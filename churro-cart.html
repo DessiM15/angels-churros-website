@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Churro Cart - Angels Churros N Chocolate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .font-sans { font-family: 'Inter', system-ui, sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .text-gradient { background: linear-gradient(to right, #f2760b, #bc4202); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .btn-primary { background: #f2760b; color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; transition: all 0.2s; }
+        .btn-primary:hover { background: #e35a01; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .card-hover { transition: all 0.3s; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        
+        .section-padding { padding: 4rem 1rem; }
+        .container-custom { max-width: 80rem; margin: 0 auto; }
+        
+        /* Scroll-based navbar color changes */
+        .navbar-scrolled {
+            background: rgba(255, 255, 255, 0.3) !important;
+            backdrop-filter: blur(8px);
+        }
+
+        .navbar-scrolled .nav-text {
+            color: #8B4513 !important; /* Brown-800 */
+        }
+
+        .navbar-scrolled .nav-text:hover {
+            color: #f2760b !important; /* Orange-500 */
+        }
+
+        .form-input {
+            @apply w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors;
+        }
+
+        .form-textarea {
+            @apply w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors resize-none;
+        }
+    </style>
+</head>
+<body class="bg-cream-50 text-brown-900 font-sans">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-sm shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-20">
+                <div class="flex items-center space-x-2">
+                    <img 
+                        src="assets/angels-churro-logo.webp" 
+                        alt="Angels Churros N Chocolate Logo" 
+                        class="h-12 lg:h-16 w-auto"
+                    />
+                </div>
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="preview.html" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Home</a>
+                    <a href="menu.html" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Menu</a>
+                    <a href="#story" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Our Story</a>
+                    <a href="#gallery" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Gallery</a>
+                    <a href="#parties" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Parties</a>
+                    <a href="#giving-back" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Giving Back</a>
+                    <a href="churro-cart.html" class="nav-text text-orange-400 hover:text-orange-300 hover:drop-shadow-lg font-medium transition-all duration-300">Churro Cart</a>
+                    <a href="#store" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Store</a>
+                </div>
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="https://www.facebook.com/Angelchurrosnchocolate" target="_blank" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg transition-all duration-300">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/angelschurroschocolate/" target="_blank" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg transition-all duration-300">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.yelp.com/biz/angels-churros-n-chocolate-cypress" target="_blank" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg transition-all duration-300">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                        </svg>
+                    </a>
+                    <a href="https://order.online/store/angels-churros-n-chocolate-582123" target="_blank" class="btn-primary">Order Online</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-16 lg:pt-20 bg-gradient-to-br from-orange-500 to-orange-700 text-white relative overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="assets/hero-churros-table.png" alt="Churro Cart Background" class="w-full h-full object-cover opacity-20">
+        </div>
+        <div class="container-custom section-padding relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <h1 class="text-5xl lg:text-7xl font-serif font-bold mb-6">
+                    Churro Cart
+                </h1>
+                <p class="text-xl lg:text-2xl text-orange-100 mb-8">
+                    A Delicious Delight on Wheels!
+                </p>
+                <p class="text-lg text-orange-200 max-w-3xl mx-auto">
+                    Have a special event coming up? Are you looking to bring a touch of sweetness and excitement to your next event or special occasion? Look no further!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="section-padding bg-white">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-serif font-bold text-brown-900 mb-8">
+                    We Are Thrilled to Present Our Newest Addition!
+                </h2>
+                <p class="text-xl text-brown-700 mb-8 leading-relaxed">
+                    We are thrilled to present our newest addition to our culinary family – the Churro Cart! 
+                    We do all events! - Corporate Events, Weddings, Birthday's, Schools, Quinces, Gender Reveals, and more!
+                </p>
+                <div class="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-lg">
+                    <p class="text-lg text-orange-800 font-semibold">
+                        Fill out our form for a free quote!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Types Section -->
+    <section class="section-padding bg-cream-50">
+        <div class="container-custom">
+            <h2 class="text-4xl font-serif font-bold text-brown-900 text-center mb-12">
+                Perfect for Any Event
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center card-hover">
+                    <div class="text-6xl mb-4">💼</div>
+                    <h3 class="text-2xl font-bold text-brown-800 mb-4">Corporate Events</h3>
+                    <p class="text-brown-600">Perfect for office parties, team building events, and corporate celebrations.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center card-hover">
+                    <div class="text-6xl mb-4">💒</div>
+                    <h3 class="text-2xl font-bold text-brown-800 mb-4">Weddings</h3>
+                    <p class="text-brown-600">Add a sweet touch to your special day with our delicious churros.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center card-hover">
+                    <div class="text-6xl mb-4">🎂</div>
+                    <h3 class="text-2xl font-bold text-brown-800 mb-4">Birthdays</h3>
+                    <p class="text-brown-600">Make any birthday celebration extra special with our churro cart.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center card-hover">
+                    <div class="text-6xl mb-4">🎓</div>
+                    <h3 class="text-2xl font-bold text-brown-800 mb-4">Schools</h3>
+                    <p class="text-brown-600">Perfect for school events, fundraisers, and student celebrations.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center card-hover">
+                    <div class="text-6xl mb-4">👑</div>
+                    <h3 class="text-2xl font-bold text-brown-800 mb-4">Quinces</h3>
+                    <p class="text-brown-600">Make your quinceañera celebration unforgettable with our churros.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center card-hover">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <h3 class="text-2xl font-bold text-brown-800 mb-4">Gender Reveals</h3>
+                    <p class="text-brown-600">Add excitement to your gender reveal party with our sweet treats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inquiry Form Section -->
+    <section class="section-padding bg-white">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-serif font-bold text-brown-900 mb-6">
+                        Get Your Free Quote
+                    </h2>
+                    <p class="text-xl text-brown-700">
+                        Fill out the form below and we'll get back to you within 24 hours with a personalized quote for your event!
+                    </p>
+                </div>
+
+                <div class="bg-cream-50 rounded-2xl shadow-xl p-8">
+                    <form id="churro-cart-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="firstName" class="block text-sm font-semibold text-brown-800 mb-2">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required class="form-input">
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-semibold text-brown-800 mb-2">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-brown-800 mb-2">Email Address *</label>
+                                <input type="email" id="email" name="email" required class="form-input">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-semibold text-brown-800 mb-2">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required class="form-input">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="eventType" class="block text-sm font-semibold text-brown-800 mb-2">Event Type *</label>
+                            <select id="eventType" name="eventType" required class="form-input">
+                                <option value="">Select Event Type</option>
+                                <option value="corporate">Corporate Event</option>
+                                <option value="wedding">Wedding</option>
+                                <option value="birthday">Birthday Party</option>
+                                <option value="school">School Event</option>
+                                <option value="quince">Quinceañera</option>
+                                <option value="gender-reveal">Gender Reveal</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="eventDate" class="block text-sm font-semibold text-brown-800 mb-2">Event Date *</label>
+                                <input type="date" id="eventDate" name="eventDate" required class="form-input">
+                            </div>
+                            <div>
+                                <label for="eventTime" class="block text-sm font-semibold text-brown-800 mb-2">Event Time *</label>
+                                <input type="time" id="eventTime" name="eventTime" required class="form-input">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="eventLocation" class="block text-sm font-semibold text-brown-800 mb-2">Event Location *</label>
+                            <input type="text" id="eventLocation" name="eventLocation" placeholder="Full address including city and zip code" required class="form-input">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="guestCount" class="block text-sm font-semibold text-brown-800 mb-2">Expected Guest Count *</label>
+                                <select id="guestCount" name="guestCount" required class="form-input">
+                                    <option value="">Select Guest Count</option>
+                                    <option value="1-25">1-25 guests</option>
+                                    <option value="26-50">26-50 guests</option>
+                                    <option value="51-100">51-100 guests</option>
+                                    <option value="101-200">101-200 guests</option>
+                                    <option value="200+">200+ guests</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="budget" class="block text-sm font-semibold text-brown-800 mb-2">Budget Range</label>
+                                <select id="budget" name="budget" class="form-input">
+                                    <option value="">Select Budget Range</option>
+                                    <option value="under-500">Under $500</option>
+                                    <option value="500-1000">$500 - $1,000</option>
+                                    <option value="1000-2000">$1,000 - $2,000</option>
+                                    <option value="2000+">$2,000+</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="specialRequests" class="block text-sm font-semibold text-brown-800 mb-2">Special Requests or Additional Information</label>
+                            <textarea id="specialRequests" name="specialRequests" rows="4" placeholder="Tell us about any special dietary requirements, theme preferences, or other details about your event..." class="form-textarea"></textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 px-12 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl text-lg">
+                                Get My Free Quote
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section-padding bg-cream-50">
+        <div class="container-custom">
+            <h2 class="text-4xl font-serif font-bold text-brown-900 text-center mb-12">
+                Why Choose Our Churro Cart?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="bg-orange-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">🚚</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brown-800 mb-4">Mobile Service</h3>
+                    <p class="text-brown-600">We bring the churros directly to your event location. No need to worry about transportation!</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-orange-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">👨‍🍳</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brown-800 mb-4">Fresh Made</h3>
+                    <p class="text-brown-600">All churros are made fresh on-site, ensuring the best taste and quality for your guests.</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-orange-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">⭐</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brown-800 mb-4">Professional Service</h3>
+                    <p class="text-brown-600">Our experienced team provides professional, friendly service that will impress your guests.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-padding bg-gradient-to-r from-orange-500 to-orange-700 text-white">
+        <div class="container-custom text-center">
+            <h2 class="text-4xl font-serif font-bold mb-6">
+                Ready to Sweeten Your Event?
+            </h2>
+            <p class="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
+                Don't wait! Fill out our form above to get your free quote and make your event unforgettable.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#churro-cart-form" class="bg-white text-orange-600 hover:bg-cream-50 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl">
+                    Get Free Quote
+                </a>
+                <a href="tel:+1234567890" class="border-2 border-white text-white hover:bg-white hover:text-orange-600 font-semibold py-4 px-8 rounded-lg transition-colors duration-200">
+                    Call Us Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brown-900 text-cream-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="py-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div>
+                        <div class="mb-4">
+                            <img 
+                                src="assets/angels-churro-logo.webp" 
+                                alt="Angels Churros N Chocolate Logo" 
+                                class="h-12 w-auto"
+                            />
+                        </div>
+                        <p class="text-cream-200 mb-6 leading-relaxed">
+                            Houston's first authentic churrería, bringing you the warmth of Mexican café culture 
+                            with fresh churros, premium chocolate, and genuine community spirit.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="https://www.facebook.com/Angelchurrosnchocolate" target="_blank" class="text-cream-300 hover:text-orange-400 transition-colors">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/angelschurroschocolate/" target="_blank" class="text-cream-300 hover:text-orange-400 transition-colors">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.yelp.com/biz/angels-churros-n-chocolate-cypress" target="_blank" class="text-cream-300 hover:text-orange-400 transition-colors">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Our Story</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#story" class="text-cream-200 hover:text-orange-400 transition-colors">About Us</a></li>
+                            <li><a href="#story" class="text-cream-200 hover:text-orange-400 transition-colors">Our Values</a></li>
+                            <li><a href="#story" class="text-cream-200 hover:text-orange-400 transition-colors">Team</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Services</h4>
+                        <ul class="space-y-2">
+                            <li><a href="menu.html" class="text-cream-200 hover:text-orange-400 transition-colors">Menu</a></li>
+                            <li><a href="#parties" class="text-cream-200 hover:text-orange-400 transition-colors">Parties</a></li>
+                            <li><a href="churro-cart.html" class="text-cream-200 hover:text-orange-400 transition-colors">Churro Cart</a></li>
+                            <li><a href="#giving-back" class="text-cream-200 hover:text-orange-400 transition-colors">Giving Back</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-orange-400 mt-0.5 flex-shrink-0">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                                <div>
+                                    <p class="text-cream-200">Cypress, Texas</p>
+                                    <p class="text-cream-300 text-sm">Houston Area</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-orange-400 flex-shrink-0">
+                                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/>
+                                </svg>
+                                <div>
+                                    <p class="text-cream-200">Mon-Sun: 7AM-9PM</p>
+                                    <p class="text-cream-300 text-sm">Fresh churros daily</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-orange-400 flex-shrink-0">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                                <a href="tel:+1234567890" class="text-cream-200 hover:text-orange-400 transition-colors">(123) 456-7890</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-brown-800 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <p class="text-cream-300 text-sm">
+                        © 2023 Angels Churros N Chocolate. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 text-sm">
+                        <a href="#privacy" class="text-cream-300 hover:text-orange-400 transition-colors">
+                            Privacy Policy
+                        </a>
+                        <a href="#terms" class="text-cream-300 hover:text-orange-400 transition-colors">
+                            Terms of Service
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll-based navbar color changes
+        function updateNavbar() {
+            const navbar = document.querySelector('#navbar');
+            const navLinks = document.querySelectorAll('.nav-text');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+                navbar.style.background = 'rgba(243, 244, 246, 0.9)';
+                navbar.style.borderBottom = '2px solid #f2760b';
+                
+                // Change text colors to dark
+                navLinks.forEach(link => {
+                    link.style.color = '#1f2937';
+                });
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+                navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+                navbar.style.borderBottom = 'none';
+                
+                // Change text colors to white
+                navLinks.forEach(link => {
+                    link.style.color = 'white';
+                });
+            }
+        }
+        
+        // Scroll listener
+        window.addEventListener('scroll', updateNavbar);
+        
+        // Initial check
+        updateNavbar();
+
+        // Form submission handling
+        document.getElementById('churro-cart-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simple validation
+            const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'eventType', 'eventDate', 'eventTime', 'eventLocation', 'guestCount'];
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!data[field]) {
+                    isValid = false;
+                    document.getElementById(field).classList.add('border-red-500');
+                } else {
+                    document.getElementById(field).classList.remove('border-red-500');
+                }
+            });
+            
+            if (isValid) {
+                // Show success message
+                alert('Thank you for your inquiry! We will get back to you within 24 hours with your free quote.');
+                
+                // Reset form
+                this.reset();
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+

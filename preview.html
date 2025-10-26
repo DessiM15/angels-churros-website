@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angels Churros N Chocolate - Houston's First Authentic Churrería</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .font-sans { font-family: 'Inter', system-ui, sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .text-gradient { background: linear-gradient(to right, #f2760b, #bc4202); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .btn-primary { background: #f2760b; color: white; font-weight: 600; padding: 12px 24px; border-radius: 8px; transition: all 0.2s; }
+        .btn-primary:hover { background: #e35a01; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .card-hover { transition: all 0.3s; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        
+        .slow-video {
+            animation: slowMotion 12s ease-in-out infinite;
+        }
+
+        @keyframes slowMotion {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.01); }
+            50% { transform: scale(1.02); }
+            75% { transform: scale(1.01); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes logoFadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes logoFadeOut {
+            0% { opacity: 1; transform: scale(1) translateY(0); }
+            100% { opacity: 0; transform: scale(0.8) translateY(-50px); }
+        }
+
+        @keyframes contentFadeIn {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scroll-based navbar color changes */
+        .navbar-scrolled {
+            background: rgba(255, 255, 255, 0.3) !important;
+            backdrop-filter: blur(8px);
+        }
+
+        .navbar-scrolled .nav-text {
+            color: #8B4513 !important;
+        }
+
+        .navbar-scrolled .nav-text:hover {
+            color: #f2760b !important;
+        }
+    </style>
+</head>
+<body class="bg-cream-50 text-brown-900 font-sans">
+        <!-- Navigation -->
+        <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-sm shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16 lg:h-20">
+                <div class="flex items-center space-x-2">
+                    <img 
+                        src="assets/angels-churro-logo.webp" 
+                        alt="Angels Churros N Chocolate Logo" 
+                        class="h-12 lg:h-16 w-auto"
+                    />
+                </div>
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Home</a>
+                    <a href="menu.html" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Menu</a>
+                    <a href="#story" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Our Story</a>
+                    <a href="gallery.html" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Gallery</a>
+                    <a href="#parties" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Parties</a>
+                    <a href="#giving-back" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Giving Back</a>
+                    <a href="churro-cart.html" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Churro Cart</a>
+                    <a href="#store" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg font-medium transition-all duration-300">Store</a>
+                </div>
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="https://www.facebook.com/Angelchurrosnchocolate" target="_blank" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg transition-all duration-300">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/angelschurroschocolate/" target="_blank" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg transition-all duration-300">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.yelp.com/biz/angels-churros-n-chocolate-cypress" target="_blank" class="nav-text text-white hover:text-orange-400 hover:drop-shadow-lg transition-all duration-300">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                        </svg>
+                    </a>
+                    <a href="https://order.online/store/angels-churros-n-chocolate-582123" target="_blank" class="btn-primary">Order Online</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-16 lg:pt-20 min-h-screen flex items-center text-white relative overflow-hidden">
+        <!-- Hero Background Image -->
+        <div class="absolute inset-0 overflow-hidden">
+            <img
+                src="assets/churro-hero.jpg"
+                alt="Fresh churros and chocolate"
+                class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+            <div class="max-w-4xl">
+                <!-- Initial Logo Animation -->
+                <div class="absolute inset-0 flex items-center justify-center" style="animation: logoFadeOut 1s ease-in-out 2s forwards;">
+                    <div class="text-center" style="animation: logoFadeIn 0.8s ease-in-out;">
+                        <img
+                            src="assets/angels-churro-logo.webp"
+                            alt="Angels Churros N Chocolate Logo"
+                            class="h-64 lg:h-96 w-auto mx-auto drop-shadow-2xl"
+                        />
+                    </div>
+                </div>
+
+                <!-- Hero Content - Delayed Entry -->
+                <div class="text-center lg:text-left" style="animation: contentFadeIn 0.8s ease-in-out 2.5s both;">
+                            <div class="inline-block bg-gradient-to-r from-orange-500/90 to-orange-600/90 backdrop-blur-sm border-2 border-orange-400/50 rounded-full px-8 py-3 mb-8 shadow-2xl" style="animation: slideInUp 0.6s ease-in-out 3s both;">
+                                <span class="text-white text-base font-bold tracking-wide drop-shadow-lg">Houston's FIRST & ONLY</span>
+                            </div>
+                        <h1 class="text-7xl lg:text-9xl font-serif font-bold text-white mb-6 leading-[0.8] drop-shadow-2xl" style="animation: slideInUp 0.8s ease-in-out 3.2s both;">
+                        <span class="block text-white drop-shadow-2xl">
+                            Churros
+                        </span>
+                        <span class="block text-5xl lg:text-6xl font-light text-white drop-shadow-xl mt-2">
+                            & Chocolate
+                        </span>
+                    </h1>
+                    <div class="max-w-2xl" style="animation: slideInUp 0.6s ease-in-out 3.4s both;">
+                        <p class="text-xl lg:text-2xl text-white mb-4 font-light leading-relaxed drop-shadow-lg">
+                            Houston's first authentic churrería
+                        </p>
+                        <p class="text-lg text-white leading-relaxed mb-4 drop-shadow-md">
+                            Inspired by the great cafeterías of Mexico, where conversation blooms and 
+                            writers, artists, activists and intellectuals make their mark.
+                        </p>
+                        <p class="text-base text-white/90 leading-relaxed drop-shadow-md">
+                            Plenty of tables, no television, no 30-minute maximum. Come and stay awhile.
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 mt-12" style="animation: slideInUp 0.8s ease-in-out 3.6s both;">
+                        <a href="https://order.online/store/angels-churros-n-chocolate-582123" target="_blank" class="group relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold py-4 px-8 rounded-full hover:from-orange-600 hover:to-orange-700 transition-all duration-300 transform hover:scale-105 shadow-2xl">
+                            <span class="relative z-10 flex items-center justify-center">
+                                Order Fresh Churros
+                                <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                            </span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </a>
+                        <a href="menu.html" class="group flex items-center justify-center py-4 px-8 border-2 border-white/30 text-white font-medium rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm">
+                            <span>View Full Menu</span>
+                            <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                        </a>
+                    </div>
+                    
+                    <!-- Location Info -->
+                    <div class="mt-16 pt-8 border-t border-white/20">
+                        <div class="flex items-center space-x-6 text-white/80 text-sm">
+                            <div class="flex items-center space-x-2">
+                                <span>📍</span>
+                                <span>Cypress, TX</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span>🕒</span>
+                                <span>Daily 7AM-9PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+                    Explore Angels Churros
+                </h2>
+                <p class="text-xl text-brown-700 max-w-3xl mx-auto">
+                    Discover everything we have to offer – from our authentic churros to our 
+                    community initiatives and special events.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group">
+                    <div class="bg-orange-50 rounded-2xl p-8 h-full transition-all duration-300 group-hover:shadow-xl">
+                        <div class="flex items-center mb-4">
+                            <div class="p-3 rounded-xl text-orange-600 bg-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                🍽️
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brown-900 mb-3 group-hover:text-orange-600 transition-colors">
+                            Our Menu
+                        </h3>
+                        <p class="text-brown-600 mb-6 leading-relaxed">
+                            Fresh churros, premium chocolate, and café favorites
+                        </p>
+                        <div class="flex items-center text-orange-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                            <span>Learn More</span>
+                            <span class="ml-2">⭐</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="bg-pink-50 rounded-2xl p-8 h-full transition-all duration-300 group-hover:shadow-xl">
+                        <div class="flex items-center mb-4">
+                            <div class="p-3 rounded-xl text-pink-600 bg-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                ❤️
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brown-900 mb-3 group-hover:text-pink-600 transition-colors">
+                            Our Story
+                        </h3>
+                        <p class="text-brown-600 mb-6 leading-relaxed">
+                            Learn about our passion for authentic churros
+                        </p>
+                        <div class="flex items-center text-pink-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                            <span>Learn More</span>
+                            <span class="ml-2">⭐</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="bg-purple-50 rounded-2xl p-8 h-full transition-all duration-300 group-hover:shadow-xl">
+                        <div class="flex items-center mb-4">
+                            <div class="p-3 rounded-xl text-purple-600 bg-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                📷
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brown-900 mb-3 group-hover:text-purple-600 transition-colors">
+                            Gallery
+                        </h3>
+                        <p class="text-brown-600 mb-6 leading-relaxed">
+                            See our delicious churros and happy customers
+                        </p>
+                        <div class="flex items-center text-purple-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                            <span>Learn More</span>
+                            <span class="ml-2">⭐</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Content -->
+    <section class="py-16 bg-cream-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+                    What Makes Us Special
+                </h2>
+                <p class="text-xl text-brown-700 max-w-3xl mx-auto">
+                    We're passionate about bringing you the most authentic churro experience 
+                    with fresh ingredients and traditional techniques.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="text-center p-8 bg-white rounded-xl shadow-lg card-hover">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        🥨
+                    </div>
+                    <h3 class="text-2xl font-bold text-brown-900 mb-4">Fresh Churros Daily</h3>
+                    <p class="text-brown-600 mb-6">Made fresh every morning using traditional Mexican recipes</p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-3xl font-bold text-orange-600">500+</div>
+                            <div class="text-sm text-brown-500">Churros Daily</div>
+                        </div>
+                        <div class="flex space-x-1">
+                            <span class="text-yellow-400">⭐</span>
+                            <span class="text-yellow-400">⭐</span>
+                            <span class="text-yellow-400">⭐</span>
+                            <span class="text-yellow-400">⭐</span>
+                            <span class="text-yellow-400">⭐</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center p-8 bg-white rounded-xl shadow-lg card-hover">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-brown-400 to-brown-600 flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        ☕
+                    </div>
+                    <h3 class="text-2xl font-bold text-brown-900 mb-4">Premium Hot Chocolate</h3>
+                    <p class="text-brown-600 mb-6">Rich, velvety chocolate made from premium cocoa</p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-3xl font-bold text-orange-600">15+</div>
+                            <div class="text-sm text-brown-500">Chocolate Varieties</div>
+                        </div>
+                        <div class="flex space-x-1">
+                            <span class="text-yellow-400">⭐</span>
+                            <span class="text-yellow-400">⭐</span>
+                            <span class="text-yellow-400">⭐</span>
+                            <span class="text-yellow-400">⭐</span>
+                            <span class="text-yellow-400">⭐</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center p-8 bg-white rounded-xl shadow-lg card-hover">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        🎉
+                    </div>
+                    <h3 class="text-2xl font-bold text-brown-900 mb-4">Community Events</h3>
+                    <p class="text-brown-600 mb-6">Join us for special events and community gatherings</p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-3xl font-bold text-orange-600">50+</div>
+                            <div class="text-sm text-brown-500">Events Monthly</div>
+                        </div>
+                        <div class="flex space-x-1">
+                            <span class="text-yellow-400">⭐</span>
+                            <span class="text-yellow-400">⭐</span>
+                            <span class="text-yellow-400">⭐</span>
+                            <span class="text-yellow-400">⭐</span>
+                            <span class="text-yellow-400">⭐</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+                    What Our Customers Say
+                </h2>
+                <p class="text-xl text-brown-700 max-w-3xl mx-auto">
+                    Don't just take our word for it – hear from our amazing customers 
+                    who make Angels Churros their go-to spot.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="flex items-center mb-4">
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                    </div>
+                    <p class="text-brown-600 mb-6 italic leading-relaxed">
+                        "Finally! I've been looking for churros like this since I moved here from Mexico. These taste exactly like my abuela used to make. The chocolate is so thick you could eat it with a spoon."
+                    </p>
+                    <div>
+                        <div class="font-semibold text-brown-900">Maria Rodriguez</div>
+                        <div class="text-sm text-brown-500">Cypress, TX</div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="flex items-center mb-4">
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                    </div>
+                    <p class="text-brown-600 mb-6 italic leading-relaxed">
+                        "My kids are obsessed with this place. We come here every Friday after school and they always get the stuffed churros. The staff remembers us and my daughter's order. It's like our second home."
+                    </p>
+                    <div>
+                        <div class="font-semibold text-brown-900">James Chen</div>
+                        <div class="text-sm text-brown-500">Houston, TX</div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="flex items-center mb-4">
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                    </div>
+                    <p class="text-brown-600 mb-6 italic leading-relaxed">
+                        "We had our first date here and now we come every month for our anniversary. The churros are perfect every single time. Plus, the owner Maria is so sweet and always remembers us."
+                    </p>
+                    <div>
+                        <div class="font-semibold text-brown-900">Sarah Johnson</div>
+                        <div class="text-sm text-brown-500">Katy, TX</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-gradient-to-r from-orange-600 to-orange-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl lg:text-5xl font-serif font-bold mb-6">
+                Ready to Experience Authentic Churros?
+            </h2>
+            <p class="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
+                Join us for the most authentic churro experience in Houston. 
+                Fresh, warm, and made with love every day.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://order.online/store/angels-churros-n-chocolate-582123" target="_blank" class="bg-white text-orange-600 hover:bg-cream-50 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2">
+                    <span>Order Online Now</span>
+                    <span>→</span>
+                </a>
+                <a href="#store" class="border-2 border-white text-white hover:bg-white hover:text-orange-600 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2">
+                    <span>Visit Our Store</span>
+                    <span>🎁</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brown-900 text-cream-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <div class="mb-4">
+                        <img 
+                            src="assets/angels-churro-logo.webp" 
+                            alt="Angels Churros N Chocolate Logo" 
+                            class="h-12 w-auto"
+                        />
+                    </div>
+                    <p class="text-cream-200 mb-6 leading-relaxed">
+                        Houston's first authentic churrería, bringing you the warmth of Mexican café culture 
+                        with fresh churros, premium chocolate, and genuine community spirit.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/Angelchurrosnchocolate" target="_blank" class="text-cream-300 hover:text-orange-400 transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/angelschurroschocolate/" target="_blank" class="text-cream-300 hover:text-orange-400 transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.yelp.com/biz/angels-churros-n-chocolate-cypress" target="_blank" class="text-cream-300 hover:text-orange-400 transition-colors">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Our Story</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#story" class="text-cream-200 hover:text-orange-400 transition-colors">About Us</a></li>
+                        <li><a href="#story" class="text-cream-200 hover:text-orange-400 transition-colors">Our Values</a></li>
+                        <li><a href="#story" class="text-cream-200 hover:text-orange-400 transition-colors">Team</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="menu.html" class="text-cream-200 hover:text-orange-400 transition-colors">Menu</a></li>
+                        <li><a href="#parties" class="text-cream-200 hover:text-orange-400 transition-colors">Parties</a></li>
+                        <li><a href="churro-cart.html" class="text-cream-200 hover:text-orange-400 transition-colors">Churro Cart</a></li>
+                        <li><a href="#giving-back" class="text-cream-200 hover:text-orange-400 transition-colors">Giving Back</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-start space-x-3">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-orange-400 mt-0.5 flex-shrink-0">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            <div>
+                                <p class="text-cream-200">Cypress, Texas</p>
+                                <p class="text-cream-300 text-sm">Houston Area</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-orange-400 flex-shrink-0">
+                                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/>
+                            </svg>
+                            <div>
+                                <p class="text-cream-200">Mon-Sun: 7AM-9PM</p>
+                                <p class="text-cream-300 text-sm">Fresh churros daily</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-orange-400 flex-shrink-0">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                            <a href="tel:+1234567890" class="text-cream-200 hover:text-orange-400 transition-colors">(123) 456-7890</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-brown-800 py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <p class="text-cream-300 text-sm">© 2024 Angels Churros N Chocolate. All rights reserved.</p>
+                    <div class="flex space-x-6 text-sm">
+                        <a href="#" class="text-cream-300 hover:text-orange-400 transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-cream-300 hover:text-orange-400 transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Scroll-based navbar color changes
+        function updateNavbar() {
+            const navbar = document.querySelector('#navbar');
+            const navLinks = document.querySelectorAll('.nav-text');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+                navbar.style.background = 'rgba(243, 244, 246, 0.9)';
+                navbar.style.borderBottom = '2px solid #f2760b';
+                
+                // Change text colors to dark
+                navLinks.forEach(link => {
+                    link.style.color = '#1f2937';
+                });
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+                navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+                navbar.style.borderBottom = 'none';
+                
+                // Change text colors to white
+                navLinks.forEach(link => {
+                    link.style.color = 'white';
+                });
+            }
+        }
+        
+        // Scroll listener
+        window.addEventListener('scroll', updateNavbar);
+        
+        // Initial check
+        updateNavbar();
+    </script>
+</body>
+</html>

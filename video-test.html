@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Test - Angels Churros</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.4), transparent);
+        }
+        .content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: white;
+            text-align: center;
+        }
+        .content h1 {
+            font-size: 4rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        .fallback-message {
+            background: rgba(255,0,0,0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <video class="video-background" autoplay loop muted playsinline>
+            <source src="./assets/envato-churro-hero.mov" type="video/mp4">
+            <source src="./assets/lume-video-hero.mp4" type="video/mp4">
+            <!-- Fallback image if video doesn't load -->
+            <img src="./assets/churro-hero.jpg" alt="Fresh churros and chocolate" style="width: 100%; height: 100%; object-fit: cover;">
+        </video>
+        <div class="overlay"></div>
+        <div class="content">
+            <div>
+                <h1>Angels Churros N Chocolate</h1>
+                <p>Video Hero Test Page</p>
+                <div class="fallback-message" id="fallback" style="display: none;">
+                    Video not loading - check console for errors
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Check if video is loading
+        const video = document.querySelector('video');
+        const fallback = document.getElementById('fallback');
+        
+        video.addEventListener('error', function(e) {
+            console.error('Video error:', e);
+            fallback.style.display = 'block';
+        });
+        
+        video.addEventListener('loadstart', function() {
+            console.log('Video loading started');
+        });
+        
+        video.addEventListener('canplay', function() {
+            console.log('Video can play');
+        });
+        
+        // Check video sources
+        console.log('Video sources:', video.querySelectorAll('source'));
+        console.log('Video currentSrc:', video.currentSrc);
+    </script>
+</body>
+</html>
+
