@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { MapPin, Clock, Phone, Mail, Star, Navigation, Heart, Coffee, Users } from 'lucide-react'
+import ElegenciaLayout from '@/components/ElegenciaLayout'
 
 const storeInfo = {
   address: '12345 FM 1960 W, Cypress, TX 77433',
@@ -96,24 +97,29 @@ export default function Store() {
   }
 
   return (
+    <ElegenciaLayout>
     <div className="pt-16 lg:pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
-        <div className="container-custom section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <h1 className="text-5xl lg:text-6xl font-serif font-bold mb-6">
-              Visit Our Store
-            </h1>
-            <p className="text-xl lg:text-2xl text-primary-100 max-w-3xl mx-auto">
-              Come experience the authentic churro atmosphere in our cozy Cypress location. 
-              Fresh churros, premium chocolate, and warm hospitality await.
-            </p>
-          </motion.div>
+      <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-brown-900 to-brown-800"></div>
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-4">
+            <div className="text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
+                  Visit Our Store
+                </h1>
+                <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
+                  Come experience the authentic churro atmosphere in our cozy Cypress location. 
+                  Fresh churros, premium chocolate, and warm hospitality await.
+                </p>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -168,14 +174,14 @@ export default function Store() {
                   <Clock className="w-6 h-6 text-primary-600" />
                   <span>Store Hours</span>
                 </h3>
-                <div className="bg-cream-50 rounded-2xl p-6">
+                <div className="bg-[#040D10] rounded-2xl p-6">
                   <div className="space-y-2">
                     {Object.entries(storeInfo.hours).map(([day, hours]) => (
                       <div key={day} className="flex justify-between">
-                        <span className="font-semibold text-brown-900 capitalize">
+                        <span className="font-semibold text-white capitalize">
                           {day}:
                         </span>
-                        <span className="text-brown-600">{hours}</span>
+                        <span className="text-gray-300">{hours}</span>
                       </div>
                     ))}
                   </div>
@@ -213,7 +219,7 @@ export default function Store() {
       </section>
 
       {/* Store Gallery */}
-      <section className="section-padding bg-cream-50">
+      <section className="section-padding bg-[#1a1f23]">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -287,7 +293,7 @@ export default function Store() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-cream-50 rounded-2xl p-6 shadow-lg"
+                className="bg-[#040D10] rounded-2xl p-6 shadow-lg"
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-2">
@@ -458,7 +464,7 @@ export default function Store() {
       </section>
 
       {/* Call to Action */}
-      <section className="section-padding bg-gradient-to-r from-primary-600 to-primary-800 text-white">
+      <section className="section-padding bg-gradient-to-r from-brown-900 to-brown-800 text-white">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -469,7 +475,7 @@ export default function Store() {
             <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-6">
               Visit Us Today
             </h2>
-            <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-brown-200 mb-8 max-w-2xl mx-auto">
               Experience the authentic taste of Mexican churros in our warm, 
               welcoming store. We can't wait to serve you!
             </p>
@@ -478,7 +484,7 @@ export default function Store() {
                 href="https://order.online/store/angels-churros-n-chocolate-582123"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white text-primary-600 hover:bg-cream-50 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
               >
                 <span>Order Online</span>
                 <Coffee size={20} />
@@ -497,5 +503,6 @@ export default function Store() {
         </div>
       </section>
     </div>
+    </ElegenciaLayout>
   )
 }

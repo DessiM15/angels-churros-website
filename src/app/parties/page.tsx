@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Gift, Users, Calendar, Clock, Star, CheckCircle, Heart } from 'lucide-react'
+import ElegenciaLayout from '@/components/ElegenciaLayout'
 
 interface PartyPackage {
   id: string
@@ -145,23 +146,28 @@ export default function Parties() {
   }
 
   return (
+    <ElegenciaLayout>
     <div className="pt-16 lg:pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
-        <div className="container-custom section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <h1 className="text-5xl lg:text-6xl font-serif font-bold mb-6">
-              Party Packages
-            </h1>
-            <p className="text-xl lg:text-2xl text-primary-100 max-w-3xl mx-auto">
-              Make your celebration unforgettable with our authentic churro party packages
-            </p>
-          </motion.div>
+      <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-brown-900 to-brown-800"></div>
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-4">
+            <div className="text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
+                  Party Packages
+                </h1>
+                <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
+                  Make your celebration unforgettable with our authentic churro party packages
+                </p>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -244,7 +250,7 @@ export default function Parties() {
       </section>
 
       {/* Event Types */}
-      <section className="section-padding bg-cream-50">
+      <section className="section-padding bg-[#1a1f23]">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -349,7 +355,7 @@ export default function Parties() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-cream-50 rounded-2xl p-8"
+              className="bg-[#1a1f23] rounded-2xl p-8"
             >
               <h3 className="text-2xl font-bold text-brown-900 mb-6">Book Your Party</h3>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -452,7 +458,7 @@ export default function Parties() {
       </section>
 
       {/* Past Events Gallery */}
-      <section className="section-padding bg-cream-50">
+      <section className="section-padding bg-[#040D10]">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -478,7 +484,7 @@ export default function Parties() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl p-6 shadow-lg card-hover"
+                className="bg-[#1a1f23] rounded-2xl p-6 shadow-lg card-hover"
               >
                 <div className="text-5xl mb-4 text-center">{event.image}</div>
                 <h3 className="text-lg font-bold text-brown-900 mb-2">
@@ -497,7 +503,7 @@ export default function Parties() {
       </section>
 
       {/* Call to Action */}
-      <section className="section-padding bg-gradient-to-r from-primary-600 to-primary-800 text-white">
+      <section className="section-padding bg-gradient-to-r from-brown-900 to-brown-800 text-white">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -508,14 +514,14 @@ export default function Parties() {
             <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-6">
               Ready to Celebrate?
             </h2>
-            <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-brown-200 mb-8 max-w-2xl mx-auto">
               Let us make your special event unforgettable with authentic churros 
               and warm hospitality.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white text-primary-600 hover:bg-cream-50 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
               >
                 <span>Book Your Party</span>
                 <Gift size={20} />
@@ -532,6 +538,7 @@ export default function Parties() {
         </div>
       </section>
     </div>
+    </ElegenciaLayout>
   )
 }
 

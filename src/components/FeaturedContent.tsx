@@ -54,7 +54,7 @@ const FeaturedContent = () => {
   ]
 
   return (
-    <section className="section-padding bg-cream-50">
+    <section className="section-padding bg-[#1a1f23]">
       <div className="container-custom">
         {/* Featured Items */}
         <motion.div
@@ -64,10 +64,10 @@ const FeaturedContent = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
             What Makes Us Special
           </h2>
-          <p className="text-xl text-brown-700 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             We're passionate about bringing you the most authentic churro experience 
             with fresh ingredients and traditional techniques.
           </p>
@@ -84,16 +84,16 @@ const FeaturedContent = () => {
               whileHover={{ y: -5 }}
               className="group"
             >
-              <div className="bg-white rounded-2xl p-8 shadow-lg card-hover h-full">
+              <div className="bg-[#040D10] rounded-2xl p-8 shadow-lg card-hover h-full">
                 <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
                   {item.image}
                 </div>
                 
-                <h3 className="text-2xl font-bold text-brown-900 mb-4">
+                <h3 className="text-2xl font-bold text-white mb-4">
                   {item.title}
                 </h3>
                 
-                <p className="text-brown-600 mb-6 leading-relaxed">
+                <p className="text-gray-300 mb-6 leading-relaxed">
                   {item.description}
                 </p>
                 
@@ -102,7 +102,7 @@ const FeaturedContent = () => {
                     <div className="text-3xl font-bold text-primary-600">
                       {item.stats}
                     </div>
-                    <div className="text-sm text-brown-500">
+                    <div className="text-sm text-gray-400">
                       {item.statLabel}
                     </div>
                   </div>
@@ -125,10 +125,10 @@ const FeaturedContent = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
             What Our Customers Say
           </h2>
-          <p className="text-xl text-brown-700 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Don't just take our word for it – hear from our amazing customers 
             who make Angels Churros their go-to spot.
           </p>
@@ -142,7 +142,7 @@ const FeaturedContent = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white rounded-2xl p-6 shadow-lg card-hover"
+              className="bg-[#040D10] rounded-2xl p-6 shadow-lg card-hover"
             >
               <div className="flex items-center mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
@@ -150,15 +150,15 @@ const FeaturedContent = () => {
                 ))}
               </div>
               
-              <p className="text-brown-600 mb-6 italic leading-relaxed">
+              <p className="text-gray-300 mb-6 italic leading-relaxed">
                 "{testimonial.text}"
               </p>
               
               <div>
-                <div className="font-semibold text-brown-900">
+                <div className="font-semibold text-white">
                   {testimonial.name}
                 </div>
-                <div className="text-sm text-brown-500">
+                <div className="text-sm text-gray-400">
                   {testimonial.location}
                 </div>
               </div>

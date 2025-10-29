@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { X, Heart, Users, Store, Camera } from 'lucide-react'
+import ElegenciaLayout from '@/components/ElegenciaLayout'
 
 interface GalleryImage {
   id: string
@@ -216,23 +217,28 @@ export default function Gallery() {
     : galleryImages.filter(image => image.category === selectedCategory)
 
   return (
+    <ElegenciaLayout>
     <div className="pt-16 lg:pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
-        <div className="container-custom section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <h1 className="text-5xl lg:text-6xl font-serif font-bold mb-6">
-              Gallery
-            </h1>
-            <p className="text-xl lg:text-2xl text-primary-100 max-w-3xl mx-auto">
-              Take a visual journey through our churros, store, events, and community impact
-            </p>
-          </motion.div>
+      <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-brown-900 to-brown-800"></div>
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-4">
+            <div className="text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
+                  Gallery
+                </h1>
+                <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
+                  Take a visual journey through our churros, store, events, and community impact
+                </p>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -259,7 +265,7 @@ export default function Gallery() {
       </section>
 
       {/* Gallery Grid */}
-      <section className="section-padding bg-cream-50">
+      <section className="section-padding bg-[#1a1f23]">
         <div className="container-custom">
           <AnimatePresence mode="wait">
             <motion.div
@@ -361,7 +367,7 @@ export default function Gallery() {
       </AnimatePresence>
 
       {/* Call to Action */}
-      <section className="section-padding bg-gradient-to-r from-primary-600 to-primary-800 text-white">
+      <section className="section-padding bg-gradient-to-r from-brown-900 to-brown-800 text-white">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -372,7 +378,7 @@ export default function Gallery() {
             <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-6">
               Experience It Yourself
             </h2>
-            <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-brown-200 mb-8 max-w-2xl mx-auto">
               See our gallery in person! Visit our store in Cypress, Texas, 
               and taste the authentic churros that make us special.
             </p>
@@ -381,7 +387,7 @@ export default function Gallery() {
                 href="https://order.online/store/angels-churros-n-chocolate-582123"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white text-primary-600 hover:bg-cream-50 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
               >
                 <span>Order Online</span>
                 <Heart size={20} />
@@ -398,5 +404,6 @@ export default function Gallery() {
         </div>
       </section>
     </div>
+    </ElegenciaLayout>
   )
 }

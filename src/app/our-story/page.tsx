@@ -2,28 +2,33 @@
 
 import { motion } from 'framer-motion'
 import { Heart, Users, Star, Coffee, Award, Globe } from 'lucide-react'
+import ElegenciaLayout from '@/components/ElegenciaLayout'
 
 export default function OurStory() {
   const values = [
     {
-      icon: <Heart className="w-8 h-8 text-primary-600" />,
+      icon: <Heart className="w-8 h-8 text-brown-700" />,
       title: 'Authenticity',
       description: 'We stay true to traditional Mexican churro recipes, passed down through generations.',
+      image: '/assets/placeholder.jpg'
     },
     {
-      icon: <Users className="w-8 h-8 text-primary-600" />,
+      icon: <Users className="w-8 h-8 text-brown-700" />,
       title: 'Community',
       description: 'We believe in building connections and giving back to the community that supports us.',
+      image: '/assets/placeholder.jpg'
     },
     {
-      icon: <Star className="w-8 h-8 text-primary-600" />,
+      icon: <Star className="w-8 h-8 text-brown-700" />,
       title: 'Quality',
       description: 'Every churro is made fresh daily with the finest ingredients and attention to detail.',
+      image: '/assets/placeholder.jpg'
     },
     {
-      icon: <Coffee className="w-8 h-8 text-primary-600" />,
+      icon: <Coffee className="w-8 h-8 text-brown-700" />,
       title: 'Hospitality',
       description: 'We create a warm, welcoming atmosphere where everyone feels like family.',
+      image: '/assets/placeholder.jpg'
     },
   ]
 
@@ -82,28 +87,41 @@ export default function OurStory() {
   ]
 
   return (
+    <ElegenciaLayout>
     <div className="pt-16 lg:pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
-        <div className="container-custom section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <h1 className="text-5xl lg:text-6xl font-serif font-bold mb-6">
-              Our Story
-            </h1>
-            <p className="text-xl lg:text-2xl text-primary-100 max-w-3xl mx-auto">
-              From a small dream in Mexico City to Houston's first authentic churrería
-            </p>
-          </motion.div>
+      <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src="/assets/angels-churros-our-story-hero.png" 
+            alt="Our Story" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/60"></div>
+        </div>
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-4">
+            <div className="text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
+                  Our Story
+                </h1>
+                <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
+                  From a small dream in Mexico City to Houston's first authentic churrería
+                </p>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Brand Narrative */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-[#040D10]">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -112,26 +130,18 @@ export default function OurStory() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+              <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
                 A Family Tradition
               </h2>
-              <div className="space-y-6 text-lg text-brown-700 leading-relaxed">
+              <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
                 <p>
-                  It all started with a homesick Texan and her abuela's recipe. Maria moved here 
-                  from Mexico City in 2019 and couldn't find a single place that made churros 
-                  the way she remembered them – crispy on the outside, soft inside, dusted with 
-                  just the right amount of cinnamon sugar.
+                  Our story starts here in Houston, Texas! In 2016, we opened our doors as the first "churreria" here in our city, and have rapidly grown since! Here at Angels, we serve the traditional "Spanish Styled" churros. Originating from Spain, churros are fried until they become crunchy, and may be sprinkled with sugar. The surface of a churro is ridged due to having been piped from a "churrera", a syringe-like tool with a star-shaped nozzle.
                 </p>
                 <p>
-                  After months of experimenting in her tiny Cypress kitchen (and driving her 
-                  neighbors crazy with the smell), she finally got it right. What started as 
-                  weekend treats for friends became a full-blown obsession. By 2021, she was 
-                  selling churros out of a food truck, and by 2022, we had our first real location.
+                  Erika and Oscar Garcia have always dreamed of calling something distinguishably their own, which is why Angels is so unique in itself! Here at Angels, we are more than a Cafe, we are a store that helps our communities made through every purchase, here in Texas, and also our native Veracruz!
                 </p>
                 <p>
-                  We're not fancy. We're not trying to reinvent the wheel. We just make churros 
-                  the way they're supposed to be made – with love, patience, and a whole lot 
-                  of cinnamon sugar. Come hungry, leave happy.
+                  As a family owned business, you will always be greeted by our family, taken care of by our family, and leave like you're family! Bienvenido a Angels! Welcome to Angels!
                 </p>
               </div>
             </motion.div>
@@ -143,24 +153,20 @@ export default function OurStory() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl p-12 text-center text-white">
-                <div className="text-6xl mb-4">🥨</div>
-                <h3 className="text-2xl font-bold mb-4">Made Fresh Daily</h3>
-                <p className="text-primary-100">
-                  Every morning, we start from scratch, just like abuela used to do.
-                </p>
+              <div className="rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src="/assets/Angels-churros-family.webp" 
+                  alt="Angels Churros Family" 
+                  className="w-full h-full object-cover"
+                />
               </div>
-              
-              {/* Decorative Elements */}
-              <div className="absolute -top-4 -right-4 w-16 h-16 bg-brown-200 rounded-full opacity-60"></div>
-              <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-primary-200 rounded-full opacity-60"></div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Our Values */}
-      <section className="section-padding bg-cream-50">
+      <section className="section-padding bg-[#1a1f23]">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -169,10 +175,10 @@ export default function OurStory() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-elegencia-gold mb-6">
               Our Values
             </h2>
-            <p className="text-xl text-brown-700 max-w-3xl mx-auto">
+            <p className="text-xl text-elegencia-gold max-w-3xl mx-auto">
               These core values guide everything we do, from how we make our churros 
               to how we serve our community.
             </p>
@@ -186,17 +192,32 @@ export default function OurStory() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="text-center bg-white rounded-2xl p-8 shadow-lg card-hover"
+                className="relative h-64 group cursor-pointer"
               >
-                <div className="flex justify-center mb-6">
-                  {value.icon}
+                {/* Flip Card Container */}
+                <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180">
+                  {/* Front Side */}
+                  <div className="absolute inset-0 backface-hidden text-center bg-white rounded-2xl p-8 shadow-lg flex flex-col items-center justify-center">
+                    <div className="flex justify-center mb-6">
+                      {value.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-brown-900 mb-4">
+                      {value.title}
+                    </h3>
+                    <p className="text-brown-600 leading-relaxed">
+                      {value.description}
+                    </p>
+                  </div>
+                  
+                  {/* Back Side - Image will go here */}
+                  <div className="absolute inset-0 backface-hidden rotate-y-180 bg-cover bg-center rounded-2xl shadow-lg overflow-hidden">
+                    <img 
+                      src={value.image} 
+                      alt={value.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-brown-900 mb-4">
-                  {value.title}
-                </h3>
-                <p className="text-brown-600 leading-relaxed">
-                  {value.description}
-                </p>
               </motion.div>
             ))}
           </div>
@@ -236,7 +257,7 @@ export default function OurStory() {
                 <h3 className="text-2xl font-bold text-brown-900 mb-2">
                   {member.name}
                 </h3>
-                <p className="text-primary-600 font-semibold mb-4">
+                <p className="text-brown-700 font-semibold mb-4">
                   {member.role}
                 </p>
                 <p className="text-brown-600 leading-relaxed">
@@ -268,7 +289,7 @@ export default function OurStory() {
 
           <div className="relative">
             {/* Timeline Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary-600"></div>
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-brown-700"></div>
             
             <div className="space-y-12">
               {milestones.map((milestone, index) => (
@@ -281,7 +302,7 @@ export default function OurStory() {
                   className="relative flex items-start space-x-8"
                 >
                   {/* Timeline Dot */}
-                  <div className="relative z-10 flex-shrink-0 w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  <div className="relative z-10 flex-shrink-0 w-16 h-16 bg-brown-700 rounded-full flex items-center justify-center text-white font-bold text-lg">
                     {milestone.year}
                   </div>
                   
@@ -302,7 +323,7 @@ export default function OurStory() {
       </section>
 
       {/* Call to Action */}
-      <section className="section-padding bg-gradient-to-r from-primary-600 to-primary-800 text-white">
+      <section className="section-padding bg-gradient-to-r from-brown-900 to-brown-800 text-white">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -313,7 +334,7 @@ export default function OurStory() {
             <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-6">
               Join Our Story
             </h2>
-            <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-brown-200 mb-8 max-w-2xl mx-auto">
               Be part of our growing community and experience the authentic taste 
               of Mexican churros right here in Houston.
             </p>
@@ -322,14 +343,14 @@ export default function OurStory() {
                 href="https://order.online/store/angels-churros-n-chocolate-582123"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white text-primary-600 hover:bg-cream-50 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                className="bg-white text-brown-900 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
               >
                 <span>Order Online</span>
                 <Coffee size={20} />
               </a>
               <a
                 href="/store"
-                className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+                className="border-2 border-white text-white hover:bg-white hover:text-brown-900 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
               >
                 <span>Visit Us</span>
                 <Globe size={20} />
@@ -339,5 +360,6 @@ export default function OurStory() {
         </div>
       </section>
     </div>
+    </ElegenciaLayout>
   )
 }

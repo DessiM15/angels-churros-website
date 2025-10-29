@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Plus, Minus, ShoppingCart, Star, Clock, Utensils } from 'lucide-react'
 import { useCart } from '@/components/CartProvider'
+import ElegenciaLayout from '@/components/ElegenciaLayout'
 
 interface MenuItem {
   id: string
@@ -244,28 +245,33 @@ export default function Menu() {
   }
 
   return (
+    <ElegenciaLayout>
     <div className="pt-16 lg:pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-orange-500 to-orange-700 text-white">
-        <div className="container-custom section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <h1 className="text-5xl lg:text-6xl font-serif font-bold mb-6">
-              Our Menu
-            </h1>
-            <p className="text-xl lg:text-2xl text-orange-100 max-w-3xl mx-auto">
-              Authentic Mexican cuisine, fresh churros, and café favorites made daily
-            </p>
-          </motion.div>
+      <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-brown-900 to-brown-800"></div>
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-4">
+            <div className="text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
+                  Our Menu
+                </h1>
+                <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
+                  Authentic Mexican cuisine, fresh churros, and café favorites made daily
+                </p>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Menu Categories */}
-      <div className="bg-cream-50">
+      <div className="bg-[#1a1f23]">
         {Object.entries(menuData).map(([categoryKey, category], categoryIndex) => (
           <section key={categoryKey} className="py-16">
             <div className="container-custom">
@@ -288,7 +294,7 @@ export default function Menu() {
                     </p>
                   </div>
                 </div>
-                <div className="w-24 h-1 bg-orange-500 mx-auto rounded-full"></div>
+                <div className="w-24 h-1 bg-elegencia-gold mx-auto rounded-full"></div>
               </motion.div>
 
               {/* Menu Items Grid */}
@@ -322,7 +328,7 @@ export default function Menu() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <span className="text-2xl font-bold text-orange-600">
+                          <span className="text-2xl font-bold text-elegencia-gold">
                             ${item.price.toFixed(2)}
                           </span>
                         </div>
@@ -341,7 +347,7 @@ export default function Menu() {
                             {item.options.map((option, optionIndex) => (
                               <span
                                 key={optionIndex}
-                                className="text-xs bg-orange-100 text-orange-800 px-3 py-1 rounded-full font-medium"
+                                className="text-xs bg-elegencia-gold/20 text-elegencia-gold px-3 py-1 rounded-full font-medium"
                               >
                                 {option}
                               </span>
@@ -373,7 +379,7 @@ export default function Menu() {
                         <button
                           onClick={() => addToCart(item)}
                           disabled={!quantities[item.id] || quantities[item.id] === 0}
-                          className="flex items-center space-x-2 bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-6 py-2 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
+                          className="flex items-center space-x-2 bg-elegencia-gold hover:bg-elegencia-gold/90 disabled:bg-gray-300 disabled:cursor-not-allowed text-brown-900 px-6 py-2 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
                         >
                           <ShoppingCart className="w-4 h-4" />
                           <span>Add to Cart</span>
@@ -389,7 +395,7 @@ export default function Menu() {
       </div>
 
       {/* Order Online CTA */}
-      <section className="bg-gradient-to-r from-orange-500 to-orange-700 text-white">
+      <section className="bg-gradient-to-r from-brown-900 to-brown-800 text-white">
         <div className="container-custom section-padding text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -400,7 +406,7 @@ export default function Menu() {
             <h2 className="text-4xl font-serif font-bold mb-6">
               Ready to Order?
             </h2>
-            <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-elegencia-gold mb-8 max-w-2xl mx-auto">
               Skip the line and order online for pickup or delivery. Fresh churros and authentic Mexican cuisine delivered to your door.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -408,13 +414,13 @@ export default function Menu() {
                 href="https://order.online/store/angels-churros-n-chocolate-582123"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white text-orange-600 hover:bg-cream-50 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+                className="bg-elegencia-gold text-brown-900 hover:bg-elegencia-gold/90 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
               >
                 Order Online Now
               </a>
               <a
                 href="tel:+1234567890"
-                className="border-2 border-white text-white hover:bg-white hover:text-orange-600 font-semibold py-4 px-8 rounded-lg transition-colors duration-200"
+                className="border-2 border-elegencia-gold text-white hover:bg-elegencia-gold hover:text-brown-900 font-semibold py-4 px-8 rounded-lg transition-colors duration-200"
               >
                 Call to Order
               </a>
@@ -423,5 +429,6 @@ export default function Menu() {
         </div>
       </section>
     </div>
+    </ElegenciaLayout>
   )
 }

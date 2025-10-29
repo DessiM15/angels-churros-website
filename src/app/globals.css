@@ -10,7 +10,7 @@
   }
   
   body {
-    @apply bg-cream-50 text-brown-900;
+    @apply bg-[#040D10] text-white;
   }
 }
 
@@ -37,6 +37,19 @@
   
   .card-hover {
     @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+  
+  .transform-style-preserve-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  .rotate-y-180 {
+    transform: rotateY(180deg);
   }
 }
 

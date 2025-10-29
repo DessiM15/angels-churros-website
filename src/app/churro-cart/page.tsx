@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Truck, Calendar, Clock, Users, Star, CheckCircle, Heart, MapPin, Phone } from 'lucide-react'
+import ElegenciaLayout from '@/components/ElegenciaLayout'
 
 interface CartFeature {
   title: string
@@ -139,29 +140,34 @@ export default function ChurroCart() {
   }
 
   return (
+    <ElegenciaLayout>
     <div className="pt-16 lg:pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
-        <div className="container-custom section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <h1 className="text-5xl lg:text-6xl font-serif font-bold mb-6">
-              Churro Cart
-            </h1>
-            <p className="text-xl lg:text-2xl text-primary-100 max-w-3xl mx-auto">
-              Bring the authentic churro experience to your event! Our mobile churro cart 
-              brings fresh churros and premium chocolate directly to you.
-            </p>
-          </motion.div>
+      <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-brown-900 to-brown-800"></div>
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-4">
+            <div className="text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
+                  Churro Cart
+                </h1>
+                <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
+                  Bring the authentic churro experience to your event! Our mobile churro cart 
+                  brings fresh churros and premium chocolate directly to you.
+                </p>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Cart Features */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-[#040D10]">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -170,10 +176,10 @@ export default function ChurroCart() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
-              What We Bring
-            </h2>
-            <p className="text-xl text-brown-700 max-w-3xl mx-auto">
+                <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
+                  What We Bring
+                </h2>
+                <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Our mobile churro cart comes fully equipped with everything needed 
               to create an unforgettable churro experience at your event.
             </p>
@@ -187,13 +193,13 @@ export default function ChurroCart() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="text-center bg-cream-50 rounded-2xl p-8 card-hover"
+                className="text-center bg-[#1a1f23] rounded-2xl p-8 card-hover"
               >
                 <div className="text-6xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold text-brown-900 mb-4">
+                <h3 className="text-xl font-bold text-white mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-brown-600 leading-relaxed">
+                <p className="text-gray-300 leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
@@ -203,7 +209,7 @@ export default function ChurroCart() {
       </section>
 
       {/* Event Types */}
-      <section className="section-padding bg-cream-50">
+      <section className="section-padding bg-[#1a1f23]">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -212,10 +218,10 @@ export default function ChurroCart() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
-              Perfect for Any Event
-            </h2>
-            <p className="text-xl text-brown-700 max-w-3xl mx-auto">
+              <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
+                Perfect for Any Event
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               From intimate birthday parties to large corporate events, our churro cart 
               adds a unique and delicious touch to any celebration.
             </p>
@@ -229,18 +235,18 @@ export default function ChurroCart() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 shadow-lg card-hover"
+                className="bg-[#040D10] rounded-2xl p-8 shadow-lg card-hover"
               >
                 <div className="text-center">
                   <div className="text-6xl mb-4">{event.icon}</div>
-                  <h3 className="text-2xl font-bold text-brown-900 mb-3">
+                  <h3 className="text-2xl font-bold text-white mb-3">
                     {event.title}
                   </h3>
-                  <p className="text-brown-600 mb-6 leading-relaxed">
+                  <p className="text-gray-300 mb-6 leading-relaxed">
                     {event.description}
                   </p>
                   
-                  <div className="space-y-2 text-sm text-brown-500">
+                  <div className="space-y-2 text-sm text-gray-400">
                     <div className="flex items-center justify-center space-x-2">
                       <Clock size={16} />
                       <span>{event.duration}</span>
@@ -258,7 +264,7 @@ export default function ChurroCart() {
       </section>
 
       {/* Booking Form */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-[#040D10]">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <motion.div
@@ -267,7 +273,7 @@ export default function ChurroCart() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+              <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
                 Book Your Event
               </h2>
               <div className="space-y-6">
@@ -276,8 +282,8 @@ export default function ChurroCart() {
                     1
                   </div>
                   <div>
-                    <h3 className="font-bold text-brown-900 mb-2">Choose Your Event Type</h3>
-                    <p className="text-brown-600">Select the type of event you're planning.</p>
+                    <h3 className="font-bold text-white mb-2">Choose Your Event Type</h3>
+                    <p className="text-gray-300">Select the type of event you're planning.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -285,8 +291,8 @@ export default function ChurroCart() {
                     2
                   </div>
                   <div>
-                    <h3 className="font-bold text-brown-900 mb-2">Fill Out the Form</h3>
-                    <p className="text-brown-600">Provide your event details and preferences.</p>
+                    <h3 className="font-bold text-white mb-2">Fill Out the Form</h3>
+                    <p className="text-gray-300">Provide your event details and preferences.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -294,8 +300,8 @@ export default function ChurroCart() {
                     3
                   </div>
                   <div>
-                    <h3 className="font-bold text-brown-900 mb-2">We'll Contact You</h3>
-                    <p className="text-brown-600">We'll reach out within 24 hours to confirm your booking.</p>
+                    <h3 className="font-bold text-white mb-2">We'll Contact You</h3>
+                    <p className="text-gray-300">We'll reach out within 24 hours to confirm your booking.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -303,8 +309,8 @@ export default function ChurroCart() {
                     4
                   </div>
                   <div>
-                    <h3 className="font-bold text-brown-900 mb-2">Enjoy Your Event</h3>
-                    <p className="text-brown-600">We'll handle everything so you can focus on celebrating!</p>
+                    <h3 className="font-bold text-white mb-2">Enjoy Your Event</h3>
+                    <p className="text-gray-300">We'll handle everything so you can focus on celebrating!</p>
                   </div>
                 </div>
               </div>
@@ -316,13 +322,13 @@ export default function ChurroCart() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-cream-50 rounded-2xl p-8"
+              className="bg-[#1a1f23] rounded-2xl p-8"
             >
-              <h3 className="text-2xl font-bold text-brown-900 mb-6">Event Details</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">Event Details</h3>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Name *</label>
+                    <label className="block text-sm font-semibold text-gray-200 mb-2">Name *</label>
                     <input
                       {...register('name', { required: 'Name is required' })}
                       className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
@@ -331,7 +337,7 @@ export default function ChurroCart() {
                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Email *</label>
+                    <label className="block text-sm font-semibold text-gray-200 mb-2">Email *</label>
                     <input
                       {...register('email', { required: 'Email is required' })}
                       type="email"
@@ -344,7 +350,7 @@ export default function ChurroCart() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Phone *</label>
+                    <label className="block text-sm font-semibold text-gray-200 mb-2">Phone *</label>
                     <input
                       {...register('phone', { required: 'Phone is required' })}
                       className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
@@ -353,7 +359,7 @@ export default function ChurroCart() {
                     {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Event Date *</label>
+                    <label className="block text-sm font-semibold text-gray-200 mb-2">Event Date *</label>
                     <input
                       {...register('eventDate', { required: 'Event date is required' })}
                       type="date"
@@ -365,7 +371,7 @@ export default function ChurroCart() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Event Time *</label>
+                    <label className="block text-sm font-semibold text-gray-200 mb-2">Event Time *</label>
                     <input
                       {...register('eventTime', { required: 'Event time is required' })}
                       type="time"
@@ -374,7 +380,7 @@ export default function ChurroCart() {
                     {errors.eventTime && <p className="text-red-500 text-sm mt-1">{errors.eventTime.message}</p>}
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Event Duration *</label>
+                    <label className="block text-sm font-semibold text-gray-200 mb-2">Event Duration *</label>
                     <select
                       {...register('eventDuration', { required: 'Event duration is required' })}
                       className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
@@ -391,7 +397,7 @@ export default function ChurroCart() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Event Type *</label>
+                    <label className="block text-sm font-semibold text-gray-200 mb-2">Event Type *</label>
                     <select
                       {...register('eventType', { required: 'Event type is required' })}
                       className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
@@ -408,7 +414,7 @@ export default function ChurroCart() {
                     {errors.eventType && <p className="text-red-500 text-sm mt-1">{errors.eventType.message}</p>}
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Guest Count *</label>
+                    <label className="block text-sm font-semibold text-gray-200 mb-2">Guest Count *</label>
                     <input
                       {...register('guestCount', { required: 'Guest count is required' })}
                       type="number"
@@ -421,7 +427,7 @@ export default function ChurroCart() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-brown-700 mb-2">Event Location *</label>
+                  <label className="block text-sm font-semibold text-gray-200 mb-2">Event Location *</label>
                   <input
                     {...register('eventLocation', { required: 'Event location is required' })}
                     className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
@@ -431,7 +437,7 @@ export default function ChurroCart() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-brown-700 mb-2">Special Requests</label>
+                  <label className="block text-sm font-semibold text-gray-200 mb-2">Special Requests</label>
                   <textarea
                     {...register('specialRequests')}
                     rows={3}
@@ -453,7 +459,7 @@ export default function ChurroCart() {
       </section>
 
       {/* FAQ Section */}
-      <section className="section-padding bg-cream-50">
+      <section className="section-padding bg-[#1a1f23]">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -462,10 +468,10 @@ export default function ChurroCart() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
               Frequently Asked Questions
             </h2>
-            <p className="text-xl text-brown-700 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Have questions about our churro cart service? Here are the answers 
               to the most common questions we receive.
             </p>
@@ -479,12 +485,12 @@ export default function ChurroCart() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl p-6 shadow-lg"
+                className="bg-[#040D10] rounded-2xl p-6 shadow-lg"
               >
-                <h3 className="text-xl font-bold text-brown-900 mb-3">
+                <h3 className="text-xl font-bold text-white mb-3">
                   {faq.question}
                 </h3>
-                <p className="text-brown-600 leading-relaxed">
+                <p className="text-gray-300 leading-relaxed">
                   {faq.answer}
                 </p>
               </motion.div>
@@ -557,6 +563,7 @@ export default function ChurroCart() {
         </div>
       </section>
     </div>
+    </ElegenciaLayout>
   )
 }
 

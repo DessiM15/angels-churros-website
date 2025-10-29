@@ -123,3 +123,10 @@ public
 # Temporary folders
 tmp/
 temp/
+
+# Template inspiration
+template-inspiration/
+
+# Large files
+*.mov
+*.mp4

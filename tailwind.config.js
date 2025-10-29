@@ -43,6 +43,13 @@ module.exports = {
           700: '#d4a15c',
           800: '#b88a4a',
           900: '#9a6f3a',
+        },
+        // Elegencia template colors for the template components
+        elegencia: {
+          dark: '#040D10',
+          gold: '#FFD28D',
+          card: '#091E24',
+          gray: '#C8C8C8',
         }
       },
       fontFamily: {
