@@ -10,25 +10,25 @@ export default function OurStory() {
       icon: <Heart className="w-8 h-8 text-brown-700" />,
       title: 'Authenticity',
       description: 'We stay true to traditional Mexican churro recipes, passed down through generations.',
-      image: '/assets/placeholder.jpg'
+      image: '/assets/authentic-our-story.jpg'
     },
     {
       icon: <Users className="w-8 h-8 text-brown-700" />,
       title: 'Community',
       description: 'We believe in building connections and giving back to the community that supports us.',
-      image: '/assets/placeholder.jpg'
+      image: '/assets/community-our-story.jpg'
     },
     {
       icon: <Star className="w-8 h-8 text-brown-700" />,
       title: 'Quality',
       description: 'Every churro is made fresh daily with the finest ingredients and attention to detail.',
-      image: '/assets/placeholder.jpg'
+      image: '/assets/quality-our-story.jpg'
     },
     {
       icon: <Coffee className="w-8 h-8 text-brown-700" />,
       title: 'Hospitality',
       description: 'We create a warm, welcoming atmosphere where everyone feels like family.',
-      image: '/assets/placeholder.jpg'
+      image: '/assets/hospitality-our-story.jpg'
     },
   ]
 
@@ -36,19 +36,19 @@ export default function OurStory() {
     {
       name: 'Maria Rodriguez',
       role: 'Founder & Chief Churro Officer',
-      image: '👩‍🍳',
+      image: '/assets/angels-churros-team.webp',
       bio: 'The woman behind the magic. Maria learned to make churros from her abuela in Mexico City and has been perfecting the recipe for 15 years. She still gets up at 4 AM to make the first batch every morning.',
     },
     {
       name: 'Carlos Mendez',
       role: 'Hot Chocolate Wizard',
-      image: '👨‍🍳',
+      image: '/assets/angels-churros-team.webp',
       bio: 'Carlos is our resident chocolate genius. He spent 3 months perfecting the hot chocolate recipe and still won\'t tell us all the spices he uses. We think there might be a little magic involved.',
     },
     {
       name: 'Ana Gutierrez',
       role: 'Customer Happiness Manager',
-      image: '👩‍💼',
+      image: '/assets/angels-churros-team.webp',
       bio: 'Ana makes sure everyone feels like family. She remembers everyone\'s order and always has a smile ready. She\'s been with us since day one and knows all the regulars by name.',
     },
   ]
@@ -243,29 +243,21 @@ export default function OurStory() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center bg-cream-50 rounded-2xl p-8 card-hover"
-              >
-                <div className="text-6xl mb-4">{member.image}</div>
-                <h3 className="text-2xl font-bold text-brown-900 mb-2">
-                  {member.name}
-                </h3>
-                <p className="text-brown-700 font-semibold mb-4">
-                  {member.role}
-                </p>
-                <p className="text-brown-600 leading-relaxed">
-                  {member.bio}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="rounded-2xl overflow-hidden shadow-2xl">
+              <img 
+                src="/assets/angels-churros-team.webp" 
+                alt="Angels Churros Team"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </motion.div>
         </div>
       </section>
 
