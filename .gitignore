@@ -112,9 +112,13 @@ jspm_packages/
 .nuxt
 dist
 
+# Legacy static assets not used in Next app
+/assets/
+/public/kababi-assets/
+/public/template-assets/
+
 # Gatsby files
 .cache/
-public
 
 # Storybook build outputs
 .out
@@ -128,5 +132,3 @@ temp/
 template-inspiration/
 
 # Large files
-*.mov
-*.mp4
