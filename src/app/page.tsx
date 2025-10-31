@@ -1,3 +1,5 @@
+'use client'
+
 import ElegenciaLayout from '@/components/ElegenciaLayout'
 import ElegenciaHero from '@/components/ElegenciaHero'
 import ElegenciaMenuSimple from '@/components/ElegenciaMenuSimple'

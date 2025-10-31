@@ -1,3 +1,5 @@
+'use client'
+
 import ElegenciaLayout from '@/components/ElegenciaLayout'
 import ReservationForm from '@/components/ReservationForm'
 import RotatingReviews from '@/components/RotatingReviews'
