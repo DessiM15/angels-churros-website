@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Heart, Users, DollarSign, Star, Award, Globe, Coffee } from 'lucide-react'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
+import RotatingReviews from '@/components/RotatingReviews'
 
 const initiatives = [
   {
@@ -393,6 +394,9 @@ export default function GivingBack() {
           </motion.div>
         </div>
       </section>
+
+      {/* Reviews Section */}
+      <RotatingReviews />
     </div>
     </ElegenciaLayout>
   )

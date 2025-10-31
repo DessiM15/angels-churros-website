@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { X, Heart, Users, Store, Camera } from 'lucide-react'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
+import RotatingReviews from '@/components/RotatingReviews'
 
 interface GalleryImage {
   id: string
@@ -15,188 +16,101 @@ interface GalleryImage {
 }
 
 const galleryImages: GalleryImage[] = [
-  // Products
   {
-    id: 'churros-1',
-    src: '/assets/hero-churros-table.png',
-    alt: 'Fresh churros',
+    id: 'img-churro-hero',
+    src: '/assets/churro-hero.jpg',
+    alt: 'Classic churros',
     category: 'products',
-    title: 'Fresh Churros',
+    title: 'Classic Churros',
     description: 'Golden, crispy churros dusted with cinnamon sugar'
   },
   {
-    id: 'churros-2',
-    src: '/assets/churros.webp',
-    alt: 'Filled churros',
-    category: 'products',
-    title: 'Filled Churros',
-    description: 'Churros filled with dulce de leche and chocolate'
-  },
-  {
-    id: 'churros-3',
-    src: '/assets/churros-and-table.png',
-    alt: 'Churros display',
-    category: 'products',
-    title: 'Churros Display',
-    description: 'Beautiful presentation of our signature churros'
-  },
-  {
-    id: 'churros-4',
+    id: 'img-heart-churros',
     src: '/assets/heart-churros.webp',
     alt: 'Heart shaped churros',
     category: 'products',
     title: 'Heart Churros',
-    description: 'Special heart-shaped churros for romantic occasions'
+    description: 'Sweet heart-shaped churros for special moments'
   },
   {
-    id: 'chocolate-1',
-    src: '/assets/hero-champurrado.jpg',
-    alt: 'Hot chocolate',
-    category: 'products',
-    title: 'Premium Hot Chocolate',
-    description: 'Rich, velvety hot chocolate made from premium cocoa'
-  },
-  {
-    id: 'chocolate-2',
-    src: '/assets/hot-chocolate.webp',
-    alt: 'Hot chocolate varieties',
-    category: 'products',
-    title: 'Hot Chocolate Varieties',
-    description: 'Different chocolate flavors and preparations'
-  },
-  {
-    id: 'chocolate-3',
-    src: '/assets/churros-condensed-milk.webp',
-    alt: 'Chocolate with condensed milk',
-    category: 'products',
-    title: 'Chocolate with Condensed Milk',
-    description: 'Indulgent chocolate paired with sweet condensed milk'
-  },
-  {
-    id: 'coffee-1',
+    id: 'img-coffee',
     src: '/assets/coffee.webp',
-    alt: 'Coffee',
+    alt: 'Fresh coffee',
     category: 'products',
     title: 'Fresh Coffee',
-    description: 'Perfectly brewed coffee to complement your churros'
+    description: 'Perfectly brewed coffee to pair with churros'
   },
   {
-    id: 'fried-oreos',
-    src: '/assets/fried-oreos.webp',
-    alt: 'Fried Oreos',
+    id: 'img-champurrado',
+    src: '/assets/hero-champurrado.jpg',
+    alt: 'Hot chocolate champurrado',
     category: 'products',
-    title: 'Fried Oreos',
-    description: 'Crispy fried Oreos - a perfect sweet treat'
-  },
-
-  // Store
-  {
-    id: 'store-1',
-    src: '/assets/hero-store-front.png',
-    alt: 'Angels Churros store front',
-    category: 'store',
-    title: 'Our Store',
-    description: 'Our cozy storefront in Cypress, Texas'
+    title: 'Champurrado',
+    description: 'Rich Mexican hot chocolate, warm and comforting'
   },
   {
-    id: 'store-2',
-    src: '/assets/store-front-alt.png',
-    alt: 'Store front alternative view',
-    category: 'store',
-    title: 'Store Front View',
-    description: 'Another view of our welcoming storefront'
-  },
-  {
-    id: 'store-3',
-    src: '/assets/angels-hero-2.webp',
-    alt: 'Store interior',
-    category: 'store',
-    title: 'Cozy Interior',
-    description: 'Comfortable seating for enjoying your churros'
-  },
-  {
-    id: 'store-4',
-    src: '/assets/hero-churros-table.png',
-    alt: 'Customers enjoying',
-    category: 'store',
-    title: 'Happy Customers',
-    description: 'Families and friends gathering to enjoy churros'
-  },
-
-  // Events
-  {
-    id: 'event-1',
-    src: '/assets/churro-cart-1.webp',
-    alt: 'Churro cart event',
-    category: 'events',
-    title: 'Birthday Celebrations',
-    description: 'Making special moments even more memorable'
-  },
-  {
-    id: 'event-2',
-    src: '/assets/churro-cart-2.webp',
-    alt: 'Community event',
-    category: 'events',
-    title: 'Community Events',
-    description: 'Bringing the community together with churros'
-  },
-  {
-    id: 'event-3',
-    src: '/assets/churro-cart-3.webp',
-    alt: 'Special occasions',
-    category: 'events',
-    title: 'Special Occasions',
-    description: 'Celebrating life\'s special moments'
-  },
-  {
-    id: 'event-4',
-    src: '/assets/churro-cart-4.webp',
-    alt: 'Party events',
-    category: 'events',
-    title: 'Party Events',
-    description: 'Perfect for any celebration'
-  },
-  {
-    id: 'event-5',
-    src: '/assets/churro-cart-5.webp',
-    alt: 'Outdoor events',
-    category: 'events',
-    title: 'Outdoor Events',
-    description: 'Bringing churros to your outdoor gatherings'
-  },
-  {
-    id: 'event-6',
-    src: '/assets/churro-cart-6.webp',
-    alt: 'Corporate events',
-    category: 'events',
-    title: 'Corporate Events',
-    description: 'Professional catering for business events'
-  },
-
-  // Community
-  {
-    id: 'community-1',
+    id: 'img-elote',
     src: '/assets/elote.webp',
     alt: 'Elote',
     category: 'community',
     title: 'Elote',
-    description: 'Authentic Mexican street corn - a delicious community favorite'
+    description: 'Authentic Mexican street corn favorite'
   },
   {
-    id: 'community-2',
-    src: '/assets/joes-burger.webp',
-    alt: 'Joes Burger',
-    category: 'community',
-    title: 'Joes Burger',
-    description: 'Delicious burgers from our community partner Joes Burger'
+    id: 'img-store-alt',
+    src: '/assets/store-front-alt.png',
+    alt: 'Store front alternate view',
+    category: 'store',
+    title: 'Storefront View',
+    description: 'Another angle of our welcoming storefront'
   },
   {
-    id: 'community-3',
+    id: 'img-cart-1',
+    src: '/assets/churro-cart-1.webp',
+    alt: 'Churro cart event',
+    category: 'events',
+    title: 'Churro Cart',
+    description: 'Serving smiles at your events'
+  },
+  {
+    id: 'img-party-packs',
     src: '/assets/party+packs.webp',
-    alt: 'Local partnerships',
-    category: 'community',
-    title: 'Local Partnerships',
-    description: 'Working with local businesses and organizations'
+    alt: 'Party packs',
+    category: 'events',
+    title: 'Party Packs',
+    description: 'Perfect bundles for parties and gatherings'
+  },
+  {
+    id: 'img-angels-hero-2',
+    src: '/assets/inside-the-store.jpg',
+    alt: 'Interior and vibe',
+    category: 'store',
+    title: 'Inside the Store',
+    description: 'Cozy vibes to enjoy your treats'
+  },
+  {
+    id: 'img-photo-gallery',
+    src: '/assets/photo-gallery.jpg',
+    alt: 'Photo gallery highlight',
+    category: 'store',
+    title: 'Churro Pop',
+    description: 'A favorite moment from around the shop'
+  },
+  {
+    id: 'img-photo-gallery-2',
+    src: '/assets/photo-gallery-2.jpg',
+    alt: 'Photo gallery highlight 2',
+    category: 'store',
+    title: 'Fresh Homemade Tamales',
+    description: 'Another favorite scene from the shop'
+  },
+  {
+    id: 'img-photo-gallery-3',
+    src: '/assets/photo-gallery-3.jpg',
+    alt: 'Photo gallery highlight 3',
+    category: 'store',
+    title: "Angel's brings people together",
+    description: 'More moments from our space'
   },
 ]
 
@@ -231,7 +145,7 @@ export default function Gallery() {
                 transition={{ duration: 0.6 }}
               >
                 <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
-                  Gallery
+                  Experience It Yourself
                 </h1>
                 <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
                   Take a visual journey through our churros, store, events, and community impact
@@ -286,8 +200,8 @@ export default function Gallery() {
                   className="group cursor-pointer"
                   onClick={() => setSelectedImage(image)}
                 >
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
-                  <div className="aspect-square bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg card-hover relative">
+                  <div className="aspect-square bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center relative">
                     {image.src.startsWith('/') ? (
                       <img 
                         src={image.src} 
@@ -297,15 +211,16 @@ export default function Gallery() {
                     ) : (
                       <span className="text-6xl">{image.src}</span>
                     )}
-                  </div>
-                    <div className="p-4">
-                      <h3 className="font-bold text-brown-900 mb-2 group-hover:text-primary-600 transition-colors">
+                    {/* Overlay with text - only visible on hover */}
+                    <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <h3 className="font-bold text-white mb-2 text-center">
                         {image.title}
                       </h3>
-                      <p className="text-sm text-brown-600">
+                      <p className="text-sm text-white/90 text-center">
                         {image.description}
                       </p>
                     </div>
+                  </div>
                   </div>
                 </motion.div>
               ))}
@@ -403,6 +318,9 @@ export default function Gallery() {
           </motion.div>
         </div>
       </section>
+
+      {/* Reviews Section */}
+      <RotatingReviews />
     </div>
     </ElegenciaLayout>
   )

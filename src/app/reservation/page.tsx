@@ -1,5 +1,6 @@
 import ElegenciaLayout from '@/components/ElegenciaLayout'
 import ReservationForm from '@/components/ReservationForm'
+import RotatingReviews from '@/components/RotatingReviews'
 import { motion } from 'framer-motion'
 
 const ReservationPage = () => {
@@ -90,6 +91,9 @@ const ReservationPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Reviews Section */}
+      <RotatingReviews />
     </ElegenciaLayout>
   )
 }

@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Gift, Users, Calendar, Clock, Star, CheckCircle, Heart } from 'lucide-react'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
+import RotatingReviews from '@/components/RotatingReviews'
 
 interface PartyPackage {
   id: string
@@ -19,54 +20,64 @@ interface PartyPackage {
 
 const partyPackages: PartyPackage[] = [
   {
-    id: 'small-party',
-    name: 'Small Celebration',
-    price: 45,
-    description: 'Perfect for intimate gatherings and small celebrations',
+    id: 'forreal-pack',
+    name: 'Forreal Pack',
+    price: 25.00,
+    description: 'Perfect for small gatherings and intimate celebrations',
     includes: [
-      '12 Fresh Churros',
+      '25 Fresh Churros',
       '3 Dipping Sauces',
-      'Hot Chocolate for 4',
+      'Party Decorations'
+    ],
+    serves: '4-6 people',
+    image: '/assets/party-pack-1.jpg'
+  },
+  {
+    id: 'oh-my-goodness',
+    name: 'Oh My Goodness',
+    price: 50.95,
+    description: 'Great for birthday parties and family gatherings',
+    includes: [
+      '50 Fresh Churros',
+      '5 Dipping Sauces',
       'Party Decorations',
       'Setup & Cleanup'
     ],
-    serves: '4-6 people',
-    image: '🎉'
+    serves: '8-12 people',
+    popular: true,
+    image: '/assets/party-pack-2.jpg'
   },
   {
-    id: 'medium-party',
-    name: 'Medium Celebration',
-    price: 85,
-    description: 'Great for birthday parties and family gatherings',
+    id: 'oh-la-la',
+    name: 'Oh La La',
+    price: 76.95,
+    description: 'Perfect for larger celebrations and events',
     includes: [
-      '24 Fresh Churros',
-      '5 Dipping Sauces',
-      'Hot Chocolate for 8',
+      '75 Fresh Churros',
+      '8 Dipping Sauces',
       'Party Decorations',
       'Setup & Cleanup',
       'Party Games'
     ],
-    serves: '8-12 people',
-    popular: true,
-    image: '🎊'
+    serves: '12-18 people',
+    image: '/assets/party-pack-3.jpg'
   },
   {
-    id: 'large-party',
-    name: 'Large Celebration',
-    price: 150,
-    description: 'Perfect for big celebrations and community events',
+    id: 'heaven-is-real',
+    name: 'Heaven Is Real',
+    price: 98.79,
+    description: 'The ultimate celebration package for big events',
     includes: [
-      '48 Fresh Churros',
-      '8 Dipping Sauces',
-      'Hot Chocolate for 15',
+      '100 Fresh Churros',
+      '10 Dipping Sauces',
       'Party Decorations',
       'Setup & Cleanup',
       'Party Games',
       'Photo Booth Props',
       'Custom Banner'
     ],
-    serves: '15-25 people',
-    image: '🎈'
+    serves: '20-30 people',
+    image: '/assets/party-pack-4.jpg'
   }
 ]
 
@@ -74,25 +85,25 @@ const eventTypes = [
   {
     title: 'Birthday Parties',
     description: 'Make birthdays extra special with our churro party packages',
-    icon: '🎂',
+    icon: '',
     features: ['Custom decorations', 'Party games', 'Photo opportunities']
   },
   {
     title: 'Corporate Events',
     description: 'Treat your team to authentic churros at your next company event',
-    icon: '💼',
+    icon: '',
     features: ['Professional setup', 'Custom branding', 'Flexible timing']
   },
   {
     title: 'Community Events',
     description: 'Bring the community together with our churro celebrations',
-    icon: '🤝',
+    icon: '',
     features: ['Community focus', 'Charity partnerships', 'Local engagement']
   },
   {
     title: 'Holiday Celebrations',
     description: 'Celebrate special holidays with traditional churros and chocolate',
-    icon: '🎄',
+    icon: '',
     features: ['Holiday themes', 'Seasonal decorations', 'Special treats']
   }
 ]
@@ -102,25 +113,25 @@ const pastEvents = [
     title: 'Maria\'s 8th Birthday',
     description: 'A magical churro party with 15 kids and lots of laughter',
     date: 'March 2024',
-    image: '🎂'
+    image: ''
   },
   {
     title: 'Tech Startup Team Building',
     description: 'Corporate event for 25 employees with churros and hot chocolate',
     date: 'February 2024',
-    image: '💼'
+    image: ''
   },
   {
     title: 'Community Food Drive',
     description: 'Raised $500 for local food bank with churro sales',
     date: 'January 2024',
-    image: '🤝'
+    image: ''
   },
   {
     title: 'Christmas Celebration',
     description: 'Holiday party with 40 community members',
     date: 'December 2023',
-    image: '🎄'
+    image: ''
   }
 ]
 
@@ -160,7 +171,7 @@ export default function Parties() {
                 transition={{ duration: 0.6 }}
               >
                 <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
-                  Party Packages
+                  Need Fresh Hot Churros For Your Special Event? Let Us Take Care Of Your Sweet Cravings!
                 </h1>
                 <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
                   Make your celebration unforgettable with our authentic churro party packages
@@ -172,7 +183,7 @@ export default function Parties() {
       </section>
 
       {/* Party Packages */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-[#040D10]">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -181,16 +192,16 @@ export default function Parties() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
               Choose Your Package
             </h2>
-            <p className="text-xl text-brown-700 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               From intimate gatherings to large celebrations, we have the perfect 
               churro party package for your special event.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {partyPackages.map((pkg, index) => (
               <motion.div
                 key={pkg.id}
@@ -198,7 +209,7 @@ export default function Parties() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`relative bg-white rounded-2xl shadow-lg overflow-hidden card-hover ${
+                className={`relative bg-[#1a1f23] rounded-2xl shadow-lg overflow-hidden card-hover border border-gray-800 ${
                   pkg.popular ? 'ring-2 ring-primary-600' : ''
                 }`}
               >
@@ -211,27 +222,35 @@ export default function Parties() {
 
                 <div className="p-8">
                   <div className="text-center mb-6">
-                    <div className="text-6xl mb-4">{pkg.image}</div>
-                    <h3 className="text-2xl font-bold text-brown-900 mb-2">
+                    {pkg.image && (
+                      <div className="mb-4 rounded-lg overflow-hidden">
+                        <img 
+                          src={pkg.image} 
+                          alt={pkg.name}
+                          className="w-full h-48 object-cover"
+                        />
+                      </div>
+                    )}
+                    <h3 className="text-2xl font-bold text-white mb-2">
                       {pkg.name}
                     </h3>
-                    <p className="text-brown-600 mb-4">
+                    <p className="text-gray-300 mb-4">
                       {pkg.description}
                     </p>
-                    <div className="text-3xl font-bold text-primary-600 mb-2">
-                      ${pkg.price}
+                    <div className="text-3xl font-bold text-elegencia-gold mb-2">
+                      ${pkg.price.toFixed(2)}
                     </div>
-                    <div className="text-sm text-brown-500">
+                    <div className="text-sm text-gray-400">
                       Serves {pkg.serves}
                     </div>
                   </div>
 
                   <div className="space-y-3 mb-8">
-                    <h4 className="font-semibold text-brown-900 mb-3">Includes:</h4>
+                    <h4 className="font-semibold text-white mb-3">Includes:</h4>
                     {pkg.includes.map((item, idx) => (
                       <div key={idx} className="flex items-center space-x-2">
-                        <CheckCircle size={16} className="text-primary-600 flex-shrink-0" />
-                        <span className="text-brown-600 text-sm">{item}</span>
+                        <CheckCircle size={16} className="text-elegencia-gold flex-shrink-0" />
+                        <span className="text-gray-300 text-sm">{item}</span>
                       </div>
                     ))}
                   </div>
@@ -259,10 +278,10 @@ export default function Parties() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
               Perfect for Any Event
             </h2>
-            <p className="text-xl text-brown-700 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Whether it's a birthday, corporate event, or community celebration, 
               our churro parties are perfect for any occasion.
             </p>
@@ -276,16 +295,16 @@ export default function Parties() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="text-center bg-white rounded-2xl p-6 shadow-lg card-hover"
+                className="text-center bg-[#040D10] rounded-2xl p-6 shadow-lg card-hover border border-gray-800"
               >
-                <div className="text-5xl mb-4">{event.icon}</div>
-                <h3 className="text-xl font-bold text-brown-900 mb-3">
+                {event.icon && <div className="text-5xl mb-4">{event.icon}</div>}
+                <h3 className="text-xl font-bold text-white mb-3">
                   {event.title}
                 </h3>
-                <p className="text-brown-600 mb-4 leading-relaxed">
+                <p className="text-gray-300 mb-4 leading-relaxed">
                   {event.description}
                 </p>
-                <ul className="text-sm text-brown-500 space-y-1">
+                <ul className="text-sm text-gray-400 space-y-1">
                   {event.features.map((feature, idx) => (
                     <li key={idx}>• {feature}</li>
                   ))}
@@ -297,7 +316,7 @@ export default function Parties() {
       </section>
 
       {/* How to Book */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-[#1a1f23]">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -306,44 +325,44 @@ export default function Parties() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+              <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
                 How to Book
               </h2>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="bg-primary-100 text-primary-600 rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+                  <div className="bg-primary-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
                     1
                   </div>
                   <div>
-                    <h3 className="font-bold text-brown-900 mb-2">Choose Your Package</h3>
-                    <p className="text-brown-600">Select the perfect package for your event size and needs.</p>
+                    <h3 className="font-bold text-white mb-2">Choose Your Package</h3>
+                    <p className="text-gray-300">Select the perfect package for your event size and needs.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="bg-primary-100 text-primary-600 rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+                  <div className="bg-primary-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
                     2
                   </div>
                   <div>
-                    <h3 className="font-bold text-brown-900 mb-2">Fill Out the Form</h3>
-                    <p className="text-brown-600">Provide your event details and special requests.</p>
+                    <h3 className="font-bold text-white mb-2">Fill Out the Form</h3>
+                    <p className="text-gray-300">Provide your event details and special requests.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="bg-primary-100 text-primary-600 rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+                  <div className="bg-primary-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
                     3
                   </div>
                   <div>
-                    <h3 className="font-bold text-brown-900 mb-2">We'll Contact You</h3>
-                    <p className="text-brown-600">We'll reach out within 24 hours to confirm your booking.</p>
+                    <h3 className="font-bold text-white mb-2">We'll Contact You</h3>
+                    <p className="text-gray-300">We'll reach out within 24 hours to confirm your booking.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="bg-primary-100 text-primary-600 rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
+                  <div className="bg-primary-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
                     4
                   </div>
                   <div>
-                    <h3 className="font-bold text-brown-900 mb-2">Enjoy Your Party</h3>
-                    <p className="text-brown-600">We'll handle everything so you can focus on celebrating!</p>
+                    <h3 className="font-bold text-white mb-2">Enjoy Your Party</h3>
+                    <p className="text-gray-300">We'll handle everything so you can focus on celebrating!</p>
                   </div>
                 </div>
               </div>
@@ -355,26 +374,26 @@ export default function Parties() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-[#1a1f23] rounded-2xl p-8"
+              className="bg-[#040D10] rounded-2xl p-8 border border-gray-800"
             >
-              <h3 className="text-2xl font-bold text-brown-900 mb-6">Book Your Party</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">Book Your Party</h3>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Name *</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Name *</label>
                     <input
                       {...register('name', { required: 'Name is required' })}
-                      className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500"
                       placeholder="Your name"
                     />
                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Email *</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Email *</label>
                     <input
                       {...register('email', { required: 'Email is required' })}
                       type="email"
-                      className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500"
                       placeholder="your@email.com"
                     />
                     {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
@@ -383,20 +402,20 @@ export default function Parties() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Phone *</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Phone *</label>
                     <input
                       {...register('phone', { required: 'Phone is required' })}
-                      className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500"
                       placeholder="(123) 456-7890"
                     />
                     {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Event Date *</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Event Date *</label>
                     <input
                       {...register('eventDate', { required: 'Event date is required' })}
                       type="date"
-                      className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     />
                     {errors.eventDate && <p className="text-red-500 text-sm mt-1">{errors.eventDate.message}</p>}
                   </div>
@@ -404,21 +423,21 @@ export default function Parties() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Event Time *</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Event Time *</label>
                     <input
                       {...register('eventTime', { required: 'Event time is required' })}
                       type="time"
-                      className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     />
                     {errors.eventTime && <p className="text-red-500 text-sm mt-1">{errors.eventTime.message}</p>}
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-brown-700 mb-2">Number of Guests *</label>
+                    <label className="block text-sm font-semibold text-gray-300 mb-2">Number of Guests *</label>
                     <input
                       {...register('guests', { required: 'Number of guests is required' })}
                       type="number"
                       min="1"
-                      className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500"
                       placeholder="10"
                     />
                     {errors.guests && <p className="text-red-500 text-sm mt-1">{errors.guests.message}</p>}
@@ -426,21 +445,21 @@ export default function Parties() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-brown-700 mb-2">Event Location *</label>
+                  <label className="block text-sm font-semibold text-gray-300 mb-2">Event Location *</label>
                   <input
                     {...register('location', { required: 'Event location is required' })}
-                    className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500"
                     placeholder="Your address or venue"
                   />
                   {errors.location && <p className="text-red-500 text-sm mt-1">{errors.location.message}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-brown-700 mb-2">Special Requests</label>
+                  <label className="block text-sm font-semibold text-gray-300 mb-2">Special Requests</label>
                   <textarea
                     {...register('specialRequests')}
                     rows={3}
-                    className="w-full px-4 py-3 border border-brown-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500"
                     placeholder="Any special dietary needs, decorations, or requests..."
                   />
                 </div>
@@ -467,12 +486,11 @@ export default function Parties() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
               Past Events
             </h2>
-            <p className="text-xl text-brown-700 max-w-3xl mx-auto">
-              See some of the amazing celebrations we've been part of. 
-              Every event is special to us!
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              We have catered for events including: Cinco de Mayo parties, Weddings, Gender Reveals, Birthday Parties, and Corporate events!
             </p>
           </motion.div>
 
@@ -484,16 +502,16 @@ export default function Parties() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-[#1a1f23] rounded-2xl p-6 shadow-lg card-hover"
+                className="bg-[#1a1f23] rounded-2xl p-6 shadow-lg card-hover border border-gray-800"
               >
-                <div className="text-5xl mb-4 text-center">{event.image}</div>
-                <h3 className="text-lg font-bold text-brown-900 mb-2">
+                {event.image && <div className="text-5xl mb-4 text-center">{event.image}</div>}
+                <h3 className="text-lg font-bold text-white mb-2">
                   {event.title}
                 </h3>
-                <p className="text-brown-600 text-sm mb-3">
+                <p className="text-gray-300 text-sm mb-3">
                   {event.description}
                 </p>
-                <div className="text-xs text-brown-500">
+                <div className="text-xs text-gray-400">
                   {event.date}
                 </div>
               </motion.div>
@@ -537,6 +555,9 @@ export default function Parties() {
           </motion.div>
         </div>
       </section>
+
+      {/* Reviews Section */}
+      <RotatingReviews />
     </div>
     </ElegenciaLayout>
   )

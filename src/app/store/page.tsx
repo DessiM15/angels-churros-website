@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { MapPin, Clock, Phone, Mail, Star, Navigation, Heart, Coffee, Users } from 'lucide-react'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
+import RotatingReviews from '@/components/RotatingReviews'
 
 const storeInfo = {
   address: '12345 FM 1960 W, Cypress, TX 77433',
@@ -502,6 +503,9 @@ export default function Store() {
           </motion.div>
         </div>
       </section>
+
+      {/* Additional Reviews Section */}
+      <RotatingReviews />
     </div>
     </ElegenciaLayout>
   )

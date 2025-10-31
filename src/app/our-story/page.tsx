@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Heart, Users, Star, Coffee, Award, Globe } from 'lucide-react'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
+import RotatingReviews from '@/components/RotatingReviews'
 
 export default function OurStory() {
   const values = [
@@ -53,38 +54,6 @@ export default function OurStory() {
     },
   ]
 
-  const milestones = [
-    {
-      year: '2019',
-      title: 'The Homesick Texan',
-      description: 'Maria moves to Houston and immediately starts missing her abuela\'s churros. The search for authentic churros begins (and fails miserably).',
-    },
-    {
-      year: '2020',
-      title: 'Kitchen Experiments',
-      description: 'Maria starts making churros in her tiny apartment kitchen. Her neighbors start complaining about the smell (but also start asking for samples).',
-    },
-    {
-      year: '2021',
-      title: 'Food Truck Dreams',
-      description: 'We buy a beat-up food truck and start selling churros at local farmers markets. Our first day we sold out in 2 hours and had to close early.',
-    },
-    {
-      year: '2022',
-      title: 'First Real Location',
-      description: 'We finally get a real storefront in Cypress. It\'s small, it\'s cramped, but it\'s ours. The line out the door on opening day was insane.',
-    },
-    {
-      year: '2023',
-      title: 'The Churro Cart',
-      description: 'We buy a second food truck and start doing events. Birthday parties, corporate events, even a wedding. Turns out people really love churros.',
-    },
-    {
-      year: '2024',
-      title: 'Still Going Strong',
-      description: 'We\'re still here, still making churros the old way, and still getting up at 4 AM. Some things never change, and we\'re okay with that.',
-    },
-  ]
 
   return (
     <ElegenciaLayout>
@@ -225,8 +194,10 @@ export default function OurStory() {
       </section>
 
       {/* Our Team */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
+      <section className="section-padding bg-white relative">
+        {/* Tinted overlay for navbar visibility */}
+        <div className="absolute inset-0 bg-black/20 pointer-events-none z-10"></div>
+        <div className="container-custom relative z-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -261,58 +232,8 @@ export default function OurStory() {
         </div>
       </section>
 
-      {/* Our Journey */}
-      <section className="section-padding bg-brown-900 text-white">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-6">
-              Our Journey
-            </h2>
-            <p className="text-xl text-brown-200 max-w-3xl mx-auto">
-              From a small dream to Houston's premier churrería – here's how we got here.
-            </p>
-          </motion.div>
-
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-brown-700"></div>
-            
-            <div className="space-y-12">
-              {milestones.map((milestone, index) => (
-                <motion.div
-                  key={milestone.year}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="relative flex items-start space-x-8"
-                >
-                  {/* Timeline Dot */}
-                  <div className="relative z-10 flex-shrink-0 w-16 h-16 bg-brown-700 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                    {milestone.year}
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="flex-1 bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                    <h3 className="text-2xl font-bold text-white mb-3">
-                      {milestone.title}
-                    </h3>
-                    <p className="text-brown-200 leading-relaxed">
-                      {milestone.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Customer Reviews */}
+      <RotatingReviews />
 
       {/* Call to Action */}
       <section className="section-padding bg-gradient-to-r from-brown-900 to-brown-800 text-white">

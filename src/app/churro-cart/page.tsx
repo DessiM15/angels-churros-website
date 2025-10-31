@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Truck, Calendar, Clock, Users, Star, CheckCircle, Heart, MapPin, Phone } from 'lucide-react'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
+import RotatingReviews from '@/components/RotatingReviews'
 
 interface CartFeature {
   title: string
@@ -562,6 +563,9 @@ export default function ChurroCart() {
           </motion.div>
         </div>
       </section>
+
+      {/* Reviews Section */}
+      <RotatingReviews />
     </div>
     </ElegenciaLayout>
   )

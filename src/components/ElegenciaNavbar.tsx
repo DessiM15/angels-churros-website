@@ -30,11 +30,8 @@ const ElegenciaNavbar = () => {
             />
             <div className="hidden sm:block">
               <h1 className="text-xl font-serif font-bold text-white">
-                Angels Churros
+                Angels Churros N Chocolate
               </h1>
-              <p className="text-sm text-white/80">
-                N Chocolate
-              </p>
             </div>
           </Link>
 

@@ -14,7 +14,8 @@ const ElegenciaHero = () => {
       maintitle: "N Chocolate",
       description: "Houston's first authentic churrería, where culinary artistry meets exceptional dining experiences. Experience the authentic taste of Mexico with our freshly made churros and premium hot chocolate.",
       buttonUrl: "/reservation",
-      backgroundImage: "/assets/churro-hero.jpg"
+      backgroundImage: "/assets/churro-hero.jpg",
+      backgroundVideo: "/assets/churros-with-hot-chocolate.mp4"
     },
     {
       id: 2,
@@ -51,13 +52,26 @@ const ElegenciaHero = () => {
 
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Background Image */}
+      {/* Background Video/Image */}
       <div className="absolute inset-0">
-        <img 
-          className="w-full h-full object-cover" 
-          src={slides[currentSlide].backgroundImage} 
-          alt={slides[currentSlide].title}
-        />
+        {slides[currentSlide].backgroundVideo ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+            poster={slides[currentSlide].backgroundImage}
+          >
+            <source src={slides[currentSlide].backgroundVideo} type="video/mp4" />
+          </video>
+        ) : (
+          <img 
+            className="w-full h-full object-cover" 
+            src={slides[currentSlide].backgroundImage} 
+            alt={slides[currentSlide].title}
+          />
+        )}
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
