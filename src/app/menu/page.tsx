@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import { Plus, Minus, ShoppingCart, Star, ChevronRight } from 'lucide-react'
 import { useCart } from '@/components/CartProvider'
@@ -396,21 +396,31 @@ export default function Menu() {
   const [activeSection, setActiveSection] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const sectionRefs = useRef<(HTMLDivElement | null)[]>([])
+  const sectionRefs = useRef<(HTMLElement | null)[]>([])
   const { addItem } = useCart()
 
   // Track scroll position for active section
   useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
     const handleScroll = () => {
       if (isScrolling) return
       
-      const scrollPosition = window.scrollY + window.innerHeight / 2
-      const currentSection = Math.round(scrollPosition / window.innerHeight)
-      setActiveSection(Math.min(currentSection, categoryOrder.length - 1))
+      // Calculate which section is currently in view
+      const scrollTop = container.scrollTop
+      const viewportHeight = container.clientHeight
+      // Each section is full height (100vh), so divide scroll position by viewport height
+      // Round to nearest section
+      const currentSection = Math.round(scrollTop / viewportHeight)
+      setActiveSection(Math.min(Math.max(0, currentSection), categoryOrder.length - 1))
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    container.addEventListener('scroll', handleScroll, { passive: true })
+    // Initial check to set active section on mount
+    handleScroll()
+    
+    return () => container.removeEventListener('scroll', handleScroll)
   }, [isScrolling])
 
   const updateQuantity = (itemId: string, change: number) => {
@@ -476,12 +486,15 @@ export default function Menu() {
       {/* Main Container with Snap Scrolling */}
       <div 
         ref={containerRef}
-        className="snap-y snap-mandatory overflow-y-scroll h-screen"
+        className="snap-y snap-mandatory overflow-y-scroll h-screen scrollbar-hide"
         style={{ scrollBehavior: 'smooth' }}
       >
         {categoryOrder.map((categoryKey, sectionIndex) => {
           const category = menuData[categoryKey]
           if (!category) return null
+
+          // Categories that need extra padding due to long subtitles or many items
+          const needsExtraPadding = ['lunch', 'traditional-churros', 'drinks', 'churro-sundaes'].includes(categoryKey)
 
           return (
             <section
@@ -499,23 +512,23 @@ export default function Menu() {
               <div className="absolute inset-0 bg-black/60"></div>
               
               {/* Content Container */}
-              <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 pt-32">
-                <div className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)]">
+              <div className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${needsExtraPadding ? 'pt-16 sm:pt-20' : 'pt-20 sm:pt-24'}`}>
+                <div className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
                   {/* Category Title */}
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, ease: 'easeOut' }}
-                    className="text-center mb-16 mt-8"
+                    className="text-center mb-8"
                   >
-                    <h2 className="text-6xl md:text-7xl lg:text-8xl font-serif font-light text-white mb-6 tracking-tight">
+                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-light text-white mb-2 tracking-tight">
                       {category.title}
                     </h2>
-                    <p className="text-xl md:text-2xl text-elegencia-gold font-light tracking-wide">
+                    <p className="text-lg md:text-xl text-elegencia-gold font-light tracking-wide">
                       {category.subtitle}
                     </p>
-                    <div className="w-24 h-px bg-elegencia-gold mx-auto mt-8"></div>
+                    <div className="w-24 h-px bg-elegencia-gold mx-auto mt-3"></div>
                   </motion.div>
 
                   {/* Menu Items Grid */}
@@ -526,7 +539,7 @@ export default function Menu() {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="w-full max-w-5xl"
                   >
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                       {category.items.slice(0, 6).map((item, itemIndex) => (
                         <motion.div
                           key={item.id}
