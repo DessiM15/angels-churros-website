@@ -94,7 +94,7 @@ const RotatingReviews = () => {
   }
 
   return (
-    <section className="bg-gradient-to-r from-brown-900 to-brown-800 py-16">
+    <section className="py-16 bg-black/40 border-t border-white/10">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -106,7 +106,7 @@ const RotatingReviews = () => {
           <h2 className="text-3xl lg:text-4xl font-serif font-bold text-white mb-4">
             What Our Customers Say
           </h2>
-          <p className="text-lg text-brown-200 max-w-2xl mx-auto">
+          <p className="text-lg text-white/80 max-w-2xl mx-auto">
             Don't just take our word for it - hear from our amazing customers!
           </p>
         </motion.div>
@@ -144,7 +144,7 @@ const RotatingReviews = () => {
                 </div>
 
                 {/* Author and Source */}
-                <div className="text-brown-200">
+                <div className="text-white/80">
                   <p className="text-lg font-semibold">{reviews[currentReview].author}</p>
                   {reviews[currentReview].source && (
                     <p className="text-sm opacity-80">{reviews[currentReview].source}</p>
