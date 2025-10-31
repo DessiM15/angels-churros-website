@@ -170,8 +170,24 @@ export default function Parties() {
         <div className="relative z-10">
           {/* Hero Section */}
           <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-brown-900/85 via-brown-900/70 to-brown-800/60 backdrop-blur-sm"></div>
-            <div className="relative z-10 h-full flex items-center">
+            <div className="absolute inset-0 overflow-hidden">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/assets/churro-party.mp4" type="video/mp4" />
+                <img
+                  src="/assets/parties-background.jpg"
+                  alt="Churro party celebration"
+                  className="w-full h-full object-cover"
+                />
+              </video>
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-br from-brown-900/85 via-brown-900/60 to-brown-800/60 backdrop-blur-sm z-10"></div>
+            <div className="relative z-20 h-full flex items-center">
               <div className="container mx-auto px-4">
                 <div className="text-center">
                   <motion.div
