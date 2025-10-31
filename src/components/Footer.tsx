@@ -4,10 +4,16 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Facebook, Instagram, Star, MapPin, Clock, Phone, Mail } from 'lucide-react'
 
+interface FooterLink {
+  name: string
+  href: string
+  external?: boolean
+}
+
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
-  const footerLinks = {
+  const footerLinks: Record<string, FooterLink[]> = {
     'Our Story': [
       { name: 'About Us', href: '/our-story' },
       { name: 'Our Values', href: '/our-story#values' },
