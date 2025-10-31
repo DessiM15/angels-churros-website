@@ -196,10 +196,10 @@ export default function Parties() {
                     transition={{ duration: 0.6 }}
                   >
                     <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
-                      Need Fresh Hot Churros For Your Special Event? Let Us Take Care Of Your Sweet Cravings!
+                      Fresh Churros For Every Celebration
                     </h1>
-                    <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
-                      Make your celebration unforgettable with our authentic churro party packages
+                    <p className="text-xl lg:text-2xl text-elegencia-gold max-w-2xl mx-auto">
+                      Pick a party package and we’ll bring the sweetness.
                     </p>
                   </motion.div>
                 </div>
