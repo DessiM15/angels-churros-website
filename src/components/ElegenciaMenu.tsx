@@ -569,7 +569,7 @@ const ElegenciaMenu = () => {
                   )}
 
                   {/* Add to Cart */}
-                  <div className="flex items-center justify-between">
+                  <div className={`flex items-center justify-between ${item.category === 'churro-sundaes' ? 'pb-4' : ''}`}>
                     {quantity === 0 ? (
                       <button
                         onClick={() => handleAddToCart(item)}
