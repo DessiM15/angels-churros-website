@@ -1,11 +1,10 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { Plus, Minus, ShoppingCart, Star, Clock, Utensils } from 'lucide-react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { Plus, Minus, ShoppingCart, Star, ChevronRight } from 'lucide-react'
 import { useCart } from '@/components/CartProvider'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
-import RotatingReviews from '@/components/RotatingReviews'
 
 interface MenuItem {
   id: string
@@ -18,10 +17,18 @@ interface MenuItem {
   options?: string[]
 }
 
-const menuData = {
+interface CategoryData {
+  title: string
+  subtitle: string
+  heroImage: string
+  items: MenuItem[]
+}
+
+const menuData: Record<string, CategoryData> = {
   'breakfast': {
     title: 'Breakfast',
     subtitle: 'Start your day right',
+    heroImage: '/assets/breakfast-hero.jpg',
     items: [
       {
         id: 'huevos-chorizo',
@@ -42,6 +49,7 @@ const menuData = {
   'lunch': {
     title: 'Lunch',
     subtitle: 'Served all day',
+    heroImage: '/assets/lunch-hero.jpg',
     items: [
       {
         id: 'joe-burger',
@@ -74,6 +82,7 @@ const menuData = {
   'quick-bites': {
     title: 'Quick Bites',
     subtitle: 'Perfect for snacking',
+    heroImage: '/assets/quick-bites-hero.jpg',
     items: [
       {
         id: 'cheeto-fries',
@@ -105,6 +114,7 @@ const menuData = {
   'cafe': {
     title: 'Cafe',
     subtitle: 'Our organic espresso originates from the mountains of Chiapas, Mexico',
+    heroImage: '/assets/cafe-hero.jpg',
     items: [
       {
         id: 'espresso',
@@ -165,6 +175,7 @@ const menuData = {
   'bakery': {
     title: 'Bakery',
     subtitle: 'Fresh baked treats',
+    heroImage: '/assets/bakery-hero.jpg',
     items: [
       {
         id: 'fried-oreos',
@@ -178,6 +189,7 @@ const menuData = {
   'traditional-churros': {
     title: 'Traditional Churros',
     subtitle: 'Traditional Spanish churros topped with your choice of powdered sugar, or granular sugar dashed with cinnamon. Choice of dips: caramel, chocolate, condensed milk, honey, nutella, dulce de leche, strawberry',
+    heroImage: '/assets/traditional-churros-hero.jpg',
     items: [
       {
         id: '3-churros-1-dip',
@@ -213,6 +225,7 @@ const menuData = {
   'churro-dream': {
     title: 'Churro Dream',
     subtitle: 'Creamy ice-cream served with a fresh hot churro. Ice-cream flavors include butter-pecan, cappuccino crunch, chocolate, cookies-n-creme, vanilla, coconut, lama-licious, strawberry',
+    heroImage: '/assets/churro-dream-hero.jpg',
     items: [
       {
         id: '1-scoop-churro',
@@ -240,6 +253,7 @@ const menuData = {
   'drinks': {
     title: 'Drinks',
     subtitle: 'Refreshing beverages',
+    heroImage: '/assets/drinks-hero.jpg',
     items: [
       {
         id: 'hot-chocolate',
@@ -288,6 +302,7 @@ const menuData = {
   'churro-sundaes': {
     title: 'Churro Sundaes',
     subtitle: 'Churros topped with ice-cream and other fun toppings!',
+    heroImage: '/assets/churro-sundae-hero.jpg',
     items: [
       {
         id: 'rocky-road',
@@ -320,6 +335,7 @@ const menuData = {
   'churro-combos': {
     title: 'Churro Combo\'s',
     subtitle: 'Want churros and a drink? These combos aim to satisfy! Any additional churro is +$1.00 additional dip +$0.50',
+    heroImage: '/assets/churro-combo-hero.jpg',
     items: [
       {
         id: 'churro-smoothie',
@@ -362,10 +378,40 @@ const menuData = {
   },
 }
 
+const categoryOrder = [
+  'breakfast',
+  'lunch',
+  'quick-bites',
+  'cafe',
+  'bakery',
+  'traditional-churros',
+  'churro-dream',
+  'drinks',
+  'churro-sundaes',
+  'churro-combos'
+]
+
 export default function Menu() {
   const [quantities, setQuantities] = useState<Record<string, number>>({})
-  const [activeCategory, setActiveCategory] = useState<string>('breakfast')
+  const [activeSection, setActiveSection] = useState(0)
+  const [isScrolling, setIsScrolling] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([])
   const { addItem } = useCart()
+
+  // Track scroll position for active section
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isScrolling) return
+      
+      const scrollPosition = window.scrollY + window.innerHeight / 2
+      const currentSection = Math.round(scrollPosition / window.innerHeight)
+      setActiveSection(Math.min(currentSection, categoryOrder.length - 1))
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [isScrolling])
 
   const updateQuantity = (itemId: string, change: number) => {
     setQuantities(prev => ({
@@ -386,358 +432,214 @@ export default function Menu() {
     setQuantities(prev => ({ ...prev, [item.id]: 0 }))
   }
 
-  const scrollToCategory = (categoryKey: string) => {
-    setActiveCategory(categoryKey)
-    if (categoryKey !== 'all') {
-      const element = document.getElementById(categoryKey)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
-    }
+  const scrollToSection = (index: number) => {
+    setIsScrolling(true)
+    sectionRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setActiveSection(index)
+    setTimeout(() => setIsScrolling(false), 1000)
   }
 
   return (
     <ElegenciaLayout>
-    <div className="pt-16 lg:pt-20">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
-        {/* Background Video */}
-        <div className="absolute inset-0 overflow-hidden">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-            poster="/assets/our-menu-hero.jpg"
-          >
-            <source src="/assets/oreos-menu-hero.mp4" type="video/mp4" />
-          </video>
-        </div>
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 h-full flex items-center">
-          <div className="container mx-auto px-4">
-            <div className="text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
-                  Our Menu
-                </h1>
-                <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
-                  Authentic Mexican cuisine, fresh churros, and café favorites made daily
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Category Navigation */}
-      <section className="py-12 bg-gray-800">
-        <div className="container-custom">
-          <div className="flex flex-wrap justify-center gap-3">
-            <button
-              onClick={() => scrollToCategory('all')}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                activeCategory === 'all'
-                  ? 'bg-elegencia-gold text-brown-900 shadow-lg'
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
-              }`}
-            >
-              View All
-            </button>
-            {Object.entries(menuData).map(([categoryKey, category]) => (
+      {/* Scroll Indicator */}
+      <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
+        <div className="flex flex-col gap-3">
+          {categoryOrder.map((categoryKey, index) => {
+            const category = menuData[categoryKey]
+            if (!category) return null
+            
+            return (
               <button
                 key={categoryKey}
-                onClick={() => scrollToCategory(categoryKey)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                  activeCategory === categoryKey
-                    ? 'bg-elegencia-gold text-brown-900 shadow-lg'
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
+                onClick={() => scrollToSection(index)}
+                className={`group flex items-center gap-3 transition-all duration-300 ${
+                  activeSection === index ? 'opacity-100' : 'opacity-40 hover:opacity-70'
                 }`}
+                aria-label={`Go to ${category.title}`}
               >
-                {category.title}
+                <div className={`h-1 w-12 transition-all duration-300 ${
+                  activeSection === index 
+                    ? 'bg-elegencia-gold w-16' 
+                    : 'bg-white/30 group-hover:bg-white/50'
+                }`}></div>
+                <span className={`text-sm font-light tracking-wider uppercase transition-colors duration-300 ${
+                  activeSection === index ? 'text-elegencia-gold' : 'text-white'
+                }`}>
+                  {category.title}
+                </span>
               </button>
-            ))}
-          </div>
+            )
+          })}
         </div>
-      </section>
-
-      {/* Menu Categories */}
-      <div className={`bg-gray-900 ${activeCategory === 'all' ? 'relative' : ''}`}>
-        {/* View All Background with Logo */}
-        {activeCategory === 'all' && (
-          <div 
-            className="absolute inset-0 bg-black bg-cover bg-center bg-no-repeat opacity-10"
-            style={{
-              backgroundImage: 'url(/assets/angels-churro-logo.webp)'
-            }}
-          ></div>
-        )}
-        {Object.entries(menuData).map(([categoryKey, category], categoryIndex) => (
-          <section 
-            key={categoryKey} 
-            id={categoryKey}
-            className={`py-20 ${categoryIndex % 2 === 0 ? 'bg-gray-900' : 'bg-gray-800'} ${
-              activeCategory === categoryKey || activeCategory === 'all' ? 'block' : 'hidden'
-            } ${
-              categoryKey === 'breakfast' || categoryKey === 'lunch' || categoryKey === 'quick-bites' || categoryKey === 'cafe' || categoryKey === 'bakery' || categoryKey === 'drinks' || categoryKey === 'traditional-churros' || categoryKey === 'churro-dream' || categoryKey === 'churro-sundaes' || categoryKey === 'churro-combos' ? 'relative' : ''
-            } ${
-              activeCategory === 'all' ? 'relative z-10' : ''
-            }`}
-          >
-            {/* Breakfast Hero Background */}
-            {categoryKey === 'breakfast' && activeCategory === 'breakfast' && (
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-                style={{
-                  backgroundImage: 'url(/assets/breakfast-hero.jpg)'
-                }}
-              ></div>
-            )}
-            {/* Lunch Hero Background */}
-            {categoryKey === 'lunch' && activeCategory === 'lunch' && (
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-                style={{
-                  backgroundImage: 'url(/assets/lunch-hero.jpg)'
-                }}
-              ></div>
-            )}
-            {/* Quick Bites Hero Background */}
-            {categoryKey === 'quick-bites' && activeCategory === 'quick-bites' && (
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-                style={{
-                  backgroundImage: 'url(/assets/quick-bites-hero.jpg)'
-                }}
-                aria-label="elote elote in houston best elote in houston best elote in cypress elote in cypress"
-              ></div>
-            )}
-            {/* Cafe Hero Background */}
-            {categoryKey === 'cafe' && activeCategory === 'cafe' && (
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-                style={{
-                  backgroundImage: 'url(/assets/cafe-hero.jpg)'
-                }}
-              ></div>
-            )}
-            {/* Bakery Hero Background */}
-            {categoryKey === 'bakery' && activeCategory === 'bakery' && (
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-                style={{
-                  backgroundImage: 'url(/assets/bakery-hero.jpg)'
-                }}
-                aria-label="fried oreos fried oreos in houston fried oreos in cypress fried oreos near me"
-              ></div>
-            )}
-            {/* Drinks Hero Background */}
-            {categoryKey === 'drinks' && activeCategory === 'drinks' && (
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-                style={{
-                  backgroundImage: 'url(/assets/drinks-hero.jpg)'
-                }}
-                aria-label="mangonadas in houston mangonadas in cypress mangonadas"
-              ></div>
-            )}
-            {/* Traditional Churros Hero Background */}
-            {categoryKey === 'traditional-churros' && activeCategory === 'traditional-churros' && (
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-                style={{
-                  backgroundImage: 'url(/assets/traditional-churros-hero.jpg)'
-                }}
-                aria-label="churros near me churros in houston best churros churros churros in cypress churros cypress best churros cypress best churros in houston"
-              ></div>
-            )}
-            {/* Churro Dream Hero Background */}
-            {categoryKey === 'churro-dream' && activeCategory === 'churro-dream' && (
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-                style={{
-                  backgroundImage: 'url(/assets/churro-dream-hero.jpg)'
-                }}
-                aria-label="churros houston churros in cypress sweet treats near me Cypress churros houston churros icecream in houston icecream in cypress"
-              ></div>
-            )}
-            {/* Churro Sundaes Hero Background */}
-            {categoryKey === 'churro-sundaes' && activeCategory === 'churro-sundaes' && (
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-                style={{
-                  backgroundImage: 'url(/assets/churro-sundae-hero.jpg)'
-                }}
-              ></div>
-            )}
-            {/* Churro Combos Hero Background */}
-            {categoryKey === 'churro-combos' && activeCategory === 'churro-combos' && (
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-                style={{
-                  backgroundImage: 'url(/assets/churro-combo-hero.jpg)'
-                }}
-                aria-label="churros near me boba near me milk tea near me milk tea cypress milk tea houston houston churros"
-              ></div>
-            )}
-            <div className={`container-custom ${(categoryKey === 'breakfast' && activeCategory === 'breakfast') || (categoryKey === 'lunch' && activeCategory === 'lunch') || (categoryKey === 'quick-bites' && activeCategory === 'quick-bites') || (categoryKey === 'cafe' && activeCategory === 'cafe') || (categoryKey === 'bakery' && activeCategory === 'bakery') || (categoryKey === 'drinks' && activeCategory === 'drinks') || (categoryKey === 'traditional-churros' && activeCategory === 'traditional-churros') || (categoryKey === 'churro-dream' && activeCategory === 'churro-dream') || (categoryKey === 'churro-sundaes' && activeCategory === 'churro-sundaes') || (categoryKey === 'churro-combos' && activeCategory === 'churro-combos') ? 'relative z-10' : ''}`}>
-              {/* Category Header */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="text-center mb-16"
-              >
-                <div className="inline-block">
-                  <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-4">
-                    {category.title}
-                  </h2>
-                  <p className="text-xl text-elegencia-gold mb-6">
-                    {category.subtitle}
-                  </p>
-                  <div className="w-24 h-1 bg-elegencia-gold mx-auto rounded-full"></div>
-                </div>
-              </motion.div>
-
-              {/* Menu Items Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {(category.items as MenuItem[]).map((item, itemIndex) => (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: itemIndex * 0.1 }}
-                    viewport={{ once: true }}
-                    className="bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group border border-gray-700"
-                  >
-                    <div className="p-8">
-                      {/* Item Header */}
-                      <div className="flex items-start justify-between mb-6">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <h3 className="text-xl font-bold text-white">
-                              {item.name}
-                            </h3>
-                            {item.popular && (
-                              <div className="flex items-center space-x-1 bg-yellow-100 px-3 py-1 rounded-full">
-                                <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                                <span className="text-sm text-yellow-700 font-semibold">Popular</span>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <span className="text-3xl font-bold text-elegencia-gold">
-                            ${item.price.toFixed(2)}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-gray-300 mb-6 leading-relaxed text-base">
-                        {item.description}
-                      </p>
-
-                      {/* Add-ons */}
-                      {item.options && (
-                        <div className="mb-6">
-                          <h4 className="text-sm font-semibold text-gray-200 mb-3">Add-ons:</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {item.options.map((option, optionIndex) => (
-                              <span
-                                key={optionIndex}
-                                className="text-sm bg-elegencia-gold/20 text-elegencia-gold px-4 py-2 rounded-lg font-medium border border-elegencia-gold/30"
-                              >
-                                {option}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Quantity and Add to Cart */}
-                      <div className="flex items-center justify-between pt-6 border-t border-gray-600">
-                        <div className="flex items-center space-x-4">
-                          <button
-                            onClick={() => updateQuantity(item.id, -1)}
-                            className="w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center transition-colors border border-gray-600"
-                          >
-                            <Minus className="w-5 h-5 text-gray-300" />
-                          </button>
-                          <span className="text-xl font-bold text-white w-8 text-center">
-                            {quantities[item.id] || 0}
-                          </span>
-                          <button
-                            onClick={() => updateQuantity(item.id, 1)}
-                            className="w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center transition-colors border border-gray-600"
-                          >
-                            <Plus className="w-5 h-5 text-gray-300" />
-                          </button>
-                        </div>
-
-                        <button
-                          onClick={() => addToCart(item)}
-                          disabled={!quantities[item.id] || quantities[item.id] === 0}
-                          className="flex items-center space-x-3 bg-elegencia-gold hover:bg-elegencia-gold/90 disabled:bg-gray-600 disabled:cursor-not-allowed text-brown-900 px-8 py-3 rounded-xl font-bold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-                        >
-                          <ShoppingCart className="w-5 h-5" />
-                          <span>Add to Cart</span>
-                        </button>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-        ))}
       </div>
 
-      {/* Order Online CTA */}
-      <section className="bg-gradient-to-r from-brown-900 to-brown-800 text-white">
-        <div className="container-custom section-padding text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-serif font-bold mb-6">
-              Ready to Order?
-            </h2>
-            <p className="text-xl text-elegencia-gold mb-8 max-w-2xl mx-auto">
-              Skip the line and order online for pickup or delivery. Fresh churros and authentic Mexican cuisine delivered to your door.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://order.online/store/angels-churros-n-chocolate-582123"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-elegencia-gold text-brown-900 hover:bg-elegencia-gold/90 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
-              >
-                Order Online Now
-              </a>
-              <a
-                href="tel:+1234567890"
-                className="border-2 border-elegencia-gold text-white hover:bg-elegencia-gold hover:text-brown-900 font-semibold py-4 px-8 rounded-lg transition-colors duration-200"
-              >
-                Call to Order
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Main Container with Snap Scrolling */}
+      <div 
+        ref={containerRef}
+        className="snap-y snap-mandatory overflow-y-scroll h-screen"
+        style={{ scrollBehavior: 'smooth' }}
+      >
+        {categoryOrder.map((categoryKey, sectionIndex) => {
+          const category = menuData[categoryKey]
+          if (!category) return null
 
-      {/* Reviews Section */}
-      <RotatingReviews />
-    </div>
+          return (
+            <section
+              key={categoryKey}
+              ref={(el) => { sectionRefs.current[sectionIndex] = el }}
+              className="relative h-screen snap-start snap-always flex items-center justify-center overflow-hidden"
+              style={{
+                backgroundImage: `url(${category.heroImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            >
+              {/* Darkened Overlay */}
+              <div className="absolute inset-0 bg-black/60"></div>
+              
+              {/* Content Container */}
+              <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 pt-32">
+                <div className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)]">
+                  {/* Category Title */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                    className="text-center mb-16 mt-8"
+                  >
+                    <h2 className="text-6xl md:text-7xl lg:text-8xl font-serif font-light text-white mb-6 tracking-tight">
+                      {category.title}
+                    </h2>
+                    <p className="text-xl md:text-2xl text-elegencia-gold font-light tracking-wide">
+                      {category.subtitle}
+                    </p>
+                    <div className="w-24 h-px bg-elegencia-gold mx-auto mt-8"></div>
+                  </motion.div>
+
+                  {/* Menu Items Grid */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="w-full max-w-5xl"
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                      {category.items.slice(0, 6).map((item, itemIndex) => (
+                        <motion.div
+                          key={item.id}
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.5, delay: itemIndex * 0.1 }}
+                          className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-black/50 transition-all duration-300 group"
+                        >
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-1">
+                                <h3 className="text-lg font-serif text-white group-hover:text-elegencia-gold transition-colors">
+                                  {item.name}
+                                </h3>
+                                {item.popular && (
+                                  <Star className="w-4 h-4 text-elegencia-gold fill-current" />
+                                )}
+                              </div>
+                            </div>
+                            <span className="text-xl font-serif text-elegencia-gold">
+                              ${item.price.toFixed(2)}
+                            </span>
+                          </div>
+                          
+                          <p className="text-sm text-white/80 mb-4 leading-relaxed">
+                            {item.description}
+                          </p>
+
+                          {item.options && (
+                            <div className="mb-4">
+                              <div className="flex flex-wrap gap-2">
+                                {item.options.map((option, optIndex) => (
+                                  <span
+                                    key={optIndex}
+                                    className="text-xs text-elegencia-gold/80 border border-elegencia-gold/30 px-2 py-1 rounded"
+                                  >
+                                    {option}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                            <div className="flex items-center gap-3">
+                              <button
+                                onClick={() => updateQuantity(item.id, -1)}
+                                className="w-8 h-8 rounded-full border border-white/30 hover:border-elegencia-gold hover:bg-elegencia-gold/10 flex items-center justify-center transition-all"
+                              >
+                                <Minus className="w-4 h-4 text-white" />
+                              </button>
+                              <span className="text-white w-6 text-center">
+                                {quantities[item.id] || 0}
+                              </span>
+                              <button
+                                onClick={() => updateQuantity(item.id, 1)}
+                                className="w-8 h-8 rounded-full border border-white/30 hover:border-elegencia-gold hover:bg-elegencia-gold/10 flex items-center justify-center transition-all"
+                              >
+                                <Plus className="w-4 h-4 text-white" />
+                              </button>
+                            </div>
+
+                            <button
+                              onClick={() => addToCart(item)}
+                              disabled={!quantities[item.id] || quantities[item.id] === 0}
+                              className="px-4 py-2 bg-elegencia-gold/90 hover:bg-elegencia-gold disabled:bg-white/10 disabled:cursor-not-allowed text-brown-900 text-sm font-medium rounded transition-all disabled:text-white/30"
+                            >
+                              <ShoppingCart className="w-4 h-4 inline-block mr-1" />
+                              Add
+                            </button>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    {/* Order Online Button */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 0.4 }}
+                      className="text-center"
+                    >
+                      <a
+                        href="https://order.online/store/angels-churros-n-chocolate-582123"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 bg-elegencia-gold hover:bg-elegencia-gold/90 text-brown-900 px-8 py-4 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl group"
+                      >
+                        <span>Order Online</span>
+                        <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </a>
+                    </motion.div>
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Scroll Indicator Arrow */}
+              {sectionIndex < categoryOrder.length - 1 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1, y: [0, 10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                  className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+                >
+                  <div className="w-px h-12 bg-white/30"></div>
+                </motion.div>
+              )}
+            </section>
+          )
+        })}
+      </div>
     </ElegenciaLayout>
   )
 }
