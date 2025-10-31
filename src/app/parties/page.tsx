@@ -158,36 +158,29 @@ export default function Parties() {
 
   return (
     <ElegenciaLayout>
-      <div className="relative pt-16 lg:pt-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="/assets/parties-background.jpg"
-            alt="Friends enjoying churros at a party"
+      <div className="relative pt-16 lg:pt-20">
+        <div className="fixed inset-0 -z-10 overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/70"></div>
+          >
+            <source src="/assets/churros-falling.mp4" type="video/mp4" />
+            <img
+              src="/assets/parties-background.jpg"
+              alt="Mini churros falling"
+              className="w-full h-full object-cover"
+            />
+          </video>
+          <div className="absolute inset-0 bg-black/55"></div>
         </div>
         <div className="relative z-10">
           {/* Hero Section */}
           <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
-            <div className="absolute inset-0 overflow-hidden">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              >
-                <source src="/assets/churro-party.mp4" type="video/mp4" />
-                <img
-                  src="/assets/parties-background.jpg"
-                  alt="Churro party celebration"
-                  className="w-full h-full object-cover"
-                />
-              </video>
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-br from-brown-900/85 via-brown-900/60 to-brown-800/60 backdrop-blur-sm z-10"></div>
-            <div className="relative z-20 h-full flex items-center">
+            <div className="absolute inset-0 bg-gradient-to-br from-brown-900/75 via-brown-900/50 to-brown-800/40"></div>
+            <div className="relative z-10 h-full flex items-center">
               <div className="container mx-auto px-4">
                 <div className="text-center">
                   <motion.div
