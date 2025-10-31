@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronUp, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 
 const ElegenciaHero = () => {
@@ -52,59 +53,79 @@ const ElegenciaHero = () => {
 
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Background Video/Image */}
+      {/* Background Video/Image with vertical snapping */}
       <div className="absolute inset-0">
-        {slides[currentSlide].backgroundVideo ? (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-            poster={slides[currentSlide].backgroundImage}
+        <AnimatePresence>
+          <motion.div
+            key={slides[currentSlide].id}
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '-100%' }}
+            transition={{ duration: 0.6, ease: 'easeInOut' }}
+            className="absolute inset-0"
           >
-            <source src={slides[currentSlide].backgroundVideo} type="video/mp4" />
-          </video>
-        ) : (
-          <img 
-            className="w-full h-full object-cover" 
-            src={slides[currentSlide].backgroundImage} 
-            alt={slides[currentSlide].title}
-          />
-        )}
-        <div className="absolute inset-0 bg-black/40"></div>
+            {slides[currentSlide].backgroundVideo ? (
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+                poster={slides[currentSlide].backgroundImage}
+              >
+                <source src={slides[currentSlide].backgroundVideo} type="video/mp4" />
+              </video>
+            ) : (
+              <img 
+                className="w-full h-full object-cover" 
+                src={slides[currentSlide].backgroundImage} 
+                alt={slides[currentSlide].title}
+              />
+            )}
+            <div className="absolute inset-0 bg-black/40"></div>
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-center">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl">
-            <div className="text-white">
-              {/* Main Title */}
-              <div className="mb-8">
-                <h1 className="text-6xl lg:text-8xl font-serif font-bold mb-4 leading-tight">
-                  {slides[currentSlide].title}
-                </h1>
-                <h1 className="text-6xl lg:text-8xl font-serif font-bold text-[#FFD28D] leading-tight">
-                  {slides[currentSlide].maintitle}
-                </h1>
-              </div>
-
-              {/* Description */}
-              <div className="mb-12">
-                <p className="text-xl lg:text-2xl text-gray-200 max-w-3xl leading-relaxed">
-                  {slides[currentSlide].description}
-                </p>
-              </div>
-
-              {/* CTA Button */}
-              <Link
-                href={slides[currentSlide].buttonUrl}
-                className="inline-block bg-[#FFD28D] hover:bg-[#FFD28D]/90 text-[#040D10] px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+            <AnimatePresence>
+              <motion.div
+                key={slides[currentSlide].id}
+                initial={{ y: '100%' }}
+                animate={{ y: 0 }}
+                exit={{ y: '-100%' }}
+                transition={{ duration: 0.6, ease: 'easeInOut' }}
+                className="text-white"
               >
-                View More
-              </Link>
-            </div>
+                {/* Main Title */}
+                <div className="mb-8">
+                  <h1 className="text-6xl lg:text-8xl font-serif font-bold mb-4 leading-tight">
+                    {slides[currentSlide].title}
+                  </h1>
+                  <h1 className="text-6xl lg:text-8xl font-serif font-bold text-[#FFD28D] leading-tight">
+                    {slides[currentSlide].maintitle}
+                  </h1>
+                </div>
+
+                {/* Description */}
+                <div className="mb-12">
+                  <p className="text-xl lg:text-2xl text-gray-200 max-w-3xl leading-relaxed">
+                    {slides[currentSlide].description}
+                  </p>
+                </div>
+
+                {/* CTA Button */}
+                <Link
+                  href={slides[currentSlide].buttonUrl}
+                  className="inline-block bg-[#FFD28D] hover:bg-[#FFD28D]/90 text-[#040D10] px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+                >
+                  View More
+                </Link>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
@@ -112,26 +133,26 @@ const ElegenciaHero = () => {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-8 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 text-white p-4 rounded-full transition-all duration-300"
+        className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20 bg-white/20 hover:bg-white/30 text-white p-4 rounded-full transition-all duration-300"
       >
-        <ChevronLeft className="h-8 w-8" />
+        <ChevronUp className="h-8 w-8" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 text-white p-4 rounded-full transition-all duration-300"
+        className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20 bg-white/20 hover:bg-white/30 text-white p-4 rounded-full transition-all duration-300"
       >
-        <ChevronRight className="h-8 w-8" />
+        <ChevronDown className="h-8 w-8" />
       </button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex space-x-3">
+      <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20">
+        <div className="flex flex-col space-y-3">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentSlide === index ? 'bg-[#FFD28D] w-8' : 'bg-white/50 hover:bg-white/70'
+                currentSlide === index ? 'bg-[#FFD28D] h-8' : 'bg-white/50 hover:bg-white/70'
               }`}
             ></button>
           ))}

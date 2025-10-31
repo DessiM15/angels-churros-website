@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import { X, Heart, Users, Store, Camera } from 'lucide-react'
+import { X, Heart, Store } from 'lucide-react'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
 import RotatingReviews from '@/components/RotatingReviews'
 
@@ -114,28 +114,25 @@ const galleryImages: GalleryImage[] = [
   },
 ]
 
-const categories = [
-  { id: 'all', name: 'All', icon: <Camera className="w-5 h-5" /> },
-  { id: 'products', name: 'Products', icon: <Heart className="w-5 h-5" /> },
-  { id: 'store', name: 'Store', icon: <Store className="w-5 h-5" /> },
-  { id: 'events', name: 'Events', icon: <Users className="w-5 h-5" /> },
-  { id: 'community', name: 'Community', icon: <Heart className="w-5 h-5" /> },
-]
-
 export default function Gallery() {
-  const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null)
-
-  const filteredImages = selectedCategory === 'all' 
-    ? galleryImages 
-    : galleryImages.filter(image => image.category === selectedCategory)
 
   return (
     <ElegenciaLayout>
     <div className="pt-16 lg:pt-20">
       {/* Hero Section */}
       <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brown-900 to-brown-800"></div>
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/assets/photo-gallery-hero-video.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-brown-900/80 to-brown-800/70"></div>
         <div className="relative z-10 h-full flex items-center">
           <div className="container mx-auto px-4">
             <div className="text-center">
@@ -156,41 +153,16 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Category Filter */}
-      <section className="bg-white border-b border-brown-200">
-        <div className="container-custom py-8">
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all duration-200 ${
-                  selectedCategory === category.id
-                    ? 'bg-primary-600 text-white shadow-lg'
-                    : 'bg-brown-100 text-brown-700 hover:bg-brown-200'
-                }`}
-              >
-                {category.icon}
-                <span>{category.name}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Gallery Grid */}
       <section className="section-padding bg-[#1a1f23]">
         <div className="container-custom">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selectedCategory}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-            >
-              {filteredImages.map((image, index) => (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
+            {galleryImages.map((image, index) => (
                 <motion.div
                   key={image.id}
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -225,7 +197,6 @@ export default function Gallery() {
                 </motion.div>
               ))}
             </motion.div>
-          </AnimatePresence>
         </div>
       </section>
 

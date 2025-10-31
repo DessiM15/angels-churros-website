@@ -44,7 +44,10 @@ const ElegenciaMenuSimple = () => {
         {/* Menu Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {menuItems.map((item) => (
-            <div key={item.id} className="bg-[#091E24] rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 group">
+            <div
+              key={item.id}
+              className="bg-transparent border border-white/10 rounded-2xl overflow-hidden hover:border-[#FFD28D] hover:shadow-[0_15px_40px_rgba(255,210,141,0.2)] transition-all duration-300 group"
+            >
               {/* Image */}
               <div className="relative overflow-hidden">
                 <img 

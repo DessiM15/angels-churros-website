@@ -90,7 +90,13 @@ export default function OurStory() {
       </section>
 
       {/* Brand Narrative */}
-      <section className="section-padding bg-[#040D10]">
+      <motion.section
+        className="section-padding bg-[#040D10]"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -132,10 +138,16 @@ export default function OurStory() {
             </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Our Values */}
-      <section className="section-padding bg-[#1a1f23]">
+      <motion.section
+        className="section-padding bg-[#1a1f23]"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -191,13 +203,17 @@ export default function OurStory() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Our Team */}
-      <section className="section-padding bg-white relative">
-        {/* Tinted overlay for navbar visibility */}
-        <div className="absolute inset-0 bg-black/20 pointer-events-none z-10"></div>
-        <div className="container-custom relative z-20">
+      <motion.section
+        className="section-padding bg-[#040D10] relative"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <div className="container-custom relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -205,23 +221,23 @@ export default function OurStory() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
+            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-[#FFD28D] mb-6">
               Meet Our Team
             </h2>
-            <p className="text-xl text-brown-700 max-w-3xl mx-auto">
+            <p className="text-xl text-[#C8C8C8] max-w-3xl mx-auto">
               The passionate people behind Angels Churros, dedicated to bringing you 
               the most authentic churro experience.
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+        <motion.div
+            initial={{ opacity: 0, y: 80, scale: 0.92 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.9, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.4 }}
             className="max-w-4xl mx-auto"
           >
-            <div className="rounded-2xl overflow-hidden shadow-2xl">
+            <div className="rounded-2xl overflow-hidden border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
               <img 
                 src="/assets/angels-churros-team.webp" 
                 alt="Angels Churros Team"
@@ -230,13 +246,19 @@ export default function OurStory() {
             </div>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Customer Reviews */}
       <RotatingReviews />
 
       {/* Call to Action */}
-      <section className="section-padding bg-gradient-to-r from-brown-900 to-brown-800 text-white">
+      <motion.section
+        className="section-padding bg-gradient-to-r from-brown-900 to-brown-800 text-white"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -271,7 +293,7 @@ export default function OurStory() {
             </div>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
     </ElegenciaLayout>
   )
