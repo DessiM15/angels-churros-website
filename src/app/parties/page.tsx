@@ -158,32 +158,41 @@ export default function Parties() {
 
   return (
     <ElegenciaLayout>
-    <div className="pt-16 lg:pt-20">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brown-900 to-brown-800"></div>
-        <div className="relative z-10 h-full flex items-center">
-          <div className="container mx-auto px-4">
-            <div className="text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
-                  Need Fresh Hot Churros For Your Special Event? Let Us Take Care Of Your Sweet Cravings!
-                </h1>
-                <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
-                  Make your celebration unforgettable with our authentic churro party packages
-                </p>
-              </motion.div>
-            </div>
-          </div>
+      <div className="relative pt-16 lg:pt-20 overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="/assets/parties-background.jpg"
+            alt="Friends enjoying churros at a party"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/70"></div>
         </div>
-      </section>
+        <div className="relative z-10">
+          {/* Hero Section */}
+          <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-brown-900/85 via-brown-900/70 to-brown-800/60 backdrop-blur-sm"></div>
+            <div className="relative z-10 h-full flex items-center">
+              <div className="container mx-auto px-4">
+                <div className="text-center">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
+                      Need Fresh Hot Churros For Your Special Event? Let Us Take Care Of Your Sweet Cravings!
+                    </h1>
+                    <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
+                      Make your celebration unforgettable with our authentic churro party packages
+                    </p>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </section>
 
-      {/* Party Packages */}
-      <section className="section-padding bg-[#040D10]">
+          {/* Party Packages */}
+          <section className="section-padding bg-black/70 backdrop-blur-md">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -268,8 +277,8 @@ export default function Parties() {
         </div>
       </section>
 
-      {/* Event Types */}
-      <section className="section-padding bg-[#1a1f23]">
+          {/* Event Types */}
+          <section className="section-padding bg-black/60 backdrop-blur-md">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -315,8 +324,8 @@ export default function Parties() {
         </div>
       </section>
 
-      {/* How to Book */}
-      <section className="section-padding bg-[#1a1f23]">
+          {/* How to Book */}
+          <section className="section-padding bg-black/60 backdrop-blur-md">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -374,7 +383,7 @@ export default function Parties() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-[#040D10] rounded-2xl p-8 border border-gray-800"
+              className="bg-black/70 rounded-2xl p-8 border border-gray-800 backdrop-blur-sm"
             >
               <h3 className="text-2xl font-bold text-white mb-6">Book Your Party</h3>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -476,8 +485,8 @@ export default function Parties() {
         </div>
       </section>
 
-      {/* Past Events Gallery */}
-      <section className="section-padding bg-[#040D10]">
+          {/* Past Events Gallery */}
+          <section className="section-padding bg-black/70 backdrop-blur-md">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -520,8 +529,8 @@ export default function Parties() {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="section-padding bg-gradient-to-r from-brown-900 to-brown-800 text-white">
+          {/* Call to Action */}
+          <section className="section-padding bg-gradient-to-r from-brown-900/90 to-brown-800/80 backdrop-blur-sm text-white">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -556,9 +565,10 @@ export default function Parties() {
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <RotatingReviews />
-    </div>
+          {/* Reviews Section */}
+          <RotatingReviews />
+        </div>
+      </div>
     </ElegenciaLayout>
   )
 }
