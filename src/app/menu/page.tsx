@@ -608,7 +608,7 @@ export default function Menu() {
 
               {/* Menu Items Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {category.items.map((item, itemIndex) => (
+                {(category.items as MenuItem[]).map((item, itemIndex) => (
                   <motion.div
                     key={item.id}
                     initial={{ opacity: 0, y: 20 }}
