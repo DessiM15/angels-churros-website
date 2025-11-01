@@ -94,19 +94,19 @@ const RotatingReviews = () => {
   }
 
   return (
-    <section className="py-16 bg-black/40 border-t border-white/10">
+    <section className="py-10 sm:py-16 bg-black/40 border-t border-white/10">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h2 className="text-3xl lg:text-4xl font-serif font-bold text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-white mb-3 sm:mb-4">
             What Our Customers Say
           </h2>
-          <p className="text-lg text-white/80 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto">
             Don't just take our word for it - hear from our amazing customers!
           </p>
         </motion.div>
@@ -121,18 +121,18 @@ const RotatingReviews = () => {
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 lg:p-12 shadow-2xl">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 lg:p-12 shadow-2xl">
                 {/* Angels Churros Logo */}
-                <div className="flex justify-center mb-6">
+                <div className="flex justify-center mb-4 sm:mb-6">
                   <img 
                     src="/assets/angels-churro-logo.webp" 
                     alt="Angels Churros N Chocolate Logo" 
-                    className="h-16 w-auto"
+                    className="h-12 sm:h-16 w-auto"
                   />
                 </div>
 
                 {/* Review Text */}
-                <blockquote className="text-xl lg:text-2xl text-white mb-8 leading-relaxed font-medium">
+                <blockquote className="text-base sm:text-lg lg:text-2xl text-white mb-6 sm:mb-8 leading-relaxed font-medium">
                   "{reviews[currentReview].text}"
                 </blockquote>
 

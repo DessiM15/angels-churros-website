@@ -54,7 +54,7 @@ const ElegenciaHero = () => {
   }
 
   return (
-    <section className="relative h-screen overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden">
       {/* Background Video/Image with vertical snapping */}
       <div className="absolute inset-0">
         <AnimatePresence>
@@ -106,8 +106,8 @@ const ElegenciaHero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center">
-        <div className="container mx-auto px-4">
+      <div className="relative z-10 h-full flex items-center py-20 sm:py-0">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl">
             <AnimatePresence>
               <motion.div
@@ -119,18 +119,18 @@ const ElegenciaHero = () => {
                 className="text-white"
               >
                 {/* Main Title */}
-                <div className="mb-8">
-                  <h1 className="text-6xl lg:text-8xl font-serif font-bold mb-4 leading-tight">
+                <div className="mb-6 sm:mb-8">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-serif font-bold mb-2 sm:mb-4 leading-tight">
                     {slides[currentSlide].title}
                   </h1>
-                  <h1 className="text-6xl lg:text-8xl font-serif font-bold text-[#FFD28D] leading-tight">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-serif font-bold text-[#FFD28D] leading-tight">
                     {slides[currentSlide].maintitle}
                   </h1>
                 </div>
 
                 {/* Description */}
-                <div className="mb-12">
-                  <p className="text-xl lg:text-2xl text-gray-200 max-w-3xl leading-relaxed">
+                <div className="mb-8 sm:mb-12">
+                  <p className="text-base sm:text-lg lg:text-2xl text-gray-200 max-w-3xl leading-relaxed">
                     {slides[currentSlide].description}
                   </p>
                 </div>
@@ -138,7 +138,7 @@ const ElegenciaHero = () => {
                 {/* CTA Button */}
                 <Link
                   href={slides[currentSlide].buttonUrl}
-                  className="inline-block bg-[#FFD28D] hover:bg-[#FFD28D]/90 text-[#040D10] px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="inline-block bg-[#FFD28D] hover:bg-[#FFD28D]/90 text-[#040D10] px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
                   View More
                 </Link>

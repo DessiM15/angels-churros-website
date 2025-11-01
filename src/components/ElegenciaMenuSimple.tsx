@@ -26,17 +26,17 @@ const ElegenciaMenuSimple = () => {
   ]
 
   return (
-    <section className="py-20 bg-black/40">
+    <section className="py-12 sm:py-20 bg-black/40">
       <div className="container mx-auto px-4">
         {/* Section Title */}
-        <div className="text-center mb-16">
-          <div className="inline-block bg-[#FFD28D] text-[#040D10] px-6 py-2 rounded-full text-sm font-semibold mb-4">
+        <div className="text-center mb-10 sm:mb-16">
+          <div className="inline-block bg-[#FFD28D] text-[#040D10] px-4 py-2 sm:px-6 sm:py-2 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
             Our Menu
           </div>
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold text-[#FFD28D] mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#FFD28D] mb-4 sm:mb-6">
             Featured Items
           </h2>
-          <p className="text-xl text-[#C8C8C8] max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-[#C8C8C8] max-w-3xl mx-auto">
             Experience the authentic taste of Mexico with our freshly made churros, premium hot chocolate, and warm hospitality.
           </p>
         </div>
