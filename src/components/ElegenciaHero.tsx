@@ -7,6 +7,8 @@ import Link from 'next/link'
 
 const ElegenciaHero = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [loadedVideos, setLoadedVideos] = useState<Record<number, boolean>>({})
+  const [failedVideos, setFailedVideos] = useState<Record<number, boolean>>({})
 
   const slides = [
     {
@@ -65,16 +67,32 @@ const ElegenciaHero = () => {
             className="absolute inset-0"
           >
             {slides[currentSlide].backgroundVideo ? (
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-                poster={slides[currentSlide].backgroundImage}
-              >
-                <source src={slides[currentSlide].backgroundVideo} type="video/mp4" />
-              </video>
+              <>
+                <img
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${loadedVideos[slides[currentSlide].id] && !failedVideos[slides[currentSlide].id] ? 'opacity-0' : 'opacity-100'}`}
+                  src={slides[currentSlide].backgroundImage}
+                  alt={slides[currentSlide].title}
+                  aria-hidden="true"
+                />
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                  aria-hidden="true"
+                  onLoadedData={() =>
+                    setLoadedVideos((prev) => ({ ...prev, [slides[currentSlide].id]: true }))
+                  }
+                  onError={() =>
+                    setFailedVideos((prev) => ({ ...prev, [slides[currentSlide].id]: true }))
+                  }
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${loadedVideos[slides[currentSlide].id] && !failedVideos[slides[currentSlide].id] ? 'opacity-100' : 'opacity-0'}`}
+                  poster={slides[currentSlide].backgroundImage}
+                >
+                  <source src={slides[currentSlide].backgroundVideo} type="video/mp4" />
+                </video>
+              </>
             ) : (
               <img 
                 className="w-full h-full object-cover" 

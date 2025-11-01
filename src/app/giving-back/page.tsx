@@ -1,403 +1,330 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Heart, Users, DollarSign, Star, Award, Globe, Coffee } from 'lucide-react'
+import { CalendarDays, ExternalLink, MapPin, PenSquare } from 'lucide-react'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
 import RotatingReviews from '@/components/RotatingReviews'
 
-const initiatives = [
+type Story = {
+  title: string
+  displayDate?: string
+  author?: string
+  location?: string
+  summary?: string
+  image: string
+  imageAlt: string
+  tags?: string[]
+  body?: string[]
+  interview?: { label: string; url: string }
+  translation?: string
+  translationAttribution?: string
+  closingNote?: string
+  isComingSoon?: boolean
+  gallery?: { src: string; alt: string }[]
+}
+
+const stories: Story[] = [
   {
-    title: 'Churros for Charity',
-    description: 'Monthly events where 100% of proceeds go to local food banks and hunger relief organizations.',
-    impact: '$2,500+ raised',
-      icon: <Heart className="w-8 h-8 text-brown-700" />,
-    color: 'from-red-400 to-red-600',
-    bgColor: 'bg-red-50',
+    title: 'Helping Uvalde Texas with Churros',
+    displayDate: 'Dec 29',
+    author: 'Xochitl Garcia',
+    location: 'Uvalde, Texas',
+    summary:
+      'Erika and Joe Garcia packed the Angels Churros cart and drove from Katy to Uvalde to comfort a community in mourning with prayer, presence, and fresh churros.',
+    image: '/assets/uvalde-story.webp',
+    imageAlt: 'Erika and Joe Garcia preparing the Angels Churros cart for Uvalde outreach',
+    gallery: [
+      {
+        src: '/assets/uvalde-story.webp',
+        alt: 'Erika and Joe Garcia preparing the Angels Churros cart for Uvalde outreach',
+      },
+      {
+        src: '/assets/uvalde-story-2.webp',
+        alt: 'Angels Churros cart set up in Uvalde, Texas',
+      },
+      {
+        src: '/assets/uvalde-story-3.webp',
+        alt: 'Community receiving churros from Angels Churros team in Uvalde',
+      },
+    ],
+    tags: ['Community Relief', 'Faith in Action'],
+    body: [
+      'Our owners, Erika and Joe Garcia, went to Uvalde, Texas in June 2022 to touch and aid the Uvalde community in the best possible way they could.',
+      "They loaded their churro cart, hooked the trailer, and took off. Erika and Joe traveled from Katy all the way to the Uvalde community to give the store's churros and offer prayer requests.",
+      "All who know Erika know her testament and her heart. She does everything in love and in good faith. Thank you to our Houston community for pouring support into our store. Because of this, we are able to pour into another community.",
+      "This is our store's testament: something as simple as a churro can be the sweet remedy that someone may need.",
+    ],
+    interview: {
+      label: 'Watch the Telemundo San Antonio interview',
+      url: 'https://www.telemundosanantonio.com/noticias/local/viajan-desde-lejos-para-apoyar-a-la-comunidad-de-uvalde-tras-la-balacera-escolar/2196520/',
+    },
+    translation:
+      'We came here to bring happiness from churros, for all of the community of Uvalde, Texas... You still feel the pain of the people, from their eyes, from the air, but in all this, there are still good people out there.',
+    translationAttribution: 'Erika Garcia',
+    closingNote: 'Our Churro Cart at Town Center',
   },
   {
-    title: 'Community Food Drives',
-    description: 'Regular food collection events and donations to support families in need.',
-    impact: '500+ families helped',
-      icon: <Users className="w-8 h-8 text-brown-700" />,
-    color: 'from-blue-400 to-blue-600',
-    bgColor: 'bg-blue-50',
-  },
-  {
-    title: 'Youth Programs',
-    description: 'Free churro workshops and educational programs for local schools and youth organizations.',
-    impact: '200+ kids reached',
-      icon: <Star className="w-8 h-8 text-brown-700" />,
-    color: 'from-yellow-400 to-yellow-600',
-    bgColor: 'bg-yellow-50',
-  },
-  {
-    title: 'Local Business Support',
-    description: 'Partnerships with other local businesses to strengthen the community economy.',
-    impact: '15+ partnerships',
-      icon: <Globe className="w-8 h-8 text-brown-700" />,
-    color: 'from-green-400 to-green-600',
-    bgColor: 'bg-green-50',
+    title: 'Celebrating “Dia De Los Ninos” in Veracruz',
+    displayDate: 'May 26',
+    author: 'Xochitl Garcia',
+    location: 'Nanchital, Veracruz, Mexico',
+    summary:
+      'Partnering with family in Nanchital, Angels Churros helped 400+ kids celebrate Dia de Los Niños with donated bread and heartfelt care during the pandemic.',
+    image: '/assets/veracruz-story.webp',
+    imageAlt: 'Children in Veracruz receiving donated treats during Dia de Los Niños celebration',
+    gallery: [
+      {
+        src: '/assets/veracruz-story.webp',
+        alt: 'Children in Veracruz receiving donated treats during Dia de Los Niños celebration',
+      },
+      {
+        src: '/assets/veracruz-story-2.webp',
+        alt: 'Cousin Janet handing a child a donated sacked lunch in Veracruz',
+      },
+    ],
+    tags: ['International Outreach', 'Family', 'Community Celebration'],
+    body: [
+      'As a business, we always aim to give back to our community here in Houston and at home in our native Veracruz, Mexico in a small town called Nanchital.',
+      'Yesterday in Mexico was the national holiday we recognize as “Dia de Los Niños” or Day of the Kids. This day is about recognizing the importance of children in society and promoting their well-being—a celebration typically held in schools.',
+      'Due to COVID-19, schools were forced to close, and many children in Nanchital could not afford to celebrate this holiday, leaving students without any means of observing it.',
+      'Through every purchase made here, 400+ kids were able to celebrate with bread donated from our store. Our cousin Janet hand-delivered sacked lunches to make sure every child felt loved.',
+      'Thank you to every guest that has walked through our door. Because of you, a child was able to celebrate their holiday with joy.',
+    ],
+    closingNote: 'The Biggest Thank You y Mil Gracias — The Garcia Family // La Familia Garcia',
   },
 ]
 
-const impactStories = [
-  {
-    title: 'Maria\'s Family',
-    story: 'When Maria lost her job during the pandemic, our community food drive helped feed her family of four for three months. Today, she volunteers with us to help other families.',
-    impact: 'Family of 4 supported',
-    image: '👨‍👩‍👧‍👦',
-  },
-  {
-    title: 'Local School Program',
-    story: 'We partnered with Cypress Elementary to teach kids about Mexican culture through churro-making workshops. The kids loved learning about different traditions!',
-    impact: '150+ students reached',
-    image: '🎓',
-  },
-  {
-    title: 'Senior Center Partnership',
-    story: 'Every month, we bring fresh churros to the local senior center. For many residents, it\'s a taste of home and a chance to share stories.',
-    impact: '50+ seniors served',
-    image: '👴',
-  },
-  {
-    title: 'Holiday Food Drive',
-    story: 'Last Christmas, we organized a massive food drive that collected over 1,000 pounds of food for local families in need.',
-    impact: '1,000+ lbs of food',
-    image: '🎄',
-  },
-]
-
-const partners = [
-  {
-    name: 'Houston Food Bank',
-    description: 'Primary partner for hunger relief efforts',
-    logo: '🏦',
-    type: 'Food Bank',
-  },
-  {
-    name: 'Cypress Elementary School',
-    description: 'Educational partnership for youth programs',
-    logo: '🏫',
-    type: 'Education',
-  },
-  {
-    name: 'Local Senior Center',
-    description: 'Community outreach for elderly residents',
-    logo: '👴',
-    type: 'Community',
-  },
-  {
-    name: 'Cypress Chamber of Commerce',
-    description: 'Business community development',
-    logo: '🤝',
-    type: 'Business',
-  },
-]
-
-const stats = [
-  {
-    number: '$15,000+',
-    label: 'Donated to Local Causes',
-    icon: <DollarSign className="w-8 h-8 text-primary-600" />,
-  },
-  {
-    number: '500+',
-    label: 'Families Helped',
-      icon: <Users className="w-8 h-8 text-brown-700" />,
-  },
-  {
-    number: '200+',
-    label: 'Youth Reached',
-      icon: <Star className="w-8 h-8 text-brown-700" />,
-  },
-  {
-    number: '50+',
-    label: 'Events Hosted',
-    icon: <Award className="w-8 h-8 text-primary-600" />,
-  },
-]
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 },
+  viewport: { once: true, amount: 0.2 },
+}
 
 export default function GivingBack() {
   return (
     <ElegenciaLayout>
-    <div className="pt-16 lg:pt-20">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brown-900 to-brown-800"></div>
-        <div className="relative z-10 h-full flex items-center">
-          <div className="container mx-auto px-4">
-            <div className="text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
+      <div className="pt-16 lg:pt-20 bg-[#040D10]">
+        <section id="giving-back-hero" className="relative overflow-hidden text-white">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-900 via-brown-900 to-black" />
+          <div className="absolute inset-0 opacity-40">
+            <div className="absolute -top-32 -left-24 h-64 w-64 rounded-full bg-primary-500 blur-3xl" />
+            <div className="absolute top-24 right-0 h-80 w-80 rounded-full bg-elegencia-gold/40 blur-[120px]" />
+          </div>
+          <div className="relative z-10 container-custom py-24 lg:py-32">
+            <div className="mx-auto max-w-3xl space-y-6 text-center">
+              <motion.span
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
+                className="inline-block text-xs uppercase tracking-[0.35em] text-elegencia-gold"
               >
-                <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white mb-6">
-                  Giving Back
-                </h1>
-                <p className="text-xl lg:text-2xl text-elegencia-gold max-w-3xl mx-auto">
-                  Community is at the heart of everything we do. We believe in giving back 
-                  and supporting the people who make our neighborhood special.
-                </p>
+                Community Journal
+              </motion.span>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.75 }}
+                className="text-4xl font-serif font-bold md:text-5xl lg:text-6xl"
+              >
+                Stories of Giving Back
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.75, delay: 0.15 }}
+                className="text-lg text-cream-100/90 md:text-xl"
+              >
+                Each chapter captures how Angels Churros shows up for our neighbors with prayer, presence, and something sweet. Welcome to our blog-style archive of heartfelt impact.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.75, delay: 0.25 }}
+                className="flex flex-col items-center justify-center gap-4 pt-4 sm:flex-row"
+              >
+                <a
+                  href="mailto:community@angelschurros.com"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-3 font-semibold text-brown-900 shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-cream-200 hover:text-brown-900"
+                >
+                  Share Your Story
+                </a>
+                <a
+                  href="/store"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/60 px-8 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/10"
+                >
+                  Support the Mission
+                </a>
               </motion.div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Impact Stats */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
-              Our Impact
-            </h2>
-            <p className="text-xl text-brown-700 max-w-3xl mx-auto">
-              Together with our community, we've made a real difference in the lives 
-              of families and individuals throughout Houston.
-            </p>
-          </motion.div>
+        <section className="bg-cream-50">
+          <div className="container-custom space-y-16 py-20 lg:py-24">
+            <motion.div {...reveal} className="mx-auto max-w-3xl space-y-4 text-center">
+              <p className="text-xs uppercase tracking-[0.35em] text-brown-500">Latest Stories</p>
+              <h2 className="text-4xl font-serif text-brown-900 lg:text-5xl">Sweet moments of impact</h2>
+              <p className="text-lg text-brown-700">
+                Discover how a churro cart, a praying heart, and a supportive community come together in the moments we hold most dear.
+              </p>
+            </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center bg-[#040D10] rounded-2xl p-8 card-hover"
-              >
-                <div className="flex justify-center mb-4">
-                  <div className="text-brown-700">{stat.icon}</div>
-                </div>
-                <div className="text-4xl font-bold text-brown-700 mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-brown-700 font-semibold">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+            <div className="space-y-20">
+              {stories.map((story, index) => {
+                const galleryImages = story.gallery?.length
+                  ? story.gallery
+                  : [{ src: story.image, alt: story.imageAlt }]
 
-      {/* Our Initiatives */}
-      <section className="section-padding bg-[#1a1f23]">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
-              Our Initiatives
-            </h2>
-            <p className="text-xl text-brown-700 max-w-3xl mx-auto">
-              We're committed to making a positive impact through various community 
-              programs and partnerships.
-            </p>
-          </motion.div>
+                return (
+                  <motion.article
+                    key={story.title}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.05 }}
+                    viewport={{ once: true, amount: 0.25 }}
+                    className={`relative overflow-hidden rounded-3xl border border-brown-100/60 shadow-xl shadow-brown-900/5 ${story.isComingSoon ? 'bg-cream-100/70' : 'bg-white'}`}
+                  >
+                    <div className="grid gap-0 lg:grid-cols-[1.1fr,0.9fr]">
+                      <div className="order-2 flex flex-col gap-6 p-8 lg:order-1 lg:p-12">
+                        <div className="flex flex-wrap items-center gap-3 text-[0.65rem] uppercase tracking-[0.4em] text-primary-600">
+                          <span className="font-semibold text-elegencia-gold">Community Spotlight</span>
+                          {story.tags?.map((tag) => (
+                            <span
+                              key={`${story.title}-${tag}`}
+                              className="rounded-full bg-brown-100 px-3 py-1 font-semibold text-brown-700"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {initiatives.map((initiative, index) => (
-              <motion.div
-                key={initiative.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 shadow-lg card-hover"
-              >
-                <div className="flex items-start space-x-4 mb-6">
-                  <div className={`p-3 rounded-xl ${initiative.bgColor}`}>
-                    {initiative.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-brown-900 mb-2">
-                      {initiative.title}
-                    </h3>
-                    <div className="text-brown-700 font-semibold">
-                      {initiative.impact}
+                        <div className="space-y-4">
+                          <h3 className="text-3xl font-serif text-brown-900 md:text-4xl">{story.title}</h3>
+                          {story.summary && (
+                            <p className="leading-relaxed text-lg text-brown-700">{story.summary}</p>
+                          )}
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-6 text-sm font-semibold text-brown-500">
+                          {story.displayDate && (
+                            <span className="inline-flex items-center gap-2">
+                              <CalendarDays className="h-4 w-4" />
+                              {story.displayDate}
+                            </span>
+                          )}
+                          {story.author && (
+                            <span className="inline-flex items-center gap-2">
+                              <PenSquare className="h-4 w-4" />
+                              {story.author}
+                            </span>
+                          )}
+                          {story.location && (
+                            <span className="inline-flex items-center gap-2">
+                              <MapPin className="h-4 w-4" />
+                              {story.location}
+                            </span>
+                          )}
+                        </div>
+
+                        {story.body && (
+                          <div className="space-y-4 text-base leading-relaxed text-brown-700 md:text-lg">
+                            {story.body.map((paragraph, paragraphIndex) => (
+                              <p key={`${story.title}-paragraph-${paragraphIndex}`}>{paragraph}</p>
+                            ))}
+                          </div>
+                        )}
+
+                        {story.translation && (
+                          <blockquote className="border-l-4 border-brown-200 pl-6 italic text-brown-600">
+                            {story.translation}
+                            {story.translationAttribution && (
+                              <cite className="mt-3 block font-semibold not-italic text-brown-500">
+                                - {story.translationAttribution}
+                              </cite>
+                            )}
+                          </blockquote>
+                        )}
+
+                        {story.interview && (
+                          <a
+                            href={story.interview.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 font-semibold text-primary-600 transition hover:text-primary-700"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                            {story.interview.label}
+                          </a>
+                        )}
+
+                        {story.closingNote && (
+                          <p className="text-xs uppercase tracking-[0.35em] text-brown-400">{story.closingNote}</p>
+                        )}
+                      </div>
+
+                      <div className="order-1 relative lg:order-2">
+                        <div className={`relative h-full w-full ${story.isComingSoon ? 'opacity-80' : ''}`}>
+                          {galleryImages.length > 1 ? (
+                            <div className="flex h-full flex-col gap-3 p-4">
+                              <div className="relative flex-1 overflow-hidden rounded-3xl bg-brown-900/10">
+                                <Image
+                                  src={galleryImages[0].src}
+                                  alt={galleryImages[0].alt}
+                                  fill
+                                  sizes="(min-width: 1024px) 40vw, 100vw"
+                                  className="object-cover"
+                                  priority={index === 0}
+                                  unoptimized
+                                />
+                              </div>
+                              <div className="grid grid-cols-2 gap-3">
+                                {galleryImages.slice(1).map((media, mediaIndex) => (
+                                  <div
+                                    key={`${story.title}-gallery-${mediaIndex}`}
+                                    className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-brown-900/10"
+                                  >
+                                    <Image
+                                      src={media.src}
+                                      alt={media.alt}
+                                      fill
+                                      sizes="(min-width: 1024px) 20vw, 100vw"
+                                      className="object-cover"
+                                      unoptimized
+                                    />
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="relative aspect-[4/3] w-full lg:h-full">
+                              <Image
+                                src={galleryImages[0].src}
+                                alt={galleryImages[0].alt}
+                                fill
+                                sizes="(min-width: 1024px) 40vw, 100vw"
+                                className="object-cover"
+                                priority={index === 0}
+                                unoptimized
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <p className="text-brown-600 leading-relaxed">
-                  {initiative.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Impact Stories */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-brown-900 mb-6">
-              Impact Stories
-            </h2>
-            <p className="text-xl text-brown-700 max-w-3xl mx-auto">
-              Real stories from real people whose lives have been touched by our 
-              community efforts.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {impactStories.map((story, index) => (
-              <motion.div
-                key={story.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-[#040D10] rounded-2xl p-8 card-hover"
-              >
-                <div className="text-center mb-6">
-                  <div className="text-6xl mb-4">{story.image}</div>
-                  <h3 className="text-2xl font-bold text-brown-900 mb-2">
-                    {story.title}
-                  </h3>
-                  <div className="text-brown-700 font-semibold">
-                    {story.impact}
-                  </div>
-                </div>
-                <p className="text-brown-600 leading-relaxed italic">
-                  "{story.story}"
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Our Partners */}
-      <section className="section-padding bg-brown-900 text-white">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-6">
-              Our Partners
-            </h2>
-            <p className="text-xl text-brown-200 max-w-3xl mx-auto">
-              We're proud to work with amazing organizations that share our 
-              commitment to community service.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {partners.map((partner, index) => (
-              <motion.div
-                key={partner.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-6 card-hover"
-              >
-                <div className="text-5xl mb-4">{partner.logo}</div>
-                <h3 className="text-xl font-bold text-white mb-2">
-                  {partner.name}
-                </h3>
-                <div className="text-elegencia-gold text-sm font-semibold mb-3">
-                  {partner.type}
-                </div>
-                <p className="text-brown-200 text-sm leading-relaxed">
-                  {partner.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How You Can Help */}
-      <section className="section-padding bg-gradient-to-r from-brown-900 to-brown-800 text-white">
-        <div className="container-custom text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-6">
-              How You Can Help
-            </h2>
-            <p className="text-xl text-brown-200 mb-8 max-w-2xl mx-auto">
-              Join us in making a difference! There are many ways you can support 
-              our community initiatives.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <Heart className="w-12 h-12 text-white mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-3">Volunteer</h3>
-                <p className="text-brown-200">
-                  Join our volunteer team and help with events, food drives, and community programs.
-                </p>
-              </div>
-              
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <DollarSign className="w-12 h-12 text-white mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-3">Donate</h3>
-                <p className="text-brown-200">
-                  Make a direct donation to support our community programs and hunger relief efforts.
-                </p>
-              </div>
-              
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <Coffee className="w-12 h-12 text-white mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-3">Visit Us</h3>
-                <p className="text-brown-200">
-                  Every purchase helps support our community initiatives. Come enjoy our churros!
-                </p>
-              </div>
+                  </motion.article>
+                )
+              })}
             </div>
+          </div>
+        </section>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/store"
-                className="bg-white text-brown-900 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
-              >
-                <span>Visit Our Store</span>
-                <Coffee size={20} />
-              </a>
-              <a
-                href="mailto:community@angelschurros.com"
-                className="border-2 border-white text-white hover:bg-white hover:text-brown-900 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
-              >
-                <span>Get Involved</span>
-                <Heart size={20} />
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Reviews Section */}
-      <RotatingReviews />
-    </div>
+        <RotatingReviews />
+      </div>
     </ElegenciaLayout>
   )
 }

@@ -116,21 +116,33 @@ const galleryImages: GalleryImage[] = [
 
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null)
+  const [heroVideoLoaded, setHeroVideoLoaded] = useState(false)
+  const [heroVideoError, setHeroVideoError] = useState(false)
+  const [galleryVideoLoaded, setGalleryVideoLoaded] = useState(false)
+  const [galleryVideoError, setGalleryVideoError] = useState(false)
 
   return (
     <ElegenciaLayout>
     <div className="pt-16 lg:pt-20">
       {/* Hero Section */}
       <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+        <img
+          src="/assets/photo-gallery.jpg"
+          alt="Photo gallery background"
+          aria-hidden="true"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${heroVideoLoaded && !heroVideoError ? 'opacity-0' : 'opacity-100'}`}
+        />
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${heroVideoLoaded && !heroVideoError ? 'opacity-100' : 'opacity-0'}`}
           src="/assets/photo-gallery-hero-video.mp4"
           autoPlay
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           aria-hidden="true"
+          onLoadedData={() => setHeroVideoLoaded(true)}
+          onError={() => setHeroVideoError(true)}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-brown-900/80 to-brown-800/70"></div>
         <div className="relative z-10 h-full flex items-center">
@@ -153,145 +165,173 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Gallery Grid */}
-      <section className="section-padding bg-[#1a1f23]">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <img
+            src="/assets/churros.webp"
+            alt="Churros background"
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${galleryVideoLoaded && !galleryVideoError ? 'opacity-0' : 'opacity-100'}`}
+            aria-hidden="true"
+          />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+            onLoadedData={() => setGalleryVideoLoaded(true)}
+            onError={() => setGalleryVideoError(true)}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${galleryVideoLoaded && !galleryVideoError ? 'opacity-100' : 'opacity-0'}`}
           >
-            {galleryImages.map((image, index) => (
+            <source src="/assets/powered-sugar.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/55" />
+        </div>
+
+        <div className="relative z-10">
+          {/* Gallery Grid */}
+          <section className="section-padding bg-black/40 border-t border-white/10">
+            <div className="container-custom">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+              >
+                {galleryImages.map((image, index) => (
+                    <motion.div
+                      key={image.id}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      whileHover={{ scale: 1.05 }}
+                      className="group cursor-pointer"
+                      onClick={() => setSelectedImage(image)}
+                    >
+                      <div className="bg-white rounded-2xl overflow-hidden shadow-lg card-hover relative">
+                      <div className="aspect-square bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center relative">
+                        {image.src.startsWith('/') ? (
+                          <img 
+                            src={image.src} 
+                            alt={image.alt}
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                        ) : (
+                          <span className="text-6xl">{image.src}</span>
+                        )}
+                        {/* Overlay with text - only visible on hover */}
+                        <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <h3 className="font-bold text-white mb-2 text-center">
+                            {image.title}
+                          </h3>
+                          <p className="text-sm text-white/90 text-center">
+                            {image.description}
+                          </p>
+                        </div>
+                      </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+            </div>
+          </section>
+
+          {/* Lightbox Modal */}
+          <AnimatePresence>
+            {selectedImage && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+                onClick={() => setSelectedImage(null)}
+              >
                 <motion.div
-                  key={image.id}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="group cursor-pointer"
-                  onClick={() => setSelectedImage(image)}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.8, opacity: 0 }}
+                  className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden"
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg card-hover relative">
-                  <div className="aspect-square bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center relative">
-                    {image.src.startsWith('/') ? (
+                  {/* Close Button */}
+                  <button
+                    onClick={() => setSelectedImage(null)}
+                    className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 transition-colors"
+                  >
+                    <X size={24} />
+                  </button>
+
+                  {/* Image */}
+                  <div className="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
+                    {selectedImage.src.startsWith('/') ? (
                       <img 
-                        src={image.src} 
-                        alt={image.alt}
-                        className="w-full h-full object-cover rounded-lg"
+                        src={selectedImage.src} 
+                        alt={selectedImage.alt}
+                        className="w-full h-full object-cover"
                       />
                     ) : (
-                      <span className="text-6xl">{image.src}</span>
+                      <span className="text-8xl">{selectedImage.src}</span>
                     )}
-                    {/* Overlay with text - only visible on hover */}
-                    <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <h3 className="font-bold text-white mb-2 text-center">
-                        {image.title}
-                      </h3>
-                      <p className="text-sm text-white/90 text-center">
-                        {image.description}
-                      </p>
-                    </div>
                   </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-brown-900 mb-2">
+                      {selectedImage.title}
+                    </h3>
+                    <p className="text-brown-600 leading-relaxed">
+                      {selectedImage.description}
+                    </p>
                   </div>
                 </motion.div>
-              ))}
-            </motion.div>
-        </div>
-      </section>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-      {/* Lightbox Modal */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 transition-colors"
+          {/* Call to Action */}
+          <section className="section-padding bg-black/40 border-t border-white/10 text-white">
+            <div className="container-custom text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
               >
-                <X size={24} />
-              </button>
-
-              {/* Image */}
-              <div className="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
-                {selectedImage.src.startsWith('/') ? (
-                  <img 
-                    src={selectedImage.src} 
-                    alt={selectedImage.alt}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span className="text-8xl">{selectedImage.src}</span>
-                )}
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-brown-900 mb-2">
-                  {selectedImage.title}
-                </h3>
-                <p className="text-brown-600 leading-relaxed">
-                  {selectedImage.description}
+                <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-6">
+                  Experience It Yourself
+                </h2>
+                <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+                  See our gallery in person! Visit our store in Cypress, Texas, 
+                  and taste the authentic churros that make us special.
                 </p>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Call to Action */}
-      <section className="section-padding bg-gradient-to-r from-brown-900 to-brown-800 text-white">
-        <div className="container-custom text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-6">
-              Experience It Yourself
-            </h2>
-            <p className="text-xl text-brown-200 mb-8 max-w-2xl mx-auto">
-              See our gallery in person! Visit our store in Cypress, Texas, 
-              and taste the authentic churros that make us special.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://order.online/store/angels-churros-n-chocolate-582123"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
-              >
-                <span>Order Online</span>
-                <Heart size={20} />
-              </a>
-              <a
-                href="/store"
-                className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
-              >
-                <span>Visit Store</span>
-                <Store size={20} />
-              </a>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <a
+                    href="https://order.online/store/angels-churros-n-chocolate-582123"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                  >
+                    <span>Order Online</span>
+                    <Heart size={20} />
+                  </a>
+                  <a
+                    href="/store"
+                    className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+                  >
+                    <span>Visit Store</span>
+                    <Store size={20} />
+                  </a>
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
+          </section>
+
+          {/* Reviews Section */}
+          <RotatingReviews />
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <RotatingReviews />
     </div>
     </ElegenciaLayout>
   )
