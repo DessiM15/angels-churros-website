@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
-import { Plus, Minus, ShoppingCart, Star } from 'lucide-react'
-import { useCart } from '@/components/CartProvider'
+import { ShoppingCart, Star } from 'lucide-react'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
 
 interface MenuItem {
@@ -392,12 +391,10 @@ const categoryOrder = [
 ]
 
 export default function Menu() {
-  const [quantities, setQuantities] = useState<Record<string, number>>({})
   const [activeSection, setActiveSection] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const sectionRefs = useRef<(HTMLElement | null)[]>([])
-  const { addItem } = useCart()
 
   // Track scroll position for active section
   useEffect(() => {
@@ -423,23 +420,9 @@ export default function Menu() {
     return () => container.removeEventListener('scroll', handleScroll)
   }, [isScrolling])
 
-  const updateQuantity = (itemId: string, change: number) => {
-    setQuantities(prev => ({
-      ...prev,
-      [itemId]: Math.max(0, (prev[itemId] || 0) + change)
-    }))
-  }
-
   const addToCart = (item: MenuItem) => {
-    const quantity = quantities[item.id] || 1
-    addItem({
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      quantity,
-      image: item.image || '',
-    })
-    setQuantities(prev => ({ ...prev, [item.id]: 0 }))
+    // Redirect to order.online website
+    window.open('https://order.online/store/angels-churros-n-chocolate-582123', '_blank')
   }
 
   const scrollToSection = (index: number) => {
@@ -584,32 +567,13 @@ export default function Menu() {
                             </div>
                           )}
 
-                          <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                            <div className="flex items-center gap-3">
-                              <button
-                                onClick={() => updateQuantity(item.id, -1)}
-                                className="w-8 h-8 rounded-full border border-white/30 hover:border-elegencia-gold hover:bg-elegencia-gold/10 flex items-center justify-center transition-all"
-                              >
-                                <Minus className="w-4 h-4 text-white" />
-                              </button>
-                              <span className="text-white w-6 text-center">
-                                {quantities[item.id] || 0}
-                              </span>
-                              <button
-                                onClick={() => updateQuantity(item.id, 1)}
-                                className="w-8 h-8 rounded-full border border-white/30 hover:border-elegencia-gold hover:bg-elegencia-gold/10 flex items-center justify-center transition-all"
-                              >
-                                <Plus className="w-4 h-4 text-white" />
-                              </button>
-                            </div>
-
+                          <div className="flex items-center justify-end pt-4 border-t border-white/10">
                             <button
                               onClick={() => addToCart(item)}
-                              disabled={!quantities[item.id] || quantities[item.id] === 0}
-                              className="px-4 py-2 bg-elegencia-gold/90 hover:bg-elegencia-gold disabled:bg-white/10 disabled:cursor-not-allowed text-brown-900 text-sm font-medium rounded transition-all disabled:text-white/30"
+                              className="px-4 py-2 bg-elegencia-gold/90 hover:bg-elegencia-gold text-brown-900 text-sm font-medium rounded transition-all"
                             >
                               <ShoppingCart className="w-4 h-4 inline-block mr-1" />
-                              Add
+                              Order Now
                             </button>
                           </div>
                         </motion.div>
