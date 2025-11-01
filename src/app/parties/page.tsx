@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { Gift, Users, Calendar, Clock, Star, CheckCircle, Heart } from 'lucide-react'
+import { Gift, Star, CheckCircle, Heart, Phone, Mail } from 'lucide-react'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
 import RotatingReviews from '@/components/RotatingReviews'
 
@@ -135,26 +134,9 @@ const pastEvents = [
   }
 ]
 
-interface BookingForm {
-  name: string
-  email: string
-  phone: string
-  eventDate: string
-  eventTime: string
-  package: string
-  guests: number
-  location: string
-  specialRequests: string
-}
-
 export default function Parties() {
   const [selectedPackage, setSelectedPackage] = useState<string>('')
-  const { register, handleSubmit, formState: { errors } } = useForm<BookingForm>()
-
-  const onSubmit = (data: BookingForm) => {
-    console.log('Booking form submitted:', data)
-    // Handle form submission
-  }
+  const selectedPackageDetails = partyPackages.find(pkg => pkg.id === selectedPackage)
 
   return (
     <ElegenciaLayout>
@@ -229,7 +211,7 @@ export default function Parties() {
                 viewport={{ once: true }}
                 className={`relative bg-[#1a1f23] rounded-2xl shadow-lg overflow-hidden card-hover border border-gray-800 ${
                   pkg.popular ? 'ring-2 ring-primary-600' : ''
-                }`}
+                } ${selectedPackage === pkg.id ? 'ring-2 ring-elegencia-gold' : ''}`}
               >
                 {pkg.popular && (
                   <div className="absolute top-4 right-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center space-x-1">
@@ -277,7 +259,7 @@ export default function Parties() {
                     onClick={() => setSelectedPackage(pkg.id)}
                     className="w-full btn-primary"
                   >
-                    Select Package
+                    {selectedPackage === pkg.id ? 'Package Selected' : 'Select Package'}
                   </button>
                 </div>
               </motion.div>
@@ -361,8 +343,8 @@ export default function Parties() {
                     2
                   </div>
                   <div>
-                    <h3 className="font-bold text-white mb-2">Fill Out the Form</h3>
-                    <p className="text-gray-300">Provide your event details and special requests.</p>
+                    <h3 className="font-bold text-white mb-2">Contact Our Team</h3>
+                    <p className="text-gray-300">Call or email us with your event details and special requests.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -370,8 +352,8 @@ export default function Parties() {
                     3
                   </div>
                   <div>
-                    <h3 className="font-bold text-white mb-2">We'll Contact You</h3>
-                    <p className="text-gray-300">We'll reach out within 24 hours to confirm your booking.</p>
+                    <h3 className="font-bold text-white mb-2">We'll Confirm Details</h3>
+                    <p className="text-gray-300">We’ll follow up quickly to finalize your churro celebration.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -386,7 +368,6 @@ export default function Parties() {
               </div>
             </motion.div>
 
-            {/* Booking Form */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -394,101 +375,65 @@ export default function Parties() {
               viewport={{ once: true }}
               className="bg-black/70 rounded-2xl p-8 border border-gray-800 backdrop-blur-sm"
             >
-              <h3 className="text-2xl font-bold text-white mb-6">Book Your Party</h3>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <h3 className="text-2xl font-bold text-white mb-4">Talk With Our Event Team</h3>
+              <p className="text-gray-300 mb-6">
+                Reach out and we&apos;ll tailor the perfect churro experience for your celebration.
+              </p>
+
+              <div className="bg-[#111618] border border-gray-800 rounded-xl p-4 mb-6">
+                <p className="text-sm text-gray-400">Selected package</p>
+                <p className="text-xl font-semibold text-white mt-1">
+                  {selectedPackageDetails ? selectedPackageDetails.name : 'Choose a package above'}
+                </p>
+                {selectedPackageDetails && (
+                  <p className="text-sm text-gray-400">
+                    Serves {selectedPackageDetails.serves} · ${selectedPackageDetails.price.toFixed(2)}
+                  </p>
+                )}
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <Phone size={20} className="text-elegencia-gold flex-shrink-0 mt-1" />
                   <div>
-                    <label className="block text-sm font-semibold text-gray-300 mb-2">Name *</label>
-                    <input
-                      {...register('name', { required: 'Name is required' })}
-                      className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500"
-                      placeholder="Your name"
-                    />
-                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-300 mb-2">Email *</label>
-                    <input
-                      {...register('email', { required: 'Email is required' })}
-                      type="email"
-                      className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500"
-                      placeholder="your@email.com"
-                    />
-                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+                    <a
+                      href="tel:+1234567890"
+                      className="text-white font-semibold hover:text-elegencia-gold transition-colors"
+                    >
+                      (123) 456-7890
+                    </a>
+                    <p className="text-sm text-gray-400">Call us daily between 7AM and 9PM.</p>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex items-start space-x-3">
+                  <Mail size={20} className="text-elegencia-gold flex-shrink-0 mt-1" />
                   <div>
-                    <label className="block text-sm font-semibold text-gray-300 mb-2">Phone *</label>
-                    <input
-                      {...register('phone', { required: 'Phone is required' })}
-                      className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500"
-                      placeholder="(123) 456-7890"
-                    />
-                    {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-300 mb-2">Event Date *</label>
-                    <input
-                      {...register('eventDate', { required: 'Event date is required' })}
-                      type="date"
-                      className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                    />
-                    {errors.eventDate && <p className="text-red-500 text-sm mt-1">{errors.eventDate.message}</p>}
+                    <a
+                      href="mailto:hello@angelschurros.com"
+                      className="text-white font-semibold hover:text-elegencia-gold transition-colors"
+                    >
+                      hello@angelschurros.com
+                    </a>
+                    <p className="text-sm text-gray-400">Share your event date, location, and any special requests.</p>
                   </div>
                 </div>
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-300 mb-2">Event Time *</label>
-                    <input
-                      {...register('eventTime', { required: 'Event time is required' })}
-                      type="time"
-                      className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                    />
-                    {errors.eventTime && <p className="text-red-500 text-sm mt-1">{errors.eventTime.message}</p>}
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-300 mb-2">Number of Guests *</label>
-                    <input
-                      {...register('guests', { required: 'Number of guests is required' })}
-                      type="number"
-                      min="1"
-                      className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500"
-                      placeholder="10"
-                    />
-                    {errors.guests && <p className="text-red-500 text-sm mt-1">{errors.guests.message}</p>}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Event Location *</label>
-                  <input
-                    {...register('location', { required: 'Event location is required' })}
-                    className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500"
-                    placeholder="Your address or venue"
-                  />
-                  {errors.location && <p className="text-red-500 text-sm mt-1">{errors.location.message}</p>}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Special Requests</label>
-                  <textarea
-                    {...register('specialRequests')}
-                    rows={3}
-                    className="w-full px-4 py-3 bg-[#1a1f23] border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 placeholder-gray-500"
-                    placeholder="Any special dietary needs, decorations, or requests..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full btn-primary"
+              <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                <a
+                  href="tel:+1234567890"
+                  className="btn-primary flex items-center justify-center space-x-2"
                 >
-                  Submit Booking Request
-                </button>
-              </form>
+                  <span>Call Now</span>
+                </a>
+                <a
+                  href="mailto:hello@angelschurros.com"
+                  className="border border-elegencia-gold text-elegencia-gold hover:bg-elegencia-gold hover:text-black font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center"
+                >
+                  <span>Email Our Team</span>
+                </a>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -555,13 +500,13 @@ export default function Parties() {
               and warm hospitality.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
+              <a
+                href="mailto:hello@angelschurros.com"
                 className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
               >
-                <span>Book Your Party</span>
+                <span>Plan Your Party</span>
                 <Gift size={20} />
-              </button>
+              </a>
               <a
                 href="/gallery"
                 className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"

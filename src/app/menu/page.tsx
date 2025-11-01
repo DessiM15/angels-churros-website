@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
-import { Plus, Minus, ShoppingCart, Star, ChevronRight } from 'lucide-react'
+import { Plus, Minus, ShoppingCart, Star } from 'lucide-react'
 import { useCart } from '@/components/CartProvider'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
 
@@ -483,10 +483,10 @@ export default function Menu() {
         </div>
       </div>
 
-      {/* Main Container with Snap Scrolling */}
+      {/* Main Menu Container */}
       <div 
         ref={containerRef}
-        className="snap-y snap-mandatory overflow-y-scroll h-screen scrollbar-hide"
+        className="scrollbar-hide lg:h-screen lg:overflow-y-scroll lg:snap-y lg:snap-mandatory overflow-y-auto"
         style={{ scrollBehavior: 'smooth' }}
       >
         {categoryOrder.map((categoryKey, sectionIndex) => {
@@ -500,7 +500,7 @@ export default function Menu() {
             <section
               key={categoryKey}
               ref={(el) => { sectionRefs.current[sectionIndex] = el }}
-              className="relative h-screen snap-start snap-always flex items-center justify-center overflow-hidden"
+              className="relative min-h-screen flex items-start justify-center overflow-visible lg:h-screen lg:items-center lg:overflow-hidden lg:snap-start lg:snap-always"
               style={{
                 backgroundImage: `url(${category.heroImage})`,
                 backgroundSize: 'cover',
@@ -512,8 +512,8 @@ export default function Menu() {
               <div className="absolute inset-0 bg-black/60"></div>
               
               {/* Content Container */}
-              <div className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${needsExtraPadding ? 'pt-16 sm:pt-20' : 'pt-20 sm:pt-24'}`}>
-                <div className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
+              <div className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 lg:pb-0 lg:min-h-[calc(100vh-10rem)] ${needsExtraPadding ? 'pt-16 sm:pt-20' : 'pt-20 sm:pt-24'}`}>
+                <div className="flex flex-col items-start gap-8 lg:items-center lg:justify-center lg:min-h-[calc(100vh-10rem)]">
                   {/* Category Title */}
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -615,25 +615,6 @@ export default function Menu() {
                         </motion.div>
                       ))}
                     </div>
-
-                    {/* Order Online Button */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, delay: 0.4 }}
-                      className="text-center"
-                    >
-                      <a
-                        href="https://order.online/store/angels-churros-n-chocolate-582123"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-3 bg-elegencia-gold hover:bg-elegencia-gold/90 text-brown-900 px-8 py-4 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl group"
-                      >
-                        <span>Order Online</span>
-                        <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                      </a>
-                    </motion.div>
                   </motion.div>
                 </div>
               </div>
