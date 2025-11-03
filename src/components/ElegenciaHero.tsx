@@ -106,7 +106,7 @@ const ElegenciaHero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center py-20 sm:py-0">
+      <div className="relative z-10 h-full flex items-center py-20 sm:pt-24 sm:pb-0">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl">
             <AnimatePresence>
