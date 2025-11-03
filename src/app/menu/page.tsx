@@ -487,7 +487,7 @@ export default function Menu() {
       {/* Main Menu Container */}
       <div 
         ref={containerRef}
-        className="scrollbar-hide lg:h-screen lg:overflow-y-scroll lg:snap-y lg:snap-mandatory overflow-y-auto"
+        className="scrollbar-hide lg:h-screen lg:overflow-y-scroll lg:snap-y overflow-y-auto"
         style={{ scrollBehavior: 'smooth' }}
       >
         {categoryOrder.map((categoryKey, sectionIndex) => {
