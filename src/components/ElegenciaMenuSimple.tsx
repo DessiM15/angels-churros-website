@@ -30,9 +30,6 @@ const ElegenciaMenuSimple = () => {
       <div className="container mx-auto px-4">
         {/* Section Title */}
         <div className="text-center mb-10 sm:mb-16">
-          <div className="inline-block bg-[#FFD28D] text-[#040D10] px-4 py-2 sm:px-6 sm:py-2 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
-            Our Menu
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#FFD28D] mb-4 sm:mb-6">
             Featured Items
           </h2>
