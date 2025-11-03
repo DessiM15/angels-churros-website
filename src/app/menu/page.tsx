@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react'
 import { ShoppingCart, Star } from 'lucide-react'
 import Link from 'next/link'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
+import Footer from '@/components/Footer'
 
 interface MenuItem {
   id: string
@@ -615,6 +616,13 @@ export default function Menu() {
             </section>
           )
         })}
+        
+        {/* Footer inside scroll container */}
+        <section className="relative min-h-screen flex items-center justify-center lg:h-screen lg:snap-start bg-brown-900">
+          <div className="w-full">
+            <Footer />
+          </div>
+        </section>
       </div>
     </ElegenciaLayout>
   )
