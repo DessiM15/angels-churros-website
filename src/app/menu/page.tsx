@@ -513,7 +513,7 @@ export default function Menu() {
               <div className="absolute inset-0 bg-black/60"></div>
               
               {/* Content Container */}
-              <div className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:pl-8 lg:pr-32 pb-24 lg:pb-16 lg:min-h-[calc(100vh-10rem)] ${needsExtraPadding ? 'pt-16 sm:pt-20' : 'pt-20 sm:pt-24'}`}>
+              <div className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:pl-8 lg:pr-40 pb-24 lg:pb-16 lg:min-h-[calc(100vh-10rem)] ${needsExtraPadding ? 'pt-16 sm:pt-20' : 'pt-20 sm:pt-24'}`}>
                 <div className="flex flex-col items-start gap-8 lg:items-center lg:justify-center lg:min-h-[calc(100vh-10rem)]">
                   {/* Category Title */}
                   <motion.div
@@ -521,12 +521,12 @@ export default function Menu() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, ease: 'easeOut' }}
-                    className="text-center mb-8"
+                    className="text-center mb-8 max-w-4xl mx-auto lg:px-0 px-8"
                   >
                     <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-light text-white mb-2 tracking-tight">
                       {category.title}
                     </h2>
-                    <p className="text-lg md:text-xl text-elegencia-gold font-light tracking-wide">
+                    <p className="text-lg md:text-xl text-elegencia-gold font-light tracking-wide px-4 lg:px-0 max-w-3xl mx-auto">
                       {category.subtitle}
                     </p>
                     <div className="w-24 h-px bg-elegencia-gold mx-auto mt-3"></div>
@@ -538,7 +538,7 @@ export default function Menu() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="w-full max-w-5xl"
+                    className="w-full max-w-5xl lg:pr-4"
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                       {category.items.slice(0, 6).map((item, itemIndex) => (
