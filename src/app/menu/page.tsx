@@ -513,7 +513,7 @@ export default function Menu() {
               <div className="absolute inset-0 bg-black/60"></div>
               
               {/* Content Container */}
-              <div className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 lg:pb-16 lg:min-h-[calc(100vh-10rem)] ${needsExtraPadding ? 'pt-16 sm:pt-20' : 'pt-20 sm:pt-24'}`}>
+              <div className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:pl-8 lg:pr-32 pb-24 lg:pb-16 lg:min-h-[calc(100vh-10rem)] ${needsExtraPadding ? 'pt-16 sm:pt-20' : 'pt-20 sm:pt-24'}`}>
                 <div className="flex flex-col items-start gap-8 lg:items-center lg:justify-center lg:min-h-[calc(100vh-10rem)]">
                   {/* Category Title */}
                   <motion.div
