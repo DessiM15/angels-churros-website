@@ -600,7 +600,7 @@ export default function ChurroCart() {
                     <Mail className="w-6 h-6 text-primary-400" />
                     <div>
                       <div className="font-semibold">Email Us</div>
-                      <div className="text-brown-300">hello@angelschurros.com</div>
+                      <div className="text-brown-300">angleschurrosnchocolate@gmail.com</div>
                     </div>
                   </div>
                 </div>
@@ -614,7 +614,7 @@ export default function ChurroCart() {
                     <Truck size={20} />
                   </button>
                   <a
-                    href="mailto:hello@angelschurros.com"
+                    href="mailto:angleschurrosnchocolate@gmail.com"
                     className="border-2 border-white text-white hover:bg-white hover:text-brown-900 font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
                   >
                     <span>Email Us</span>

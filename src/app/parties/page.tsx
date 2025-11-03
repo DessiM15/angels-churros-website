@@ -410,10 +410,10 @@ export default function Parties() {
                   <Mail size={20} className="text-elegencia-gold flex-shrink-0 mt-1" />
                   <div>
                     <a
-                      href="mailto:hello@angelschurros.com"
+                      href="mailto:angleschurrosnchocolate@gmail.com"
                       className="text-white font-semibold hover:text-elegencia-gold transition-colors"
                     >
-                      hello@angelschurros.com
+                      angleschurrosnchocolate@gmail.com
                     </a>
                     <p className="text-sm text-gray-400">Share your event date, location, and any special requests.</p>
                   </div>

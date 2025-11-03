@@ -148,7 +148,7 @@ export default function GivingBack() {
                 className="flex flex-col items-center justify-center gap-4 pt-4 sm:flex-row"
               >
                 <a
-                  href="mailto:community@angelschurros.com"
+                  href="mailto:angleschurrosnchocolate@gmail.com"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-3 font-semibold text-brown-900 shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-cream-200 hover:text-brown-900"
                 >
                   Share Your Story
