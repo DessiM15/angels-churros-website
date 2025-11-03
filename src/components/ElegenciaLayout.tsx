@@ -1,5 +1,6 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import ElegenciaNavbar from '@/components/ElegenciaNavbar'
 import Footer from '@/components/Footer'
 
@@ -8,9 +9,12 @@ interface ElegenciaLayoutProps {
 }
 
 const ElegenciaLayout = ({ children }: ElegenciaLayoutProps) => {
+  const pathname = usePathname()
+  const isMenuPage = pathname === '/menu'
+
   return (
     <div className="min-h-screen flex flex-col">
-      <ElegenciaNavbar />
+      {!isMenuPage && <ElegenciaNavbar />}
       <main className="flex-grow">
         {children}
       </main>
