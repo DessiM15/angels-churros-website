@@ -18,7 +18,7 @@ const ElegenciaLayout = ({ children }: ElegenciaLayoutProps) => {
       <main className="flex-grow">
         {children}
       </main>
-      <Footer />
+      {!isMenuPage && <Footer />}
     </div>
   )
 }
