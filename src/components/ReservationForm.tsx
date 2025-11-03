@@ -134,7 +134,7 @@ const ReservationForm = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900">Location</h3>
-                <p className="text-gray-600">Cypress, TX</p>
+                <p className="text-gray-600">7160 Barker Cypress Rd., Cypress, TX</p>
               </div>
             </div>
 
@@ -144,7 +144,7 @@ const ReservationForm = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900">Phone</h3>
-                <p className="text-gray-600">+1 (281) 123-4567</p>
+                <p className="text-gray-600">(832) 770 - 0802</p>
               </div>
             </div>
 
@@ -225,7 +225,7 @@ const ReservationForm = () => {
                   onChange={handleInputChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  placeholder="(281) 123-4567"
+                  placeholder="(832) 770 - 0802"
                 />
               </div>
 

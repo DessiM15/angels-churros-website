@@ -353,7 +353,7 @@ export default function ChurroCart() {
                     <input
                       {...register('bestContact', { required: 'Contact number is required' })}
                       className="w-full px-4 py-3 rounded-lg border border-gray-700 bg-[#111618] text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                      placeholder="(123) 456-7890"
+                      placeholder="(832) 770 - 0802"
                     />
                     {errors.bestContact && <p className="text-red-500 text-sm mt-1">{errors.bestContact.message}</p>}
                   </div>
@@ -576,7 +576,7 @@ export default function ChurroCart() {
                     <Phone className="w-6 h-6 text-primary-400" />
                     <div>
                       <div className="font-semibold">Call Us</div>
-                      <div className="text-brown-300">(123) 456-7890</div>
+                      <div className="text-brown-300">(832) 770 - 0802</div>
                     </div>
                   </div>
                   

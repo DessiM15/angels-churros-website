@@ -397,10 +397,10 @@ export default function Parties() {
                   <Phone size={20} className="text-elegencia-gold flex-shrink-0 mt-1" />
                   <div>
                     <a
-                      href="tel:+1234567890"
+                      href="tel:+18327700802"
                       className="text-white font-semibold hover:text-elegencia-gold transition-colors"
                     >
-                      (123) 456-7890
+                      (832) 770 - 0802
                     </a>
                     <p className="text-sm text-gray-400">Call us daily between 7AM and 9PM.</p>
                   </div>
@@ -422,7 +422,7 @@ export default function Parties() {
 
               <div className="mt-6 flex flex-col sm:flex-row gap-3">
                 <a
-                  href="tel:+1234567890"
+                  href="tel:+18327700802"
                   className="btn-primary flex items-center justify-center space-x-2"
                 >
                   <span>Call Now</span>

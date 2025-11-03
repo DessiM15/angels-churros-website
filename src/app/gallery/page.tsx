@@ -302,7 +302,7 @@ export default function Gallery() {
                   Experience It Yourself
                 </h2>
                 <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-                  See our gallery in person! Visit our store in Cypress, Texas, 
+                  See our gallery in person! Visit our store at 7160 Barker Cypress Rd., Cypress, Texas, 
                   and taste the authentic churros that make us special.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -140,7 +140,7 @@ const Hero = () => {
             <div className="flex items-center space-x-6 text-white/80 text-sm">
               <div className="flex items-center space-x-2">
                 <MapPin size={16} />
-                <span>Cypress, TX</span>
+                <span>7160 Barker Cypress Rd.</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Clock size={16} />

@@ -81,7 +81,7 @@ const KababiLayout = ({ children }: { children: React.ReactNode }) => {
             <div className="hidden lg:flex items-center space-x-4">
               <div className="flex items-center text-gray-600">
                 <Phone className="h-4 w-4 mr-2" />
-                <span className="text-sm">+1 (281) 123-4567</span>
+                <span className="text-sm">(832) 770 - 0802</span>
               </div>
               <Link 
                 href="/reservation" 
@@ -185,11 +185,11 @@ const KababiLayout = ({ children }: { children: React.ReactNode }) => {
               <div className="space-y-3">
                 <div className="flex items-center">
                   <MapPin className="h-5 w-5 mr-3 text-orange-500" />
-                  <span className="text-gray-300">Cypress, TX</span>
+                  <span className="text-gray-300">7160 Barker Cypress Rd.</span>
                 </div>
                 <div className="flex items-center">
                   <Phone className="h-5 w-5 mr-3 text-orange-500" />
-                  <span className="text-gray-300">+1 (281) 123-4567</span>
+                  <span className="text-gray-300">(832) 770 - 0802</span>
                 </div>
                 <div className="flex items-center">
                   <Clock className="h-5 w-5 mr-3 text-orange-500" />

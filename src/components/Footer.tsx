@@ -136,8 +136,8 @@ const Footer = () => {
                 <div className="flex items-start space-x-3">
                   <MapPin size={20} className="text-primary-400 mt-0.5 flex-shrink-0" />
                   <div>
-                    <p className="text-cream-200">Cypress, Texas</p>
-                    <p className="text-cream-300 text-sm">Houston Area</p>
+                    <p className="text-cream-200">7160 Barker Cypress Rd.</p>
+                    <p className="text-cream-300 text-sm">Cypress, Texas</p>
                   </div>
                 </div>
                 
@@ -152,10 +152,10 @@ const Footer = () => {
                 <div className="flex items-center space-x-3">
                   <Phone size={20} className="text-primary-400 flex-shrink-0" />
                   <a
-                    href="tel:+1234567890"
+                    href="tel:+18327700802"
                     className="text-cream-200 hover:text-primary-400 transition-colors"
                   >
-                    (123) 456-7890
+                    (832) 770 - 0802
                   </a>
                 </div>
                 
