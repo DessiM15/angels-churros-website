@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import { ShoppingCart, Star } from 'lucide-react'
+import Link from 'next/link'
 import ElegenciaLayout from '@/components/ElegenciaLayout'
 
 interface MenuItem {
@@ -434,6 +435,23 @@ export default function Menu() {
 
   return (
     <ElegenciaLayout>
+      {/* Home Logo Button */}
+      <Link 
+        href="/" 
+        className="fixed top-4 left-4 z-50 flex items-center space-x-3 group transition-transform duration-300 hover:scale-105"
+      >
+        <img 
+          src="/assets/angels-churro-logo.webp" 
+          alt="Angels Churros N Chocolate" 
+          className="h-12 w-auto drop-shadow-lg"
+        />
+        <div className="hidden sm:block">
+          <h1 className="text-xl font-serif font-bold text-white drop-shadow-lg">
+            Angels Churros N Chocolate
+          </h1>
+        </div>
+      </Link>
+
       {/* Scroll Indicator */}
       <div className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
         <div className="flex flex-col gap-3">
